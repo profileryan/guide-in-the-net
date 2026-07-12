@@ -10,8 +10,9 @@ type Props = {
   backLabel?: string
   blue?: boolean
   hideBottom?: boolean
+  hideNext?: boolean
+  immersive?: boolean
 }
-
 export default function AppShell({
   children,
   onInfo,
@@ -22,9 +23,11 @@ export default function AppShell({
   backLabel = 'BACK',
   blue = false,
   hideBottom = false,
+  hideNext = false,
+  immersive = false,
 }: Props) {
   return (
-    <div className={`shell ${blue ? 'shell-blue' : 'shell-black'}`}>
+    <div className={`shell ${blue ? 'shell-blue' : 'shell-black'} ${immersive ? 'shell-immersive' : ''}`}>
       <header className="topbar">
         <img className="corner-logo" src="/assets/upper-corner-logo-transparent.png" alt="Islands in the Net" />
         <div className="topbar-actions">
@@ -42,9 +45,11 @@ export default function AppShell({
           <button type="button" className="nav-button nav-back" onClick={onBack} disabled={!onBack}>
             {backLabel}
           </button>
-          <button type="button" className="nav-button nav-next" onClick={onNext} disabled={!onNext}>
-            {nextLabel}
-          </button>
+          {!hideNext && (
+            <button type="button" className="nav-button nav-next" onClick={onNext} disabled={!onNext}>
+              {nextLabel}
+            </button>
+          )}
         </nav>
       )}
     </div>

@@ -3,8 +3,21 @@ import AppShell from './components/AppShell'
 import GlitchCanvas from './components/GlitchCanvas'
 import IslandBlob from './components/IslandBlob'
 import Modal from './components/Modal'
+import ArtworkPage from './components/ArtworkPage'
+import { sectionOneArtworks, sectionOneIntro } from './content/guideContent'
 
-type Screen = 'loading' | 'cover' | 'name' | 'welcome' | 'how' | 'map' | 'section'
+type Screen =
+  | 'loading'
+  | 'cover'
+  | 'name'
+  | 'welcome'
+  | 'how'
+  | 'map'
+  | 'section'
+  | 'sectionIntro'
+  | 'history'
+  | 'safeEntry'
+  | 'sliceComplete'
 type Dialog = 'info' | 'settings' | null
 
 const introParagraphs = [
@@ -55,7 +68,6 @@ function readStoredName() {
     return ''
   }
 }
-
 function readStoredMotion() {
   try {
     return localStorage.getItem('iitn-guide-reduced-motion') === 'true'
@@ -64,7 +76,19 @@ function readStoredMotion() {
   }
 }
 
-const validScreens: Screen[] = ['loading', 'cover', 'name', 'welcome', 'how', 'map', 'section']
+const validScreens: Screen[] = [
+  'loading',
+  'cover',
+  'name',
+  'welcome',
+  'how',
+  'map',
+  'section',
+  'sectionIntro',
+  'history',
+  'safeEntry',
+  'sliceComplete',
+]
 
 function initialScreen(): Screen {
   const candidate = new URLSearchParams(window.location.search).get('screen') as Screen | null
@@ -98,6 +122,13 @@ export default function App() {
   useEffect(() => {
     const scroller = mainRef.current?.querySelector<HTMLElement>('.shell-content')
     scroller?.scrollTo({ top: 0, behavior: 'auto' })
+  }, [screen])
+
+  useEffect(() => {
+    const url = new URL(window.location.href)
+    if (screen === 'loading') url.searchParams.delete('screen')
+    else url.searchParams.set('screen', screen)
+    window.history.replaceState(null, '', url)
   }, [screen])
 
   const displayName = useMemo(() => name.trim() || 'FRIEND', [name])
@@ -232,12 +263,59 @@ export default function App() {
 
         {screen === 'section' && (
           <AppShell
+            immersive
             onInfo={() => setDialog('info')}
             onSettings={() => setDialog('settings')}
             onBack={() => go('map')}
-            hideBottom
+            onNext={() => go('sectionIntro')}
           >
-            <SectionArrival reducedMotion={reducedMotion} onBack={() => go('map')} />
+            <SectionArrival reducedMotion={reducedMotion} />
+          </AppShell>
+        )}
+
+        {screen === 'sectionIntro' && (
+          <AppShell
+            blue
+            onInfo={() => setDialog('info')}
+            onSettings={() => setDialog('settings')}
+            onBack={() => go('section')}
+            onNext={() => go('history')}
+          >
+            <SectionIntro />
+          </AppShell>
+        )}
+
+        {screen === 'history' && (
+          <AppShell
+            onInfo={() => setDialog('info')}
+            onSettings={() => setDialog('settings')}
+            onBack={() => go('sectionIntro')}
+            onNext={() => go('safeEntry')}
+          >
+            <ArtworkPage artwork={sectionOneArtworks.history} />
+          </AppShell>
+        )}
+
+        {screen === 'safeEntry' && (
+          <AppShell
+            onInfo={() => setDialog('info')}
+            onSettings={() => setDialog('settings')}
+            onBack={() => go('history')}
+            onNext={() => go('sliceComplete')}
+          >
+            <ArtworkPage artwork={sectionOneArtworks['safe-entry']} />
+          </AppShell>
+        )}
+
+        {screen === 'sliceComplete' && (
+          <AppShell
+            onInfo={() => setDialog('info')}
+            onSettings={() => setDialog('settings')}
+            onBack={() => go('safeEntry')}
+            backLabel="BACK"
+            hideNext
+          >
+            <SliceComplete />
           </AppShell>
         )}
       </div>
@@ -338,19 +416,46 @@ function NameScreen({
   )
 }
 
-function SectionArrival({ reducedMotion, onBack }: { reducedMotion: boolean; onBack: () => void }) {
+function SectionArrival({ reducedMotion }: { reducedMotion: boolean }) {
   return (
     <section className="section-arrival screen-enter">
       <GlitchCanvas reducedMotion={reducedMotion} tone="pink" />
       <IslandBlob className="section-blob section-blob-a" variant={2} />
       <IslandBlob className="section-blob section-blob-b" variant={3} />
+      <IslandBlob className="section-blob section-blob-c" variant={1} />
       <div className="section-arrival-content">
-        <h1>YOU<br />&amp; THE<br />NET</h1>
-        <p>TECHNOLOGY, IDENTITY AND<br />THE POSSIBLE SELF</p>
-        <p className="slice-note">THE FIRST PRODUCTION SLICE ENDS HERE.</p>
-        <button type="button" onClick={onBack} className="section-back">BACK TO MAP</button>
+        <p className="section-number">SECTION 1</p>
+        <h1>YOU<br />IN THE<br />NET</h1>
+        <p className="section-subtitle">TECHNOLOGY, IDENTITY AND<br />THE POSSIBLE SELF</p>
       </div>
     </section>
+  )
+}
+
+function SectionIntro() {
+  return (
+    <article className="section-intro screen-enter">
+      <p className="section-intro-number">{sectionOneIntro.number}</p>
+      <h1>
+        {sectionOneIntro.title.split('\n').map((line) => <span key={line}>{line}</span>)}
+      </h1>
+      <div className="section-intro-copy">
+        {sectionOneIntro.paragraphs.map((paragraph, index) => (
+          <p key={paragraph} style={{ '--reveal-index': index } as React.CSSProperties}>{paragraph}</p>
+        ))}
+      </div>
+    </article>
+  )
+}
+
+function SliceComplete() {
+  return (
+    <article className="slice-complete screen-enter">
+      <p className="slice-complete-kicker">NEXT IN DEVELOPMENT</p>
+      <h1>TOGETHER<br />IN THE NET</h1>
+      <p>The next build continues into community, memory and collective worldbuilding.</p>
+      <small>THIS TEMPORARY HANDOFF SCREEN WILL BE REPLACED BY SECTION 2.</small>
+    </article>
   )
 }
 

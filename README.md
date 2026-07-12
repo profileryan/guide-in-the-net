@@ -1,93 +1,76 @@
-# Islands in the Net — Digital Guide
+# Guide in the Net
 
-This is the first production slice of the mobile exhibition guide. It implements the opening journey from the supplied wireframes:
+A mobile-first digital exhibition guide for **Islands in the Net**, presented at Padimai Art & Tech Studio, Tanjong Pagar Distripark.
 
-1. Animated loading screen
-2. Exhibition cover
-3. Visitor name entry
-4. Personalised welcome and introduction
-5. How to use the space
-6. Exhibition map and route reveal
-7. A handoff into **You & the Net**
+## Current build: v0.2.0
 
-It is built as a mobile-first React + TypeScript app using Vite. The visitor's name and motion preference are stored only in their browser.
+This build includes:
 
-## Open it on your computer
+- loading and cover sequence
+- visitor-name personalisation
+- exhibition welcome and orientation
+- how-to-use-this-space guide
+- animated map and Section 1 arrival
+- **You in the Net** section introduction
+- **A History of Intelligence in ((South)(East)) Asia** by Ho Rui An
+- **Safe Entry (Version 2.0–2.7)** by Heman Chong
+- reusable artwork, Why Now and Pause / Reflect templates
+- information and settings overlays
+- reduced-motion support
 
-You need Node.js installed. Then open a terminal in this folder and run:
+## Run locally
+
+Use Node.js 18–22.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Vite will print a local address, usually:
+Open the local address shown in the terminal, usually `http://localhost:5173`.
 
-```text
-http://localhost:5173
+## Production check
+
+```bash
+npm run check
+npm run build
 ```
 
-Open that address in a browser. Use the browser's mobile preview or open it on a phone connected to the same network.
+Vercel should detect the project as Vite and publish the `dist` directory.
 
-## Add the supplied header font
+## Direct screen testing
 
-Copy your original font file into:
+Append one of these query strings:
+
+```text
+?screen=section
+?screen=sectionIntro
+?screen=history
+?screen=safeEntry
+?screen=sliceComplete
+```
+
+## Fonts
+
+The interface expects the exhibition heading font at:
 
 ```text
 public/fonts/Header_Font.ttf
 ```
 
-The app is already configured to use it. Until it is added, a system monospace fallback is used.
+If it is absent, the app falls back to a monospace system font.
 
-## Create a production build
+## Temporary assets
 
-```bash
-npm run build
-```
+`public/assets/history-of-intelligence.jpg` is currently cropped from the supplied wireframe. Replace it with the final approved artwork photograph when available.
 
-The finished site will be generated inside the `dist` folder.
+## Next development slice
 
-## Put it on GitHub
+Replace the temporary completion screen with:
 
-Create an empty repository on GitHub, then run these commands in this folder:
-
-```bash
-git init
-git add .
-git commit -m "Initial Islands in the Net guide slice"
-git branch -M main
-git remote add origin YOUR_GITHUB_REPOSITORY_URL
-git push -u origin main
-```
-
-Replace `YOUR_GITHUB_REPOSITORY_URL` with the URL GitHub gives you.
-
-## Deploy on Vercel
-
-1. Sign in to Vercel.
-2. Choose **Add New → Project**.
-3. Import the GitHub repository.
-4. Vercel should detect Vite automatically.
-5. Press **Deploy**.
-
-No database, account system or environment variables are required for this slice.
-
-## Where to edit things
-
-- Main experience and copy: `src/App.tsx`
-- Visual design, spacing and animation: `src/styles.css`
-- Reusable app shell and modals: `src/components/`
-- Supplied image assets: `public/assets/`
-
-More implementation notes are in `docs/BUILD_NOTES.md`.
-
-## Install troubleshooting
-
-Use Node.js 20 LTS where possible.
-
-```bash
-npm install
-npm run dev
-```
-
-This corrected package pins dependency versions and intentionally omits the previous lockfile, which contained environment-specific package URLs that could stall installs outside the build environment.
+- Together in the Net section cover
+- section introduction
+- updated map
+- Living Shrine
+- Traces
+- The Commons
