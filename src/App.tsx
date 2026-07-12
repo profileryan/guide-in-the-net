@@ -18,26 +18,32 @@ const introParagraphs = [
 const guideActions = [
   {
     icon: '/assets/linger.png',
+    iconHeight: '146px',
     text: 'Spend time sitting with new ideas and confronting the future they each paint. Try lingering longer than your first reaction.',
   },
   {
     icon: '/assets/form-thoughts.png',
+    iconHeight: '70px',
     text: 'Form your own perspectives on technology, community, and what’s next for us and our cities.',
   },
   {
     icon: '/assets/converse.png',
+    iconHeight: '70px',
     text: 'Join a conversation: whether in person or with notes for visitors who come before or after you.',
   },
   {
     icon: '/assets/reflect.png',
+    iconHeight: '95px',
     text: 'Use this as a safe place to sit, listen, read, write, talk, journal, reflect and imagine.',
   },
   {
     icon: '/assets/return.png',
+    iconHeight: '108px',
     text: 'Come back after dark for screenings, performances, talks and late-night takeovers.',
   },
   {
     icon: '/assets/share.png',
+    iconHeight: '118px',
     text: 'Photograph, post, remix — or keep it offline. Feed the algorithm with #IslandsInTheNetSG.',
   },
 ]
@@ -188,7 +194,9 @@ export default function App() {
                     key={action.text}
                     style={{ '--reveal-index': index } as React.CSSProperties}
                   >
-                    <img src={action.icon} alt="" />
+                    <div className="action-icon" style={{ '--icon-height': action.iconHeight } as React.CSSProperties}>
+                      <img src={action.icon} alt="" />
+                    </div>
                     <p>{action.text}</p>
                   </section>
                 ))}

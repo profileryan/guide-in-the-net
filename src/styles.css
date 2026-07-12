@@ -610,11 +610,22 @@ button {
   animation-delay: calc(.18s + var(--reveal-index) * .09s);
 }
 
-.action-item img {
-  width: auto;
-  height: 74px;
-  max-width: 106px;
+.action-icon {
+  position: relative;
+  width: 92px;
+  height: 82px;
   margin-bottom: 19px;
+  overflow: hidden;
+}
+
+.action-icon img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  height: var(--icon-height);
+  max-width: none;
+  transform: translate(-50%, -50%);
   image-rendering: pixelated;
 }
 
@@ -665,8 +676,8 @@ button {
 
 .map-pulse {
   position: absolute;
-  left: 51.8%;
-  top: 79.5%;
+  left: 56.03%;
+  top: 78.31%;
   width: 16px;
   height: 16px;
   border-radius: 50%;

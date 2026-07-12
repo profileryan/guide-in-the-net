@@ -26,7 +26,7 @@ export default function AppShell({
   return (
     <div className={`shell ${blue ? 'shell-blue' : 'shell-black'}`}>
       <header className="topbar">
-        <img className="corner-logo" src="/assets/upper-corner-logo.png" alt="Islands in the Net" />
+        <img className="corner-logo" src="/assets/upper-corner-logo-transparent.png" alt="Islands in the Net" />
         <div className="topbar-actions">
           <button type="button" onClick={onInfo} className="icon-button" aria-label="Exhibition information">
             <img src="/assets/info-icon.png" alt="" />
