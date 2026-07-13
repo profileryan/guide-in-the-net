@@ -2,21 +2,14 @@
 
 A mobile-first digital exhibition guide for **Islands in the Net**, presented at Padimai Art & Tech Studio, Tanjong Pagar Distripark.
 
-## Current build: v0.2.0
+## Current build: v0.4.0
 
-This build includes:
+This package contains the complete opening journey and **You and the Net** section, including all five artwork pages in their approved order. The artwork pages use a new editorial digital-catalogue design and include the supplied project thumbnails.
 
-- loading and cover sequence
-- visitor-name personalisation
-- exhibition welcome and orientation
-- how-to-use-this-space guide
-- animated map and Section 1 arrival
-- **You in the Net** section introduction
-- **A History of Intelligence in ((South)(East)) Asia** by Ho Rui An
-- **Safe Entry (Version 2.0–2.7)** by Heman Chong
-- reusable artwork, Why Now and Pause / Reflect templates
-- information and settings overlays
-- reduced-motion support
+Start with:
+
+- `PROJECT_PROGRESS.md` — full project status, design principles and roadmap
+- `CODEX_HANDOFF.md` — repository merge and deployment instructions
 
 ## Run locally
 
@@ -27,50 +20,21 @@ npm install
 npm run dev
 ```
 
-Open the local address shown in the terminal, usually `http://localhost:5173`.
+Vite will print a local URL, normally `http://localhost:5173`.
 
-## Production check
+## Check and build
 
 ```bash
 npm run check
 npm run build
 ```
 
-Vercel should detect the project as Vite and publish the `dist` directory.
+## Important font note
 
-## Direct screen testing
-
-Append one of these query strings:
-
-```text
-?screen=section
-?screen=sectionIntro
-?screen=history
-?screen=safeEntry
-?screen=sliceComplete
-```
-
-## Fonts
-
-The interface expects the exhibition heading font at:
+The app expects the exhibition font at:
 
 ```text
 public/fonts/Header_Font.ttf
 ```
 
-If it is absent, the app falls back to a monospace system font.
-
-## Temporary assets
-
-`public/assets/history-of-intelligence.jpg` is currently cropped from the supplied wireframe. Replace it with the final approved artwork photograph when available.
-
-## Next development slice
-
-Replace the temporary completion screen with:
-
-- Together in the Net section cover
-- section introduction
-- updated map
-- Living Shrine
-- Traces
-- The Commons
+The font is not distributed in this ZIP. Preserve it from the existing Git repository when merging.

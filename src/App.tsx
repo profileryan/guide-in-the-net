@@ -15,8 +15,11 @@ type Screen =
   | 'map'
   | 'section'
   | 'sectionIntro'
-  | 'history'
   | 'safeEntry'
+  | 'history'
+  | 'futureYou'
+  | 'impactBench'
+  | 'graceQuek'
   | 'sliceComplete'
 type Dialog = 'info' | 'settings' | null
 
@@ -68,6 +71,7 @@ function readStoredName() {
     return ''
   }
 }
+
 function readStoredMotion() {
   try {
     return localStorage.getItem('iitn-guide-reduced-motion') === 'true'
@@ -85,8 +89,11 @@ const validScreens: Screen[] = [
   'map',
   'section',
   'sectionIntro',
-  'history',
   'safeEntry',
+  'history',
+  'futureYou',
+  'impactBench',
+  'graceQuek',
   'sliceComplete',
 ]
 
@@ -279,20 +286,9 @@ export default function App() {
             onInfo={() => setDialog('info')}
             onSettings={() => setDialog('settings')}
             onBack={() => go('section')}
-            onNext={() => go('history')}
-          >
-            <SectionIntro />
-          </AppShell>
-        )}
-
-        {screen === 'history' && (
-          <AppShell
-            onInfo={() => setDialog('info')}
-            onSettings={() => setDialog('settings')}
-            onBack={() => go('sectionIntro')}
             onNext={() => go('safeEntry')}
           >
-            <ArtworkPage artwork={sectionOneArtworks.history} />
+            <SectionIntro />
           </AppShell>
         )}
 
@@ -300,10 +296,54 @@ export default function App() {
           <AppShell
             onInfo={() => setDialog('info')}
             onSettings={() => setDialog('settings')}
-            onBack={() => go('history')}
-            onNext={() => go('sliceComplete')}
+            onBack={() => go('sectionIntro')}
+            onNext={() => go('history')}
           >
             <ArtworkPage artwork={sectionOneArtworks['safe-entry']} />
+          </AppShell>
+        )}
+
+        {screen === 'history' && (
+          <AppShell
+            onInfo={() => setDialog('info')}
+            onSettings={() => setDialog('settings')}
+            onBack={() => go('safeEntry')}
+            onNext={() => go('futureYou')}
+          >
+            <ArtworkPage artwork={sectionOneArtworks.history} />
+          </AppShell>
+        )}
+
+        {screen === 'futureYou' && (
+          <AppShell
+            onInfo={() => setDialog('info')}
+            onSettings={() => setDialog('settings')}
+            onBack={() => go('history')}
+            onNext={() => go('impactBench')}
+          >
+            <ArtworkPage artwork={sectionOneArtworks['future-you']} />
+          </AppShell>
+        )}
+
+        {screen === 'impactBench' && (
+          <AppShell
+            onInfo={() => setDialog('info')}
+            onSettings={() => setDialog('settings')}
+            onBack={() => go('futureYou')}
+            onNext={() => go('graceQuek')}
+          >
+            <ArtworkPage artwork={sectionOneArtworks.impactbench} />
+          </AppShell>
+        )}
+
+        {screen === 'graceQuek' && (
+          <AppShell
+            onInfo={() => setDialog('info')}
+            onSettings={() => setDialog('settings')}
+            onBack={() => go('impactBench')}
+            onNext={() => go('sliceComplete')}
+          >
+            <ArtworkPage artwork={sectionOneArtworks['grace-quek']} />
           </AppShell>
         )}
 
@@ -311,7 +351,7 @@ export default function App() {
           <AppShell
             onInfo={() => setDialog('info')}
             onSettings={() => setDialog('settings')}
-            onBack={() => go('safeEntry')}
+            onBack={() => go('graceQuek')}
             backLabel="BACK"
             hideNext
           >
@@ -425,7 +465,7 @@ function SectionArrival({ reducedMotion }: { reducedMotion: boolean }) {
       <IslandBlob className="section-blob section-blob-c" variant={1} />
       <div className="section-arrival-content">
         <p className="section-number">SECTION 1</p>
-        <h1>YOU<br />IN THE<br />NET</h1>
+        <h1>YOU AND<br />THE NET</h1>
         <p className="section-subtitle">TECHNOLOGY, IDENTITY AND<br />THE POSSIBLE SELF</p>
       </div>
     </section>
@@ -451,10 +491,10 @@ function SectionIntro() {
 function SliceComplete() {
   return (
     <article className="slice-complete screen-enter">
-      <p className="slice-complete-kicker">NEXT IN DEVELOPMENT</p>
+      <p className="slice-complete-kicker">SECTION 1 COMPLETE</p>
       <h1>TOGETHER<br />IN THE NET</h1>
-      <p>The next build continues into community, memory and collective worldbuilding.</p>
-      <small>THIS TEMPORARY HANDOFF SCREEN WILL BE REPLACED BY SECTION 2.</small>
+      <p>You have completed You and the Net. The next section widens the view from the individual to community, memory and collective worldbuilding.</p>
+      <small>NEXT: TOGETHER IN THE NET</small>
     </article>
   )
 }

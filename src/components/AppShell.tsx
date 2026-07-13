@@ -13,6 +13,7 @@ type Props = {
   hideNext?: boolean
   immersive?: boolean
 }
+
 export default function AppShell({
   children,
   onInfo,
