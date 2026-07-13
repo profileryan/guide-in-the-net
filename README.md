@@ -2,14 +2,20 @@
 
 A mobile-first digital exhibition guide for **Islands in the Net**, presented at Padimai Art & Tech Studio, Tanjong Pagar Distripark.
 
-## Current build: v0.4.0
+## Current build: v0.5.1
 
-This package contains the complete opening journey and **You and the Net** section, including all five artwork pages in their approved order. The artwork pages use a new editorial digital-catalogue design and include the supplied project thumbnails.
+This package contains:
+
+- the opening journey
+- the full **You and the Net** section
+- the full **Together in the Net** section
+- supplied Section 2 artwork thumbnails for **BussyTemple** and **Traces**
+- a handoff screen teasing **Here in the Net**
 
 Start with:
 
-- `PROJECT_PROGRESS.md` — full project status, design principles and roadmap
-- `CODEX_HANDOFF.md` — repository merge and deployment instructions
+- `PROJECT_PROGRESS.md` — current product state, architecture, completed flow and next steps
+- `CODEX_HANDOFF.md` — merge and deployment instructions for Codex
 
 ## Run locally
 
@@ -31,7 +37,7 @@ npm run build
 
 ## Important font note
 
-The app expects the exhibition font at:
+The app expects the exhibition header font at:
 
 ```text
 public/fonts/Header_Font.ttf

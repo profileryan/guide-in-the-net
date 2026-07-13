@@ -1,10 +1,10 @@
-# Codex Handoff — v0.4.0
+# Codex Handoff — v0.5.1
 
 ## Objective
 
 Merge this package into `profileryan/guide-in-the-net` and deploy it through the existing Vercel project `guide-in-the-net`.
 
-This ZIP is a complete project snapshot containing the full opening journey and all five Section 1 artwork screens. It supersedes the earlier Section 1 package.
+This ZIP is a complete project snapshot containing the full opening journey, the completed **You and the Net** section, the implemented **Together in the Net** section and the newly supplied BussyTemple / Traces artwork images.
 
 ## Important preservation rules
 
@@ -14,7 +14,6 @@ This ZIP is a complete project snapshot containing the full opening journey and 
    This package intentionally does not distribute the font file.
 
 2. **Preserve or regenerate `package-lock.json`.**
-   The dependency versions have not changed; only the package version is now `0.4.0`.
 
 3. Do not commit:
    - `node_modules/`
@@ -34,7 +33,7 @@ npm run check
 npm run build
 
 git add .
-git commit -m "Redesign Section 1 artwork guide pages"
+git commit -m "Add Section 2 artwork images"
 git push
 ```
 
@@ -42,29 +41,40 @@ A normal file copy is also fine. The `rsync` example simply makes the font-prese
 
 ## Key changes to review
 
-- `src/components/ArtworkPage.tsx`
-  - new editorial artwork structure
-  - hero sequence labels
-  - pull quote, Why Now and numbered reflection blocks
+- `src/App.tsx`
+  - extended screen flow through Section 2
+  - new map step and navigation sequence
+  - Section 2 cover and completion handoff
 
 - `src/content/guideContent.ts`
-  - presentation metadata for sequence, palette and pull quotes
-  - approved image alt text
-  - correct Section 1 artwork order retained
+  - corrected ImpactBench credit
+  - added Section 2 intro, artworks and Commons content
+  - added supplied image references for BussyTemple and Traces
+  - added per-artwork section labels and totals
+
+- `src/components/ArtworkPage.tsx`
+  - now supports section-specific labels and totals
+  - supports both supplied artwork images and designed hero placeholders
+
+- `src/components/CommonsPage.tsx`
+  - new dedicated page for the reflective communal space
+
+- `src/components/GlitchCanvas.tsx`
+  - now supports a blue tone for Section 2 arrival
 
 - `src/styles.css`
-  - complete editorial artwork visual system
-  - per-artwork palettes
-  - wide-image plate handling
-  - Grace Quek VHS treatment
-  - responsive and reduced-motion behaviour
+  - new Section 2 and Commons styling
+  - new cobalt and moss palettes
+  - editorial plate styling for the supplied BussyTemple and Traces images
 
-- `public/assets/works/`
-  - four new supplied artwork images
-  - existing Ho Rui An image retained
+- `public/assets/map-step-2.png`
+  - supplied Section 2 map image
 
-- `PROJECT_PROGRESS.md`
-  - current project status and future plan
+- `public/assets/works/bussytemple-altar.jpg`
+  - supplied BussyTemple image
+
+- `public/assets/works/traces-in-the-net.jpg`
+  - supplied Traces image
 
 ## Screen order to verify
 
@@ -75,17 +85,26 @@ sectionIntro
 → futureYou
 → impactBench
 → graceQuek
-→ sliceComplete
+→ sectionTwoCover
+→ sectionTwoIntro
+→ mapTwo
+→ altar
+→ traces
+→ commons
+→ sectionTwoComplete
 ```
 
 ## Direct routes
 
 ```text
-?screen=safeEntry
-?screen=history
-?screen=futureYou
-?screen=impactBench
 ?screen=graceQuek
+?screen=sectionTwoCover
+?screen=sectionTwoIntro
+?screen=mapTwo
+?screen=altar
+?screen=traces
+?screen=commons
+?screen=sectionTwoComplete
 ```
 
 ## Build expectation

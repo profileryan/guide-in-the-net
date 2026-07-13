@@ -31,19 +31,26 @@ export default function ArtworkPage({ artwork }: Props) {
       style={style}
     >
       <section className="artwork-hero" aria-labelledby={`${artwork.id}-title`}>
-        {artwork.image && (
+        {artwork.image ? (
           <figure className="artwork-hero-figure">
             <img src={artwork.image.src} alt={artwork.image.alt} />
           </figure>
+        ) : (
+          <div className="artwork-hero-placeholder" aria-hidden="true">
+            <div className="artwork-hero-placeholder-disc" />
+            <div className="artwork-hero-placeholder-grid" />
+            <p>PARTICIPATORY INSTALLATION</p>
+          </div>
         )}
         <div className="artwork-hero-no" aria-hidden="true">{artwork.sequence}</div>
         <div className="artwork-hero-scrim" aria-hidden="true" />
         <div className="artwork-hero-copy">
-          <p className="artwork-section-label">YOU AND THE NET <span>{artwork.sequence} / 05</span></p>
+          <p className="artwork-section-label">{artwork.sectionLabel} <span>{artwork.sequence} / {artwork.total}</span></p>
           <header className="artwork-heading">
             <h1 id={`${artwork.id}-title`}><MultilineText text={artwork.title} /></h1>
             <p className="artwork-artist"><MultilineText text={artwork.artist} /></p>
           </header>
+          {artwork.image?.note && <p className="artwork-image-note">{artwork.image.note}</p>}
           <p className="artwork-scroll-cue" aria-hidden="true">SCROLL TO READ <span>↓</span></p>
         </div>
       </section>
@@ -85,7 +92,7 @@ export default function ArtworkPage({ artwork }: Props) {
         <footer className="artwork-endmark" aria-hidden="true">
           <span>{artwork.sequence}</span>
           <i />
-          <span>05</span>
+          <span>{artwork.total}</span>
         </footer>
       </div>
     </article>

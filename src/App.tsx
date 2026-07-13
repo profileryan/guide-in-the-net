@@ -1,10 +1,17 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import AppShell from './components/AppShell'
+import ArtworkPage from './components/ArtworkPage'
+import CommonsPage from './components/CommonsPage'
 import GlitchCanvas from './components/GlitchCanvas'
 import IslandBlob from './components/IslandBlob'
 import Modal from './components/Modal'
-import ArtworkPage from './components/ArtworkPage'
-import { sectionOneArtworks, sectionOneIntro } from './content/guideContent'
+import {
+  sectionOneArtworks,
+  sectionOneIntro,
+  sectionTwoArtworks,
+  sectionTwoIntro,
+  type SectionIntroContent,
+} from './content/guideContent'
 
 type Screen =
   | 'loading'
@@ -20,7 +27,13 @@ type Screen =
   | 'futureYou'
   | 'impactBench'
   | 'graceQuek'
-  | 'sliceComplete'
+  | 'sectionTwoCover'
+  | 'sectionTwoIntro'
+  | 'mapTwo'
+  | 'altar'
+  | 'traces'
+  | 'commons'
+  | 'sectionTwoComplete'
 type Dialog = 'info' | 'settings' | null
 
 const introParagraphs = [
@@ -94,7 +107,13 @@ const validScreens: Screen[] = [
   'futureYou',
   'impactBench',
   'graceQuek',
-  'sliceComplete',
+  'sectionTwoCover',
+  'sectionTwoIntro',
+  'mapTwo',
+  'altar',
+  'traces',
+  'commons',
+  'sectionTwoComplete',
 ]
 
 function initialScreen(): Screen {
@@ -255,16 +274,7 @@ export default function App() {
             onBack={() => go('how')}
             onNext={() => go('section')}
           >
-            <article className="map-screen screen-enter">
-              <h1>STEP INTO THE NET</h1>
-              <div className="map-wrap">
-                <img src="/assets/map-step-1.png" alt="Map of the exhibition showing the route into You and the Net" />
-                <span className="map-pulse" aria-hidden="true" />
-              </div>
-              <p className="map-note">
-                FOLLOW THE LIGHTS.<br />STAY IN EACH SECTION AS LONG AS YOU WOULD LIKE.
-              </p>
-            </article>
+            <MapScreen image="/assets/map-step-1.png" alt="Map of the exhibition showing the route into You and the Net" note="FOLLOW THE LIGHTS.\nSTAY IN EACH SECTION AS LONG AS YOU WOULD LIKE." />
           </AppShell>
         )}
 
@@ -276,7 +286,7 @@ export default function App() {
             onBack={() => go('map')}
             onNext={() => go('sectionIntro')}
           >
-            <SectionArrival reducedMotion={reducedMotion} />
+            <SectionArrival reducedMotion={reducedMotion} number="SECTION 1" title={'YOU AND\nTHE NET'} subtitle={'TECHNOLOGY, IDENTITY AND\nTHE POSSIBLE SELF'} tone="pink" variant="one" />
           </AppShell>
         )}
 
@@ -288,74 +298,79 @@ export default function App() {
             onBack={() => go('section')}
             onNext={() => go('safeEntry')}
           >
-            <SectionIntro />
+            <SectionIntroScreen content={sectionOneIntro} />
           </AppShell>
         )}
 
         {screen === 'safeEntry' && (
-          <AppShell
-            onInfo={() => setDialog('info')}
-            onSettings={() => setDialog('settings')}
-            onBack={() => go('sectionIntro')}
-            onNext={() => go('history')}
-          >
+          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('sectionIntro')} onNext={() => go('history')}>
             <ArtworkPage artwork={sectionOneArtworks['safe-entry']} />
           </AppShell>
         )}
 
         {screen === 'history' && (
-          <AppShell
-            onInfo={() => setDialog('info')}
-            onSettings={() => setDialog('settings')}
-            onBack={() => go('safeEntry')}
-            onNext={() => go('futureYou')}
-          >
+          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('safeEntry')} onNext={() => go('futureYou')}>
             <ArtworkPage artwork={sectionOneArtworks.history} />
           </AppShell>
         )}
 
         {screen === 'futureYou' && (
-          <AppShell
-            onInfo={() => setDialog('info')}
-            onSettings={() => setDialog('settings')}
-            onBack={() => go('history')}
-            onNext={() => go('impactBench')}
-          >
+          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('history')} onNext={() => go('impactBench')}>
             <ArtworkPage artwork={sectionOneArtworks['future-you']} />
           </AppShell>
         )}
 
         {screen === 'impactBench' && (
-          <AppShell
-            onInfo={() => setDialog('info')}
-            onSettings={() => setDialog('settings')}
-            onBack={() => go('futureYou')}
-            onNext={() => go('graceQuek')}
-          >
+          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('futureYou')} onNext={() => go('graceQuek')}>
             <ArtworkPage artwork={sectionOneArtworks.impactbench} />
           </AppShell>
         )}
 
         {screen === 'graceQuek' && (
-          <AppShell
-            onInfo={() => setDialog('info')}
-            onSettings={() => setDialog('settings')}
-            onBack={() => go('impactBench')}
-            onNext={() => go('sliceComplete')}
-          >
+          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('impactBench')} onNext={() => go('sectionTwoCover')}>
             <ArtworkPage artwork={sectionOneArtworks['grace-quek']} />
           </AppShell>
         )}
 
-        {screen === 'sliceComplete' && (
-          <AppShell
-            onInfo={() => setDialog('info')}
-            onSettings={() => setDialog('settings')}
-            onBack={() => go('graceQuek')}
-            backLabel="BACK"
-            hideNext
-          >
-            <SliceComplete />
+        {screen === 'sectionTwoCover' && (
+          <AppShell immersive onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('graceQuek')} onNext={() => go('sectionTwoIntro')}>
+            <SectionArrival reducedMotion={reducedMotion} number="SECTION 2" title={'TOGETHER\nIN THE\nNET'} subtitle={'COMMUNITY, MEMORY AND\nCOLLECTIVE WORLDBUILDING'} tone="blue" variant="two" />
+          </AppShell>
+        )}
+
+        {screen === 'sectionTwoIntro' && (
+          <AppShell blue onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('sectionTwoCover')} onNext={() => go('mapTwo')}>
+            <SectionIntroScreen content={sectionTwoIntro} />
+          </AppShell>
+        )}
+
+        {screen === 'mapTwo' && (
+          <AppShell blue onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('sectionTwoIntro')} onNext={() => go('altar')}>
+            <MapScreen image="/assets/map-step-2.png" alt="Map of the exhibition showing the route into Together in the Net" note="FOLLOW THE CURVE INTO SECTION 2.\nTHIS PART OF THE EXHIBITION INVITES YOU TO LINGER TOGETHER." />
+          </AppShell>
+        )}
+
+        {screen === 'altar' && (
+          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('mapTwo')} onNext={() => go('traces')}>
+            <ArtworkPage artwork={sectionTwoArtworks.altar} />
+          </AppShell>
+        )}
+
+        {screen === 'traces' && (
+          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('altar')} onNext={() => go('commons')}>
+            <ArtworkPage artwork={sectionTwoArtworks.traces} />
+          </AppShell>
+        )}
+
+        {screen === 'commons' && (
+          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('traces')} onNext={() => go('sectionTwoComplete')}>
+            <CommonsPage />
+          </AppShell>
+        )}
+
+        {screen === 'sectionTwoComplete' && (
+          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('commons')} hideNext>
+            <SectionComplete title={'HERE IN\nTHE NET'} kicker="SECTION 2 COMPLETE" body="You have completed Together in the Net. The next section turns toward Southeast Asian imaginaries, situated technologies and futures built from here." />
           </AppShell>
         )}
       </div>
@@ -456,31 +471,58 @@ function NameScreen({
   )
 }
 
-function SectionArrival({ reducedMotion }: { reducedMotion: boolean }) {
+function MapScreen({ image, alt, note }: { image: string; alt: string; note: string }) {
   return (
-    <section className="section-arrival screen-enter">
-      <GlitchCanvas reducedMotion={reducedMotion} tone="pink" />
-      <IslandBlob className="section-blob section-blob-a" variant={2} />
-      <IslandBlob className="section-blob section-blob-b" variant={3} />
-      <IslandBlob className="section-blob section-blob-c" variant={1} />
+    <article className="map-screen screen-enter">
+      <h1>STEP INTO THE NET</h1>
+      <div className="map-wrap">
+        <img src={image} alt={alt} />
+        <span className="map-pulse" aria-hidden="true" />
+      </div>
+      <p className="map-note">{note.split('\n').map((line) => <span key={line}>{line}<br /></span>)}</p>
+    </article>
+  )
+}
+
+function SectionArrival({
+  reducedMotion,
+  number,
+  title,
+  subtitle,
+  tone,
+  variant,
+}: {
+  reducedMotion: boolean
+  number: string
+  title: string
+  subtitle: string
+  tone: 'pink' | 'blue'
+  variant: 'one' | 'two'
+}) {
+  return (
+    <section className={`section-arrival section-arrival-${variant} screen-enter`}>
+      <GlitchCanvas reducedMotion={reducedMotion} tone={tone} />
+      <IslandBlob className="section-blob section-blob-a" variant={tone === 'blue' ? 1 : 2} />
+      <IslandBlob className="section-blob section-blob-b" variant={tone === 'blue' ? 3 : 3} />
+      <IslandBlob className="section-blob section-blob-c" variant={tone === 'blue' ? 2 : 1} />
       <div className="section-arrival-content">
-        <p className="section-number">SECTION 1</p>
-        <h1>YOU AND<br />THE NET</h1>
-        <p className="section-subtitle">TECHNOLOGY, IDENTITY AND<br />THE POSSIBLE SELF</p>
+        <p className="section-number">{number}</p>
+        <h1>{title.split('\n').map((line) => <span key={line}>{line}</span>)}</h1>
+        <p className="section-subtitle">{subtitle.split('\n').map((line) => <span key={line}>{line}</span>)}</p>
       </div>
     </section>
   )
 }
 
-function SectionIntro() {
+function SectionIntroScreen({ content }: { content: SectionIntroContent }) {
   return (
     <article className="section-intro screen-enter">
-      <p className="section-intro-number">{sectionOneIntro.number}</p>
+      <p className="section-intro-number">{content.number}</p>
       <h1>
-        {sectionOneIntro.title.split('\n').map((line) => <span key={line}>{line}</span>)}
+        {content.title.split('\n').map((line) => <span key={line}>{line}</span>)}
       </h1>
       <div className="section-intro-copy">
-        {sectionOneIntro.paragraphs.map((paragraph, index) => (
+        {content.paragraphs.map((paragraph, index) => (
           <p key={paragraph} style={{ '--reveal-index': index } as React.CSSProperties}>{paragraph}</p>
         ))}
       </div>
@@ -488,13 +530,13 @@ function SectionIntro() {
   )
 }
 
-function SliceComplete() {
+function SectionComplete({ title, kicker, body }: { title: string; kicker: string; body: string }) {
   return (
     <article className="slice-complete screen-enter">
-      <p className="slice-complete-kicker">SECTION 1 COMPLETE</p>
-      <h1>TOGETHER<br />IN THE NET</h1>
-      <p>You have completed You and the Net. The next section widens the view from the individual to community, memory and collective worldbuilding.</p>
-      <small>NEXT: TOGETHER IN THE NET</small>
+      <p className="slice-complete-kicker">{kicker}</p>
+      <h1>{title.split('\n').map((line) => <span key={line}>{line}</span>)}</h1>
+      <p>{body}</p>
+      <small>NEXT SECTION COMING SOON</small>
     </article>
   )
 }

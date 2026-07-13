@@ -1,9 +1,20 @@
+export type ArtworkId =
+  | 'safe-entry'
+  | 'history'
+  | 'future-you'
+  | 'impactbench'
+  | 'grace-quek'
+  | 'altar'
+  | 'traces'
+
 export type ArtworkContent = {
-  id: 'safe-entry' | 'history' | 'future-you' | 'impactbench' | 'grace-quek'
+  id: ArtworkId
   title: string
   artist: string
   sequence: '01' | '02' | '03' | '04' | '05'
-  palette: 'coral' | 'magenta' | 'violet' | 'blue' | 'rose'
+  total: '02' | '05'
+  sectionLabel: 'YOU AND THE NET' | 'TOGETHER IN THE NET'
+  palette: 'coral' | 'magenta' | 'violet' | 'blue' | 'rose' | 'cobalt' | 'moss'
   pullQuote: string
   titleAlign?: 'left' | 'center' | 'right'
   titleSize?: string
@@ -19,7 +30,13 @@ export type ArtworkContent = {
   reflection: string[]
 }
 
-export const sectionOneIntro = {
+export type SectionIntroContent = {
+  number: string
+  title: string
+  paragraphs: string[]
+}
+
+export const sectionOneIntro: SectionIntroContent = {
   number: 'SECTION 1',
   title: 'YOU AND\nTHE NET',
   paragraphs: [
@@ -32,12 +49,25 @@ export const sectionOneIntro = {
   ],
 }
 
-export const sectionOneArtworks: Record<ArtworkContent['id'], ArtworkContent> = {
+export const sectionTwoIntro: SectionIntroContent = {
+  number: 'SECTION 2',
+  title: 'TOGETHER IN\nTHE NET',
+  paragraphs: [
+    'No relationship with technology remains personal for long. Our individual choices and traces accumulate into shared archives, social norms, rituals, memories and ways of belonging.',
+    'Here, visitors are invited to listen, respond and add something of their own. Across a living shrine, voices gathered from the city, changing public questions and spaces for reflection, the exhibition becomes something made collectively rather than simply observed.',
+    'Together in the Net asks how a crowd becomes a community: not through automatic agreement, but through participation, difference, care and exchange.',
+    'What do we preserve? What do we make visible? And what kinds of worlds can many different lives build together?',
+  ],
+}
+
+export const sectionOneArtworks: Record<Extract<ArtworkId, 'safe-entry' | 'history' | 'future-you' | 'impactbench' | 'grace-quek'>, ArtworkContent> = {
   'safe-entry': {
     id: 'safe-entry',
     title: 'SAFE ENTRY\n(VERSION 2.0–2.7)',
     artist: 'BY HEMAN CHONG',
     sequence: '01',
+    total: '05',
+    sectionLabel: 'YOU AND THE NET',
     palette: 'coral',
     pullQuote: 'The painting becomes image, gateway and historical document.',
     titleAlign: 'left',
@@ -68,6 +98,8 @@ export const sectionOneArtworks: Record<ArtworkContent['id'], ArtworkContent> = 
     title: 'A HISTORY OF\nINTELLIGENCE IN\n((SOUTH)(EAST)) ASIA',
     artist: 'BY HO RUI AN',
     sequence: '02',
+    total: '05',
+    sectionLabel: 'YOU AND THE NET',
     palette: 'magenta',
     pullQuote: 'The future of AI cannot be understood without asking whose past made it possible.',
     titleAlign: 'right',
@@ -99,6 +131,8 @@ export const sectionOneArtworks: Record<ArtworkContent['id'], ArtworkContent> = 
     title: 'FUTURE YOU',
     artist: 'BY MIT MEDIA LAB\nFT. RACHEL POONSIRIWONG',
     sequence: '03',
+    total: '05',
+    sectionLabel: 'YOU AND THE NET',
     palette: 'violet',
     pullQuote: 'A machine-generated possibility can begin to influence the choices through which that future is made.',
     titleAlign: 'right',
@@ -128,8 +162,10 @@ export const sectionOneArtworks: Record<ArtworkContent['id'], ArtworkContent> = 
   impactbench: {
     id: 'impactbench',
     title: 'IMPACTBENCH ×\nCEREALLM',
-    artist: 'BY MIT MEDIA LAB',
+    artist: 'BY MIT MEDIA LAB × RYAN HO',
     sequence: '04',
+    total: '05',
+    sectionLabel: 'YOU AND THE NET',
     palette: 'blue',
     pullQuote: 'What does an AI system do to the person using it?',
     titleAlign: 'left',
@@ -161,6 +197,8 @@ export const sectionOneArtworks: Record<ArtworkContent['id'], ArtworkContent> = 
     title: 'ART IN THE AGE OF\nHUMAN CLONING & AI',
     artist: 'BY GRACE QUEK',
     sequence: '05',
+    total: '05',
+    sectionLabel: 'YOU AND THE NET',
     palette: 'rose',
     pullQuote: 'At what point does a copy become a new work — or a new person?',
     titleAlign: 'left',
@@ -185,4 +223,93 @@ export const sectionOneArtworks: Record<ArtworkContent['id'], ArtworkContent> = 
       'When an artist works with AI, who should receive the credit, responsibility and blame?',
     ],
   },
+}
+
+export const sectionTwoArtworks: Record<Extract<ArtworkId, 'altar' | 'traces'>, ArtworkContent> = {
+  altar: {
+    id: 'altar',
+    title: 'F4NT4SY_H4RD_\nDR1VE://ALTAR\n(2026)',
+    artist: 'BY BUSSYTEMPLE',
+    sequence: '01',
+    total: '02',
+    sectionLabel: 'TOGETHER IN THE NET',
+    palette: 'cobalt',
+    pullQuote: 'It does not simply document a community. It is one of the places through which that community continues to make itself.',
+    titleAlign: 'left',
+    titleSize: '30px',
+    image: {
+      src: '/assets/works/bussytemple-altar.jpg',
+      alt: 'A dark BussyTemple gathering with amber beams of light cutting through a crowded dance floor',
+      position: 'center 35%',
+      aspect: '3 / 2',
+    },
+    description: [
+      'BussyTemple is a Southeast Asian rave collective working across electronic music, performance, visual culture and practices of care. Their gatherings approach queer nightlife not simply as entertainment, but as a form of worldbuilding: a space in which bodies, identities and relationships can temporarily be reorganised.',
+      'At the centre of F4NT4SY_H4RD_DR1VE://ALTAR is an open scaffolding structure that functions simultaneously as archive, network and communal altar. Screens hold videos, photographs and contributions gathered across BussyTemple’s history, while physical objects and traces are attached to the structure itself.',
+      'Unlike a conventional archive, the altar is deliberately unfinished. Visitors and community members can continue adding to it, allowing its form and meaning to change over the exhibition. During BussyTemple’s September gathering, the bare structure will be further transformed through materials, messages, images and performance.',
+      'It does not simply document a community. It is one of the places through which that community continues to make itself.',
+    ],
+    whyNow: [
+      'Online platforms promise to preserve everything, yet community histories can remain fragile. Posts disappear, accounts are removed and experiences are flattened into content.',
+      'This altar asks what it means to archive a culture that is embodied, collective and continually changing. It treats parties, friendships, costumes, messages and fleeting encounters as forms of cultural knowledge worth holding onto.',
+      'The installation also resists the idea that an archive must be fixed, orderly or complete. Here, memory remains alive because people can still touch it, contest it and add to it.',
+    ],
+    reflection: [
+      'What objects, images or rituals hold your community together?',
+      'What deserves to be remembered that conventional archives might overlook?',
+    ],
+  },
+  traces: {
+    id: 'traces',
+    title: 'TRACES\nIN THE NET',
+    artist: 'BY RYAN HO,\nEMOTIONAL TECHNOLOGIES LAB\nAND VIGNESH SUNDARESAN',
+    sequence: '02',
+    total: '02',
+    sectionLabel: 'TOGETHER IN THE NET',
+    palette: 'moss',
+    pullQuote: 'A private thought becomes part of a shared environment, available to someone you may never meet.',
+    titleAlign: 'right',
+    titleSize: '41px',
+    image: {
+      src: '/assets/works/traces-in-the-net.jpg',
+      alt: 'The Traces interface showing floating coloured trace orbs and controls for exploring and listening',
+      position: 'center 24%',
+      aspect: '4 / 3',
+    },
+    description: [
+      'Traces in the Net offers another way of encountering the city: through the thoughts, stories, feelings and sounds left behind by the people within it.',
+      'Visitors can move through a map or an immersive digital space, listening to fragments of emotions, confessions and soundscapes. Each trace is small and partial. Together, they form a changing portrait of the city — not as infrastructure or geography alone, but as an accumulation of interior lives.',
+      'After listening, you are invited to leave a trace of your own. A private thought becomes part of a shared environment, available to someone you may never meet.',
+      'The project does not attempt to produce a complete or authoritative record. It offers a constellation of voices: intimate, uneven and continually expanding. Some may remain; others may eventually disappear.',
+      'Alongside this living archive, a record of each contribution is preserved on the blockchain. The voice itself is not stored there. Instead, what remains is proof that it once existed: a timestamped mark of presence, even after the original trace is gone. In this way, Traces holds two forms of memory at once — one fragile and human, the other persistent but abstract.',
+    ],
+    whyNow: [
+      'Cities are understood through official maps, demographics, property values and data. These systems can tell us where people travel and what they consume, but not necessarily what a place feels like or means to those living within it.',
+      'This emotional counter-map asks whether digital networks might help us notice one another more carefully, beyond merely making us more visible.',
+    ],
+    reflection: [
+      'What would your city look like if it were mapped by feeling?',
+      'When does a private thought become part of public memory?',
+      'What trace would you leave for a stranger to find?',
+    ],
+  },
+}
+
+export const commonsContent = {
+  title: 'THE\nCOMMONS',
+  deck: 'This room is intentionally unfinished.',
+  paragraphs: [
+    'Its low seats, cushions, tables, questions and voting wall do not point toward a single object at the centre. Instead, they create the conditions for something less predictable to happen: sitting, reading, talking, listening, disagreeing, reconsidering or simply spending time together.',
+    'In a conventional exhibition, visitors are often expected to move from one artwork to the next. Here, stopping is also a form of participation. Your attention, conversations and contributions become part of the changing life of the space.',
+    'The public poll offers a visible snapshot of what people think — but not a final answer. Every cluster of stickers represents both a collective position and the limitations of the question being asked. Who participated? Who hesitated? What nuance was lost between the available choices? Could you change your mind?',
+    'This space does not assume that community means consensus. A commons is something people continually negotiate: through difference, responsibility, generosity and care.',
+  ],
+  reflectionLead: 'A community is not simply a group of people in the same place. It begins with what they are willing to make, hold and reconsider together.',
+  reflectionBullets: [
+    'Sit for longer than feels necessary.',
+    'Respond to a question, or leave a better one.',
+    'Place a voting sticker, then see whether the works change your answer.',
+    'Speak with someone whose response differs from yours.',
+    'Leave a thought for whoever arrives next.',
+  ],
 }

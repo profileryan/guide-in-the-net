@@ -1,8 +1,10 @@
 import { useEffect, useRef } from 'react'
 
+type Tone = 'green' | 'pink' | 'blue'
+
 type Props = {
   reducedMotion: boolean
-  tone?: 'green' | 'pink'
+  tone?: Tone
 }
 
 function mulberry32(seed: number) {
@@ -14,6 +16,12 @@ function mulberry32(seed: number) {
   }
 }
 
+const toneConfig: Record<Tone, { bg: string; base: [number, number, number]; speck: string }> = {
+  green: { bg: '#001506', base: [10, 220, 49], speck: '184,255,183' },
+  pink: { bg: '#351026', base: [238, 66, 174], speck: '255,220,244' },
+  blue: { bg: '#0b1bb7', base: [109, 132, 255], speck: '234,240,255' },
+}
+
 export default function GlitchCanvas({ reducedMotion, tone = 'green' }: Props) {
   const ref = useRef<HTMLCanvasElement>(null)
 
@@ -23,7 +31,6 @@ export default function GlitchCanvas({ reducedMotion, tone = 'green' }: Props) {
     const ctx = canvas.getContext('2d', { alpha: false })
     if (!ctx) return
 
-    let frame = 0
     let raf = 0
     let lastPaint = 0
 
@@ -41,11 +48,11 @@ export default function GlitchCanvas({ reducedMotion, tone = 'green' }: Props) {
       const h = rect.height
       const seed = reducedMotion ? 47 : Math.floor(time / 2300) + 47
       const random = mulberry32(seed)
+      const config = toneConfig[tone]
 
-      ctx.fillStyle = tone === 'pink' ? '#351026' : '#001506'
+      ctx.fillStyle = config.bg
       ctx.fillRect(0, 0, w, h)
 
-      const base = tone === 'pink' ? [238, 66, 174] : [10, 220, 49]
       const bands = Math.ceil(h / 16)
       for (let i = 0; i < bands; i += 1) {
         if (random() < 0.36) continue
@@ -56,7 +63,7 @@ export default function GlitchCanvas({ reducedMotion, tone = 'green' }: Props) {
           const x = Math.floor(random() * w)
           const bw = 18 + Math.floor(random() * Math.max(28, w * 0.46))
           const alpha = 0.08 + random() * 0.28
-          ctx.fillStyle = `rgba(${base[0]}, ${base[1]}, ${base[2]}, ${alpha})`
+          ctx.fillStyle = `rgba(${config.base[0]}, ${config.base[1]}, ${config.base[2]}, ${alpha})`
           ctx.fillRect(x, y, bw, bh)
         }
       }
@@ -66,14 +73,13 @@ export default function GlitchCanvas({ reducedMotion, tone = 'green' }: Props) {
         const y = random() * h
         const a = random() * 0.2
         const s = random() < 0.9 ? 1 : 2
-        ctx.fillStyle = tone === 'pink' ? `rgba(255,220,244,${a})` : `rgba(184,255,183,${a})`
+        ctx.fillStyle = `rgba(${config.speck},${a})`
         ctx.fillRect(x, y, s, s)
       }
 
       ctx.fillStyle = 'rgba(0,0,0,.22)'
       for (let y = 0; y < h; y += 5) ctx.fillRect(0, y, w, 1)
 
-      frame += 1
       if (!reducedMotion) raf = window.requestAnimationFrame(loop)
     }
 
