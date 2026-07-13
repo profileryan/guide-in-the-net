@@ -2,29 +2,23 @@
 
 A mobile-first digital exhibition guide for **Islands in the Net**, presented at Padimai Art & Tech Studio, Tanjong Pagar Distripark.
 
-## Current build: v0.6.1 — polish pass
+## Current build: v0.7.0 — complete guide journey
 
-This package includes:
+This package contains the complete visitor flow:
 
-- the complete opening journey
-- the full **You and the Net** section
-- the full **Together in the Net** section
-- the full **Here in the Net** section
-- the latest Section 1, 2 and 3 map images
-- final supplied images for **ASIAMAXXING**, **Hexagram Today** and **XO (2026)**
-- a handoff into the **Futures Reading Room**
+- opening and personalisation
+- **You and the Net**
+- **Together in the Net**
+- **Here in the Net**
+- **Futures Reading Room**
+- closing reflection questions
+- final credits and restart
 
-Key polish changes:
-
-- map-note line-break bugs removed
-- Section 1 intro title now uses the visitor’s chosen name
-- all three section covers are centred
-- the obsolete Section 2 completion screen has been removed
-- Fyerool Darma’s work is now titled **XO (2026)**
+The closing questions include optional private text fields. Responses are stored only in the visitor’s browser on that device.
 
 Start with:
 
-- `PROJECT_PROGRESS.md` — current product state, implemented flow and next steps
+- `PROJECT_PROGRESS.md` — complete product state and remaining QA notes
 - `CODEX_HANDOFF.md` — merge and deployment instructions for Codex
 
 ## Run locally

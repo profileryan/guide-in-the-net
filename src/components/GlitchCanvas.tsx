@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-type Tone = 'green' | 'pink' | 'blue'
+type Tone = 'green' | 'pink' | 'blue' | 'yellow'
 
 type Props = {
   reducedMotion: boolean
@@ -20,6 +20,7 @@ const toneConfig: Record<Tone, { bg: string; base: [number, number, number]; spe
   green: { bg: '#001506', base: [10, 220, 49], speck: '184,255,183' },
   pink: { bg: '#351026', base: [238, 66, 174], speck: '255,220,244' },
   blue: { bg: '#0b1bb7', base: [109, 132, 255], speck: '234,240,255' },
+  yellow: { bg: '#2a2100', base: [241, 197, 29], speck: '255,242,181' },
 }
 
 export default function GlitchCanvas({ reducedMotion, tone = 'green' }: Props) {

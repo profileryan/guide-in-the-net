@@ -435,3 +435,36 @@ export const commonsContent = {
     'Leave a thought for whoever arrives next.',
   ],
 }
+
+export const readingRoomContent = {
+  title: 'READING ROOM &\nRESEARCH ARCHIVE\nOF SOUTHEAST ASIAN\nFUTURES',
+  deck: 'The archive is unfinished. So is the future.',
+  paragraphs: [
+    'Popular visions of the future are often produced by technology companies and circulated globally as though they belong equally to everyone. This can make the future appear imported, inevitable and without history.',
+    'This reading room offers a counterpoint. It shows that people across Southeast Asia have long been imagining modernity and technological change on their own terms. This archive reveals that networks existed before the internet and that questions now associated with AI — about knowledge, power, ecological crisis and collective life — have deep historical roots.',
+    'It gathers publications and historical material that trace earlier regional attempts to think across technology, culture, ecology and political change. Among these histories are the Pacific Ashrams of the 1970s: gatherings through which artists, intellectuals and cultural workers used exchange and networking to imagine forms of international cooperation beyond a world order dominated by the United States.',
+    'Recovering these histories is not an exercise in nostalgia. It expands the material available for imagining what comes next, and reminds us that the future has always been a cultural and political project.',
+  ],
+  prompts: [
+    'Pick up something you would not ordinarily read.',
+    'Follow one reference into another.',
+    'Notice which countries, languages and communities are present, and which are absent.',
+    'Leave behind a title, person or history that belongs in this collection.',
+    'Ask not only what the future will be, but whose ideas it is being built from.',
+  ],
+}
+
+export const closingContent = {
+  title: 'CONTINUE?',
+  paragraphs: [
+    'You began with the self: the identities, choices and possible futures that technology reflects back to us. From there, the view widened to the communities, memories and shared worlds formed when our individual traces meet. Finally, it expanded again toward the histories, beliefs and regional imaginations through which Southeast Asian futures are being made.',
+    'But these scales are never truly separate. Every personal choice contributes to a collective pattern. Every community inherits a history. Every imagined future privileges certain values, voices and ways of living over others.',
+    'Islands in the Net does not offer a single vision of what comes next. It asks us to recognise that the future is already being produced — through the systems we use, the stories we repeat, the relationships we sustain and the possibilities we choose to make visible.',
+  ],
+  questions: [
+    'What do you want technology to help us become?',
+    'What should it never be allowed to decide for us?',
+    'What will you contribute to the net?',
+  ],
+  ending: ['The exhibition ends here.', 'The questions leave with you.'],
+}

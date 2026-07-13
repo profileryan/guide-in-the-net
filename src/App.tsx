@@ -2,9 +2,12 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import AppShell from './components/AppShell'
 import ArtworkPage from './components/ArtworkPage'
 import CommonsPage from './components/CommonsPage'
+import ClosingReflectionPage from './components/ClosingReflectionPage'
+import CreditsPage from './components/CreditsPage'
 import GlitchCanvas from './components/GlitchCanvas'
 import IslandBlob from './components/IslandBlob'
 import Modal from './components/Modal'
+import ReadingRoomPage from './components/ReadingRoomPage'
 import {
   sectionOneArtworks,
   sectionOneIntro,
@@ -41,7 +44,10 @@ type Screen =
   | 'asiaMaxxing'
   | 'hexagram'
   | 'xo'
-  | 'sectionThreeComplete'
+  | 'readingRoomCover'
+  | 'readingRoom'
+  | 'closing'
+  | 'credits'
 type Dialog = 'info' | 'settings' | null
 
 const introParagraphs = [
@@ -127,7 +133,10 @@ const validScreens: Screen[] = [
   'asiaMaxxing',
   'hexagram',
   'xo',
-  'sectionThreeComplete',
+  'readingRoomCover',
+  'readingRoom',
+  'closing',
+  'credits',
 ]
 
 function initialScreen(): Screen {
@@ -413,14 +422,32 @@ export default function App() {
         )}
 
         {screen === 'xo' && (
-          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('hexagram')} onNext={() => go('sectionThreeComplete')}>
+          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('hexagram')} onNext={() => go('readingRoomCover')}>
             <ArtworkPage artwork={sectionThreeArtworks.xo} />
           </AppShell>
         )}
 
-        {screen === 'sectionThreeComplete' && (
-          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('xo')} hideNext>
-            <SectionComplete title={'FUTURES\nREADING ROOM'} kicker="SECTION 3 COMPLETE" body="You have completed Here in the Net. The next part of the guide will lead into the Futures Reading Room and its research archive of Southeast Asian futures." />
+        {screen === 'readingRoomCover' && (
+          <AppShell immersive onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('xo')} onNext={() => go('readingRoom')}>
+            <ReadingRoomArrival reducedMotion={reducedMotion} />
+          </AppShell>
+        )}
+
+        {screen === 'readingRoom' && (
+          <AppShell tone="yellow" onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('readingRoomCover')} onNext={() => go('closing')}>
+            <ReadingRoomPage />
+          </AppShell>
+        )}
+
+        {screen === 'closing' && (
+          <AppShell tone="yellow" onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('readingRoom')} onNext={() => go('credits')} nextLabel="FINISH">
+            <ClosingReflectionPage visitorName={displayName} />
+          </AppShell>
+        )}
+
+        {screen === 'credits' && (
+          <AppShell immersive onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('closing')} hideNext>
+            <CreditsPage visitorName={displayName} onRestart={restart} />
           </AppShell>
         )}
       </div>
@@ -561,6 +588,22 @@ function SectionArrival({
         <p className="section-number">{number}</p>
         <h1>{title.split('\n').map((line) => <span key={line}>{line}</span>)}</h1>
         <p className="section-subtitle">{subtitle.split('\n').map((line) => <span key={line}>{line}</span>)}</p>
+      </div>
+    </section>
+  )
+}
+
+function ReadingRoomArrival({ reducedMotion }: { reducedMotion: boolean }) {
+  return (
+    <section className="reading-room-arrival screen-enter">
+      <GlitchCanvas reducedMotion={reducedMotion} tone="yellow" />
+      <IslandBlob className="reading-room-blob reading-room-blob-a" variant={3} />
+      <IslandBlob className="reading-room-blob reading-room-blob-b" variant={1} />
+      <div className="reading-room-arrival-copy">
+        <p>FINAL SPACE</p>
+        <h1><span>FUTURES</span><span>READING</span><span>ROOM</span></h1>
+        <div className="reading-room-arrival-rule" aria-hidden="true" />
+        <p className="reading-room-arrival-subtitle">RESEARCH ARCHIVE OF<br />SOUTHEAST ASIAN FUTURES</p>
       </div>
     </section>
   )

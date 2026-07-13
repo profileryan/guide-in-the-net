@@ -1,15 +1,15 @@
 # Guide in the Net — Project Progress
 
 _Last updated: 13 July 2026_
-_Current package: v0.6.1 — three-section polish pass_
+_Current package: v0.7.0 — complete guide journey_
 
 ## 1. Product Purpose
 
-Guide in the Net is a mobile-first digital guide for **Islands in the Net** at Padimai Art & Tech Studio. It translates the printed exhibition guide into a slow, atmospheric digital journey with visitor-name personalisation, guided navigation, artwork interpretation and reflection prompts.
+Guide in the Net is a mobile-first digital guide for **Islands in the Net** at Padimai Art & Tech Studio. It translates the printed exhibition guide into a slow, atmospheric visitor journey with local personalisation, guided navigation, artwork interpretation, reflection prompts and a concluding departure experience.
 
 The canonical design viewport remains **440 × 956 px**, with responsive behaviour for smaller phones.
 
-## 2. Current Experience Flow
+## 2. Complete Experience Flow
 
 1. Loading sequence
 2. Exhibition cover
@@ -34,80 +34,74 @@ The canonical design viewport remains **440 × 956 px**, with responsive behavio
 21. Weiwei Xu — **ASIAMAXXING**
 22. Weiwei Xu — **Hexagram Today**
 23. Fyerool Darma — **XO (2026)**
-24. Handoff into the **Futures Reading Room**
+24. **Futures Reading Room** arrival
+25. Reading Room and Research Archive interpretation
+26. personalised **Continue?** closing reflection
+27. final credits and restart
 
-The Commons now flows directly into the Section 3 cover. There is no Section 2 completion interstitial.
+## 3. What Changed in v0.7.0
 
-## 3. What Changed in v0.6.1
+### Futures Reading Room
 
-### Copy and formatting fixes
+The temporary handoff after XO has been replaced by a complete final-space sequence:
 
-- Removed visible `\\n` formatting errors from all map instructions.
-- Map notes are now passed as arrays of lines rather than escaped strings, preventing this regression elsewhere.
+- a full-screen yellow-and-black Reading Room arrival
+- a dedicated editorial interpretation page
+- the complete archive text from the printed guide
+- five prompts encouraging visitors to browse, follow references, notice absences and contribute missing histories
 
-### Dynamic Section 1 introduction
+### Closing reflection
 
-The blue Section 1 introduction now uses the visitor’s locally stored display name:
+The guide now ends with the printed guide’s **Continue?** text and three departure questions:
 
-```text
-[VISITOR NAME] AND
-THE NET
-```
+1. What do you want technology to help us become?
+2. What should it never be allowed to decide for us?
+3. What will you contribute to the net?
 
-The Section 1 cover remains **YOU AND THE NET**.
-
-### Cover alignment
-
-All three section covers are now explicitly centred:
-
-- You and the Net
-- Together in the Net
-- Here in the Net
-
-### Flow correction
-
-The obsolete `sectionTwoComplete` screen has been removed. Navigation is now:
+Each question has an optional private note field. Notes are stored in `localStorage` under:
 
 ```text
-Traces → The Commons → Here in the Net cover
+iitn-guide-closing-reflections
 ```
 
-### Latest maps integrated
+They are not uploaded or shared.
 
-The supplied final map images are now used at:
+### Final credits
 
-- `public/assets/map-step-1.png`
-- `public/assets/map-step-2.png`
-- `public/assets/map-step-3.png`
+A final full-screen credits page now includes:
 
-Their active section discs align with the CSS glow positions for markers 1, 2 and 3.
+- personalised thank-you
+- exhibition presentation credit
+- curatorial / programming / design credit
+- a **Start Again** action
 
-### Section 3 titles and images
+### Final navigation correction
 
-- Fyerool Darma’s work has been renamed from **A Xenographer’s Index** to **XO (2026)**.
-- New supplied artwork images have been integrated for:
-  - ASIAMAXXING
-  - Hexagram Today
-  - XO (2026)
-- The images use the existing editorial-plate treatment rather than destructive full-screen cropping.
+The end sequence is now:
+
+```text
+XO → Futures Reading Room cover → Reading Room → Continue? → Credits
+```
+
+The old `sectionThreeComplete` handoff route has been removed.
 
 ## 4. Direct Test Routes
 
 ```text
-?screen=section
 ?screen=sectionIntro
 ?screen=map
 ?screen=sectionTwoCover
-?screen=sectionTwoIntro
 ?screen=mapTwo
 ?screen=commons
 ?screen=sectionThreeCover
-?screen=sectionThreeIntro
 ?screen=mapThree
 ?screen=asiaMaxxing
 ?screen=hexagram
 ?screen=xo
-?screen=sectionThreeComplete
+?screen=readingRoomCover
+?screen=readingRoom
+?screen=closing
+?screen=credits
 ```
 
 ## 5. Technical Architecture
@@ -116,57 +110,65 @@ Their active section discs align with the CSS glow positions for markers 1, 2 an
 - React 18
 - TypeScript
 - CSS
-- localStorage for visitor name and reduced-motion preference
+- localStorage for visitor name, reduced-motion preference and optional closing notes
 - Vercel deployment from GitHub
 - no backend or environment variables
 
 Important files:
 
-- `src/App.tsx` — screen flow, personalisation and navigation
-- `src/content/guideContent.ts` — section introductions, artwork copy and presentation metadata
+- `src/App.tsx` — complete screen flow, personalisation and navigation
+- `src/content/guideContent.ts` — section, artwork, Reading Room and closing content
 - `src/components/ArtworkPage.tsx` — reusable editorial artwork template
-- `src/components/CommonsPage.tsx` — dedicated Commons page
-- `src/components/AppShell.tsx` — persistent header, navigation and shell tones
-- `src/styles.css` — visual system, map glow positions and artwork treatments
-- `public/assets/map-step-*.png` — final supplied map states
-- `public/assets/works/` — supplied artwork images
+- `src/components/CommonsPage.tsx` — Commons page
+- `src/components/ReadingRoomPage.tsx` — Reading Room interpretation
+- `src/components/ClosingReflectionPage.tsx` — closing questions and private local notes
+- `src/components/CreditsPage.tsx` — final credit / restart screen
+- `src/components/AppShell.tsx` — persistent shell, navigation and colour tones
+- `src/components/GlitchCanvas.tsx` — procedural backgrounds, including the new yellow tone
+- `src/styles.css` — complete visual system
 
-## 6. Known Limitations
+## 6. Design Decisions to Preserve
+
+- restrained movement rather than app-like animation
+- strong editorial hierarchy
+- deliberate section transitions
+- persistent information and settings access
+- no account requirement
+- visitor data stored locally
+- reduced-motion support
+- no forced response at closing
+- clear statement that closing notes stay on the device
+- Restart does not send, export or publish notes
+
+## 7. Known Limitations / Optional Later Work
 
 - Ho Rui An’s artwork image remains provisional.
 - The Commons uses an editorial treatment rather than a documentary room photograph.
 - The final exhibition font is intentionally not bundled. Preserve `public/fonts/Header_Font.ttf` from the live repository.
-- No external links, live submissions, shared voting backend, analytics or CMS features are included yet.
+- No external links, live submissions, shared voting backend, analytics or CMS features are included.
+- A future production decision may be needed on whether **Start Again** should also clear the stored name and closing notes on shared devices.
 
-## 7. Recommended Next Slice
-
-1. Futures Reading Room
-2. Reading / research archive interpretation
-3. Art Shop or utility route, if required
-4. closing reflection and departure experience
-5. restart / reset flow review
-6. final device and accessibility QA
-
-## 8. Acceptance Checklist
+## 8. Final QA Checklist
 
 - [ ] Preserve `public/fonts/Header_Font.ttf`
 - [ ] Run `npm install`
 - [ ] Run `npm run check`
 - [ ] Run `npm run build`
-- [ ] Confirm no map page visibly prints `\\n`
-- [ ] Confirm Section 1 intro uses the stored visitor name
-- [ ] Confirm the Section 1 cover still says **YOU AND THE NET**
-- [ ] Confirm all three section covers are centred
-- [ ] Confirm The Commons advances directly to Section 3
-- [ ] Confirm map glows align with markers 1, 2 and 3
-- [ ] Confirm ASIAMAXXING, Hexagram Today and XO images load
-- [ ] Confirm the direct route is `?screen=xo`
-- [ ] Test 440 × 956 and a shorter phone viewport
+- [ ] Test the complete journey from cover through credits
+- [ ] Test Back / Next on the four new final screens
+- [ ] Confirm `XO → readingRoomCover` directly
+- [ ] Confirm no `sectionThreeComplete` route remains
+- [ ] Confirm Reading Room content can scroll fully above the fixed navigation
+- [ ] Enter closing notes, navigate away, return and confirm they persist
+- [ ] Confirm the closing note privacy statement is visible
+- [ ] Confirm Start Again returns to the opening sequence
+- [ ] Test at 440 × 956 and a shorter phone viewport
 - [ ] Test reduced-motion mode
+- [ ] Test iOS Safari and Android Chrome
 
 ## 9. Repository Workflow
 
 Target repository: `profileryan/guide-in-the-net`
 Target Vercel project: `guide-in-the-net`
 
-ChatGPT develops and packages reviewed slices. Codex handles Git writes and deployment. Vercel should redeploy automatically after the production branch is updated.
+ChatGPT develops and packages reviewed builds. Codex handles Git writes and deployment. Vercel should redeploy automatically after the production branch is updated.

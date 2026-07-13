@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-type ShellTone = 'black' | 'blue' | 'green' | 'red'
+type ShellTone = 'black' | 'blue' | 'green' | 'red' | 'yellow'
 
 type Props = {
   children: ReactNode

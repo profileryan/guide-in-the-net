@@ -1,10 +1,10 @@
-# Codex Handoff — v0.6.1
+# Codex Handoff — v0.7.0
 
 ## Objective
 
 Merge this package into `profileryan/guide-in-the-net` and deploy it through the existing Vercel project `guide-in-the-net`.
 
-This is a full project snapshot and supersedes v0.6.0.
+This full project snapshot completes the guide journey through the Futures Reading Room, closing questions and credits.
 
 ## Important preservation rules
 
@@ -30,112 +30,99 @@ npm run check
 npm run build
 
 git add .
-git commit -m "Polish maps, personalisation and Section 3 artwork"
+git commit -m "Complete Reading Room and closing guide flow"
 git push
 ```
 
-## High-priority changes
-
-### 1. Map note formatting
-
-`MapScreen` now receives `note: string[]`. Do not convert these back to JSX string attributes containing `\\n`.
-
-Verify:
+## New final flow
 
 ```text
-?screen=map
-?screen=mapTwo
-?screen=mapThree
+xo
+→ readingRoomCover
+→ readingRoom
+→ closing
+→ credits
 ```
 
-No literal `\\n` should be visible.
+The old `sectionThreeComplete` screen is removed.
 
-### 2. Personalised Section 1 intro
-
-The Section 1 cover remains static. The following intro screen is dynamic:
+## Key files added
 
 ```text
-?screen=sectionIntro
-```
-
-It should display the locally stored visitor name followed by **AND THE NET**.
-
-### 3. Cover alignment
-
-All are centred:
-
-```text
-?screen=section
-?screen=sectionTwoCover
-?screen=sectionThreeCover
-```
-
-### 4. Removed Section 2 completion screen
-
-The correct flow is:
-
-```text
-traces → commons → sectionThreeCover
-```
-
-There is no `sectionTwoComplete` route.
-
-### 5. Final map assets
-
-The three supplied files have replaced previous versions:
-
-```text
-public/assets/map-step-1.png
-public/assets/map-step-2.png
-public/assets/map-step-3.png
-```
-
-### 6. Section 3 artwork update
-
-The final Section 3 sequence is:
-
-```text
-asiaMaxxing → hexagram → xo → sectionThreeComplete
-```
-
-The old `xenographer` route and content key have been replaced by `xo`.
-
-New assets:
-
-```text
-public/assets/works/asia-maxxing.jpg
-public/assets/works/hexagram-today.png
-public/assets/works/xo.jpeg
+src/components/ReadingRoomPage.tsx
+src/components/ClosingReflectionPage.tsx
+src/components/CreditsPage.tsx
 ```
 
 ## Key files changed
 
-- `src/App.tsx`
-- `src/content/guideContent.ts`
-- `src/styles.css`
-- `public/assets/map-step-1.png`
-- `public/assets/map-step-2.png`
-- `public/assets/map-step-3.png`
-- `public/assets/works/asia-maxxing.jpg`
-- `public/assets/works/hexagram-today.png`
-- `public/assets/works/xo.jpeg`
-- project documentation
+### `src/App.tsx`
 
-## Direct routes
+- adds the four final screens
+- routes XO directly into the Reading Room
+- passes the stored visitor name to the closing and credits screens
+
+### `src/content/guideContent.ts`
+
+Adds:
+
+- `readingRoomContent`
+- `closingContent`
+
+### `src/components/AppShell.tsx`
+
+- adds `yellow` as a supported shell tone
+
+### `src/components/GlitchCanvas.tsx`
+
+- adds a yellow procedural background tone
+
+### `src/styles.css`
+
+Adds the complete visual system for:
+
+- Reading Room cover
+- Reading Room editorial content
+- closing reflection fields
+- credits screen
+- yellow shell navigation / icon behaviour
+
+## Private closing notes
+
+Closing responses are optional and stored locally at:
 
 ```text
-?screen=sectionIntro
-?screen=map
-?screen=sectionTwoCover
-?screen=mapTwo
-?screen=commons
-?screen=sectionThreeCover
-?screen=mapThree
-?screen=asiaMaxxing
-?screen=hexagram
-?screen=xo
-?screen=sectionThreeComplete
+iitn-guide-closing-reflections
 ```
+
+Do not replace this with network submission or analytics logic without explicit approval.
+
+## Direct routes to verify
+
+```text
+?screen=xo
+?screen=readingRoomCover
+?screen=readingRoom
+?screen=closing
+?screen=credits
+```
+
+## Required checks
+
+```bash
+npm install
+npm run check
+npm run build
+```
+
+Then verify:
+
+- XO advances to Reading Room cover
+- Reading Room content scrolls correctly
+- each closing text field accepts input
+- closing notes persist after navigating Back / Next
+- credits page Start Again works
+- reduced-motion mode disables new ambient animations
 
 ## Build expectation
 
