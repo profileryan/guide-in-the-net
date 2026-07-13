@@ -122,7 +122,6 @@ export const sectionOneArtworks: Record<Extract<ArtworkId, 'safe-entry' | 'histo
     image: {
       src: '/assets/works/history-of-intelligence.jpg',
       alt: 'Ho Rui An’s wall-sized diagram A History of Intelligence in ((South)(East)) Asia',
-      note: 'Current approved guide crop; replace only when a final installation photograph is supplied.',
       position: 'center 42%',
       aspect: '1.58 / 1',
     },

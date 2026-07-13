@@ -1,5 +1,5 @@
 @font-face {
-  font-family: 'IITN Header';
+  font-family: 'PxPlus IBM BIOS';
   src: url('/fonts/Header_Font.ttf') format('truetype');
   font-display: swap;
 }
@@ -13,7 +13,7 @@
   --blue: #1717f4;
   --blue-deep: #1111e8;
   --green: #a9ff43;
-  --header: 'IITN Header', 'Courier New', Courier, monospace;
+  --header: 'PxPlus IBM BIOS', 'Courier New', Courier, monospace;
   --safe-top: max(16px, env(safe-area-inset-top));
   --safe-bottom: max(16px, env(safe-area-inset-bottom));
 }
@@ -38,7 +38,9 @@ body {
 }
 
 button,
-input {
+input,
+select,
+textarea {
   font: inherit;
 }
 
@@ -431,6 +433,21 @@ button {
 
 .shell-blue .topbar::after {
   background: linear-gradient(180deg, rgba(15,15,194,.76), transparent);
+}
+
+.corner-logo-button {
+  width: 81px;
+  height: 52px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: transform .35s ease, opacity .35s ease;
+}
+
+.corner-logo-button:active {
+  transform: scale(.94);
 }
 
 .corner-logo {
@@ -2699,4 +2716,392 @@ button {
 .reduced-motion .reading-room-copy p {
   animation: none !important;
   opacity: 1;
+}
+
+/* ---- v0.7.1 accessibility, navigation and copy polish ---- */
+
+:root {
+  --copy-xs: 13px;
+  --copy-sm: 17px;
+  --copy-md: 21px;
+  --copy-lg: 23px;
+  --copy-xl: 28px;
+  --copy-2xl: 29px;
+}
+
+html[data-text-size='small'] {
+  --copy-xs: 12px;
+  --copy-sm: 15px;
+  --copy-md: 19px;
+  --copy-lg: 21px;
+  --copy-xl: 25px;
+  --copy-2xl: 26px;
+}
+
+html[data-text-size='large'] {
+  --copy-xs: 15px;
+  --copy-sm: 20px;
+  --copy-md: 24px;
+  --copy-lg: 26px;
+  --copy-xl: 31px;
+  --copy-2xl: 33px;
+}
+
+/* Reading-size controls affect interpretation and guidance copy, not the designed display headings. */
+.intro-copy,
+.section-intro-copy { font-size: var(--copy-xl); }
+.action-item p,
+.closing-invitation,
+.modal-body-copy { font-size: var(--copy-sm); }
+.artwork-body,
+.commons-body,
+.reading-room-copy,
+.closing-copy { font-size: var(--copy-md); }
+.artwork-context-copy,
+.commons-reflection-lead,
+.commons-bullets p,
+.reading-room-prompts p,
+.closing-question-text { font-size: var(--copy-lg); }
+.artwork-deck,
+.commons-deck,
+.reading-room-deck { font-size: var(--copy-2xl); }
+.reflection-prompts p { font-size: var(--copy-lg); }
+
+/* Keep the name prompt readable and fully visible on narrow phones. */
+.name-form input {
+  font-size: clamp(18px, 6vw, 26px);
+}
+
+.name-form input::placeholder {
+  font-size: inherit;
+}
+
+@media (max-width: 350px) {
+  .name-form input {
+    padding-left: 20px;
+    padding-right: 60px;
+    letter-spacing: -.01em;
+  }
+}
+
+.how-intro {
+  width: min(320px, 100%);
+  margin: 28px auto 0;
+  color: rgba(255,255,255,.82);
+  font-size: var(--copy-sm);
+  line-height: 1.35;
+  text-align: center;
+}
+
+.how-intro + .action-list {
+  margin-top: 45px;
+}
+
+.action-item p strong {
+  color: #fff;
+  font-family: var(--header);
+  font-size: .92em;
+  font-weight: 400;
+  letter-spacing: .025em;
+}
+
+.map-screen h1 {
+  max-width: 360px;
+  margin-inline: auto;
+  font-size: clamp(15px, 4.7vw, 20px);
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+/* Settings controls */
+.settings-control-group,
+.settings-select {
+  display: grid;
+  gap: 9px;
+  margin-bottom: 24px;
+}
+
+.settings-control-group > span,
+.settings-select > span {
+  color: var(--green);
+  font-family: var(--header);
+  font-size: 12px;
+  letter-spacing: .07em;
+}
+
+.settings-stepper {
+  display: grid;
+  grid-template-columns: 58px 1fr 58px;
+  align-items: center;
+  min-height: 50px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.55);
+  border-radius: 999px;
+  background: #151515;
+}
+
+.settings-stepper button {
+  height: 50px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-family: var(--header);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.settings-stepper button:disabled {
+  opacity: .25;
+  cursor: default;
+}
+
+.settings-stepper output {
+  text-align: center;
+  color: rgba(255,255,255,.82);
+  font-family: var(--header);
+  font-size: 12px;
+  letter-spacing: .05em;
+}
+
+.settings-select select {
+  width: 100%;
+  height: 50px;
+  padding: 0 42px 0 18px;
+  border: 1px solid rgba(255,255,255,.55);
+  border-radius: 999px;
+  appearance: none;
+  background:
+    linear-gradient(45deg, transparent 50%, #fff 50%) calc(100% - 21px) 21px / 7px 7px no-repeat,
+    linear-gradient(135deg, #fff 50%, transparent 50%) calc(100% - 16px) 21px / 7px 7px no-repeat,
+    #151515;
+  color: #fff;
+  font-family: var(--header);
+  font-size: 13px;
+  outline: none;
+}
+
+.settings-select select:focus,
+.settings-stepper:focus-within {
+  border-color: var(--green);
+}
+
+/* Left sliding section menu */
+.section-menu-backdrop {
+  position: absolute;
+  z-index: 120;
+  inset: 0;
+  overflow: hidden;
+  background: rgba(0,0,0,.62);
+  backdrop-filter: blur(5px);
+  animation: section-menu-fade .35s ease both;
+}
+
+@keyframes section-menu-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.section-menu {
+  width: min(362px, 86%);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--safe-top) + 25px) 24px calc(var(--safe-bottom) + 24px);
+  background:
+    radial-gradient(circle at 12% 22%, rgba(169,255,67,.11), transparent 28%),
+    radial-gradient(circle at 86% 72%, rgba(45,75,255,.17), transparent 30%),
+    #080a08;
+  border-right: 1px solid rgba(255,255,255,.34);
+  box-shadow: 24px 0 70px rgba(0,0,0,.56);
+  animation: section-menu-slide .62s cubic-bezier(.2,.82,.2,1) both;
+}
+
+@keyframes section-menu-slide {
+  from { transform: translateX(-104%); }
+  to { transform: translateX(0); }
+}
+
+.section-menu-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-bottom: 23px;
+  border-bottom: 1px solid rgba(255,255,255,.28);
+}
+
+.section-menu-head p {
+  margin: 0;
+  color: var(--green);
+  font-family: var(--header);
+  font-size: 13px;
+  letter-spacing: .08em;
+}
+
+.section-menu-head button {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,.7);
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+  font-size: 27px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.section-menu nav {
+  display: grid;
+  margin-top: 34px;
+}
+
+.section-menu nav button {
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 82px;
+  padding: 15px 2px;
+  border: 0;
+  border-bottom: 1px solid rgba(255,255,255,.2);
+  background: transparent;
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+}
+
+.section-menu nav button > span {
+  color: rgba(255,255,255,.38);
+  font-family: var(--header);
+  font-size: 12px;
+}
+
+.section-menu nav button strong {
+  font-family: var(--header);
+  font-size: 20px;
+  line-height: .95;
+  font-weight: 400;
+}
+
+.section-menu nav button i {
+  color: rgba(255,255,255,.48);
+  font-family: var(--header);
+  font-size: 20px;
+  font-style: normal;
+  transition: transform .3s ease;
+}
+
+.section-menu nav button:active i {
+  transform: translateX(4px);
+}
+
+.section-menu nav button.is-active {
+  color: var(--green);
+}
+
+.section-menu nav button.is-active > span,
+.section-menu nav button.is-active i {
+  color: var(--green);
+}
+
+.section-menu-note {
+  margin: auto 0 0;
+  color: rgba(255,255,255,.42);
+  font-family: var(--header);
+  font-size: 10px;
+  line-height: 1.3;
+  letter-spacing: .05em;
+}
+
+/* Colour-accessibility palettes. These recolour interface signals while leaving artwork photography intact. */
+html[data-colour-mode='red-green-safe'] {
+  --blue: #0072b2;
+  --blue-deep: #005a8d;
+  --green: #e69f00;
+}
+
+html[data-colour-mode='red-green-safe'] .shell-green,
+html[data-colour-mode='red-green-safe'] .section-arrival-three { background: #003b5c; }
+html[data-colour-mode='red-green-safe'] .shell-red { background: #9c4f00; }
+html[data-colour-mode='red-green-safe'] :is(.palette-coral, .palette-magenta, .palette-rose, .palette-signal-red) {
+  --accent: #e69f00;
+  --accent-soft: #f7e5bd;
+}
+html[data-colour-mode='red-green-safe'] :is(.palette-blue, .palette-cobalt, .palette-violet, .palette-jade) {
+  --accent: #0072b2;
+  --accent-soft: #d6ebf6;
+}
+
+html[data-colour-mode='blue-yellow-safe'] {
+  --blue: #8b1e80;
+  --blue-deep: #64165d;
+  --green: #00a78e;
+}
+
+html[data-colour-mode='blue-yellow-safe'] .shell-green,
+html[data-colour-mode='blue-yellow-safe'] .section-arrival-three { background: #005b52; }
+html[data-colour-mode='blue-yellow-safe'] .shell-yellow { background: #f2f2f2; color: #080808; }
+html[data-colour-mode='blue-yellow-safe'] :is(.palette-blue, .palette-cobalt, .palette-violet, .palette-ochre) {
+  --accent: #8b1e80;
+  --accent-soft: #f0d8ec;
+}
+html[data-colour-mode='blue-yellow-safe'] :is(.palette-jade, .palette-moss) {
+  --accent: #00a78e;
+  --accent-soft: #d6f2ed;
+}
+
+html[data-colour-mode='high-contrast'] {
+  --blue: #000;
+  --blue-deep: #000;
+  --green: #fff200;
+}
+
+html[data-colour-mode='high-contrast'] :is(.shell-blue, .shell-green, .shell-red, .shell-yellow) {
+  background-color: #000;
+  color: #fff;
+  background-image: none;
+}
+
+html[data-colour-mode='high-contrast'] :is(
+  .palette-coral,
+  .palette-magenta,
+  .palette-violet,
+  .palette-blue,
+  .palette-rose,
+  .palette-cobalt,
+  .palette-moss,
+  .palette-signal-red,
+  .palette-jade,
+  .palette-ochre
+) {
+  --accent: #fff200;
+  --accent-soft: #fffbd1;
+  --hero-bg: #000;
+}
+
+html[data-colour-mode='high-contrast'] .nav-back,
+html[data-colour-mode='high-contrast'] .modal-card,
+html[data-colour-mode='high-contrast'] .settings-stepper,
+html[data-colour-mode='high-contrast'] .settings-select select {
+  border-color: #fff;
+}
+
+.reduced-motion .section-menu,
+.reduced-motion .section-menu-backdrop {
+  animation: none !important;
+}
+
+.corner-logo-button:focus-visible,
+.section-menu button:focus-visible,
+.settings-stepper button:focus-visible,
+.settings-select select:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3,
+[role='heading'] {
+  font-family: var(--header);
 }

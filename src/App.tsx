@@ -8,6 +8,7 @@ import GlitchCanvas from './components/GlitchCanvas'
 import IslandBlob from './components/IslandBlob'
 import Modal from './components/Modal'
 import ReadingRoomPage from './components/ReadingRoomPage'
+import SectionMenu from './components/SectionMenu'
 import {
   sectionOneArtworks,
   sectionOneIntro,
@@ -49,6 +50,8 @@ type Screen =
   | 'closing'
   | 'credits'
 type Dialog = 'info' | 'settings' | null
+type TextSize = 'small' | 'standard' | 'large'
+type ColourMode = 'standard' | 'red-green-safe' | 'blue-yellow-safe' | 'high-contrast'
 
 const introParagraphs = [
   'From algorithms that shape reality for millions of people to AI that’s rapidly changing how we create and work, technology is no longer separate from our everyday lives. It is part of our language, labour, identity and culture.',
@@ -62,32 +65,38 @@ const guideActions = [
   {
     icon: '/assets/linger.png',
     iconHeight: '146px',
-    text: 'Spend time sitting with new ideas and confronting the future they each paint. Try lingering longer than your first reaction.',
+    label: 'Linger',
+    text: 'Sit with an idea longer than your first impression.',
   },
   {
     icon: '/assets/form-thoughts.png',
     iconHeight: '70px',
-    text: 'Form your own perspectives on technology, community, and what’s next for us and our cities.',
+    label: 'Decide',
+    text: 'Form your own view about technology, community and the future.',
   },
   {
     icon: '/assets/converse.png',
     iconHeight: '70px',
-    text: 'Join a conversation: whether in person or with notes for visitors who come before or after you.',
+    label: 'Join In',
+    text: 'Talk with someone here, or leave a note for whoever comes next.',
   },
   {
     icon: '/assets/reflect.png',
     iconHeight: '95px',
-    text: 'Use this as a safe place to sit, listen, read, write, talk, journal, reflect and imagine.',
+    label: 'Be',
+    text: 'Use this as a safe place to sit, listen, read, write, reflect and imagine.',
   },
   {
     icon: '/assets/return.png',
     iconHeight: '108px',
-    text: 'Come back after dark for screenings, performances, talks and late-night takeovers.',
+    label: 'Come Back',
+    text: 'Return after dark for screenings, performances, talks and late-night takeovers.',
   },
   {
     icon: '/assets/share.png',
     iconHeight: '118px',
-    text: 'Photograph, post, remix — or keep it offline. Feed the algorithm with #IslandsInTheNetSG.',
+    label: "Share, Or Don't",
+    text: 'Snap and share, or keep it offline. Feed the algorithm with #IslandsintheNetSG',
   },
 ]
 
@@ -104,6 +113,24 @@ function readStoredMotion() {
     return localStorage.getItem('iitn-guide-reduced-motion') === 'true'
   } catch {
     return false
+  }
+}
+
+function readStoredTextSize(): TextSize {
+  try {
+    const value = localStorage.getItem('iitn-guide-text-size')
+    return value === 'small' || value === 'large' ? value : 'standard'
+  } catch {
+    return 'standard'
+  }
+}
+
+function readStoredColourMode(): ColourMode {
+  try {
+    const value = localStorage.getItem('iitn-guide-colour-mode')
+    return value === 'red-green-safe' || value === 'blue-yellow-safe' || value === 'high-contrast' ? value : 'standard'
+  } catch {
+    return 'standard'
   }
 }
 
@@ -139,6 +166,14 @@ const validScreens: Screen[] = [
   'credits',
 ]
 
+function sectionForScreen(screen: Screen): 'beginning' | 'one' | 'two' | 'three' | 'finale' {
+  if (['loading', 'cover', 'name', 'welcome', 'how', 'map'].includes(screen)) return 'beginning'
+  if (['section', 'sectionIntro', 'safeEntry', 'history', 'futureYou', 'impactBench', 'graceQuek'].includes(screen)) return 'one'
+  if (['sectionTwoCover', 'sectionTwoIntro', 'mapTwo', 'commons', 'altar', 'traces'].includes(screen)) return 'two'
+  if (['sectionThreeCover', 'sectionThreeIntro', 'mapThree', 'asiaMaxxing', 'hexagram', 'xo'].includes(screen)) return 'three'
+  return 'finale'
+}
+
 function initialScreen(): Screen {
   const candidate = new URLSearchParams(window.location.search).get('screen') as Screen | null
   return candidate && validScreens.includes(candidate) ? candidate : 'loading'
@@ -150,6 +185,9 @@ export default function App() {
   const [name, setName] = useState(readStoredName)
   const [draftName, setDraftName] = useState(readStoredName)
   const [reducedMotion, setReducedMotion] = useState(readStoredMotion)
+  const [textSize, setTextSize] = useState<TextSize>(readStoredTextSize)
+  const [colourMode, setColourMode] = useState<ColourMode>(readStoredColourMode)
+  const [menuOpen, setMenuOpen] = useState(false)
   const mainRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -160,6 +198,24 @@ export default function App() {
       // Storage may be unavailable in private browsing; the guide still works.
     }
   }, [reducedMotion])
+
+  useEffect(() => {
+    document.documentElement.dataset.textSize = textSize
+    try {
+      localStorage.setItem('iitn-guide-text-size', textSize)
+    } catch {
+      // Non-blocking.
+    }
+  }, [textSize])
+
+  useEffect(() => {
+    document.documentElement.dataset.colourMode = colourMode
+    try {
+      localStorage.setItem('iitn-guide-colour-mode', colourMode)
+    } catch {
+      // Non-blocking.
+    }
+  }, [colourMode])
 
   useEffect(() => {
     if (screen !== 'loading') return
@@ -184,6 +240,7 @@ export default function App() {
 
   const go = (next: Screen) => {
     setDialog(null)
+    setMenuOpen(false)
     setScreen(next)
   }
 
@@ -201,6 +258,7 @@ export default function App() {
 
   const restart = () => {
     setDialog(null)
+    setMenuOpen(false)
     setScreen('loading')
   }
 
@@ -235,6 +293,7 @@ export default function App() {
 
         {screen === 'welcome' && (
           <AppShell
+            onMenu={() => setMenuOpen(true)}
             onInfo={() => setDialog('info')}
             onSettings={() => setDialog('settings')}
             onBack={() => go('name')}
@@ -260,6 +319,7 @@ export default function App() {
         {screen === 'how' && (
           <AppShell
             blue
+            onMenu={() => setMenuOpen(true)}
             onInfo={() => setDialog('info')}
             onSettings={() => setDialog('settings')}
             onBack={() => go('welcome')}
@@ -267,6 +327,7 @@ export default function App() {
           >
             <article className="how-screen screen-enter">
               <h1>HOW TO USE THIS SPACE</h1>
+              <p className="how-intro">This space is yours to inhabit. We invite you to...</p>
               <div className="action-list">
                 {guideActions.map((action, index) => (
                   <section
@@ -277,7 +338,7 @@ export default function App() {
                     <div className="action-icon" style={{ '--icon-height': action.iconHeight } as React.CSSProperties}>
                       <img src={action.icon} alt="" />
                     </div>
-                    <p>{action.text}</p>
+                    <p><strong>{action.label}:</strong> {action.text}</p>
                   </section>
                 ))}
               </div>
@@ -292,18 +353,20 @@ export default function App() {
         {screen === 'map' && (
           <AppShell
             blue
+            onMenu={() => setMenuOpen(true)}
             onInfo={() => setDialog('info')}
             onSettings={() => setDialog('settings')}
             onBack={() => go('how')}
             onNext={() => go('section')}
           >
-            <MapScreen marker="one" image="/assets/map-step-1.png" alt="Map of the exhibition showing the route into You and the Net" note={['FOLLOW THE LIGHTS.', 'STAY IN EACH SECTION AS LONG AS YOU WOULD LIKE.']} />
+            <MapScreen heading={`STEP INTO THE NET, ${displayName.toUpperCase()}.`} marker="one" image="/assets/map-step-1.png" alt="Map of the exhibition showing the route into You and the Net" note={['FOLLOW THE LIGHTS.', 'STAY IN EACH SECTION AS LONG AS YOU WOULD LIKE.']} />
           </AppShell>
         )}
 
         {screen === 'section' && (
           <AppShell
             immersive
+            onMenu={() => setMenuOpen(true)}
             onInfo={() => setDialog('info')}
             onSettings={() => setDialog('settings')}
             onBack={() => go('map')}
@@ -316,6 +379,7 @@ export default function App() {
         {screen === 'sectionIntro' && (
           <AppShell
             blue
+            onMenu={() => setMenuOpen(true)}
             onInfo={() => setDialog('info')}
             onSettings={() => setDialog('settings')}
             onBack={() => go('section')}
@@ -326,129 +390,137 @@ export default function App() {
         )}
 
         {screen === 'safeEntry' && (
-          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('sectionIntro')} onNext={() => go('history')}>
+          <AppShell onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('sectionIntro')} onNext={() => go('history')}>
             <ArtworkPage artwork={sectionOneArtworks['safe-entry']} />
           </AppShell>
         )}
 
         {screen === 'history' && (
-          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('safeEntry')} onNext={() => go('futureYou')}>
+          <AppShell onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('safeEntry')} onNext={() => go('futureYou')}>
             <ArtworkPage artwork={sectionOneArtworks.history} />
           </AppShell>
         )}
 
         {screen === 'futureYou' && (
-          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('history')} onNext={() => go('impactBench')}>
+          <AppShell onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('history')} onNext={() => go('impactBench')}>
             <ArtworkPage artwork={sectionOneArtworks['future-you']} />
           </AppShell>
         )}
 
         {screen === 'impactBench' && (
-          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('futureYou')} onNext={() => go('graceQuek')}>
+          <AppShell onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('futureYou')} onNext={() => go('graceQuek')}>
             <ArtworkPage artwork={sectionOneArtworks.impactbench} />
           </AppShell>
         )}
 
         {screen === 'graceQuek' && (
-          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('impactBench')} onNext={() => go('sectionTwoCover')}>
+          <AppShell onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('impactBench')} onNext={() => go('sectionTwoCover')}>
             <ArtworkPage artwork={sectionOneArtworks['grace-quek']} />
           </AppShell>
         )}
 
         {screen === 'sectionTwoCover' && (
-          <AppShell immersive onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('graceQuek')} onNext={() => go('sectionTwoIntro')}>
+          <AppShell immersive onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('graceQuek')} onNext={() => go('sectionTwoIntro')}>
             <SectionArrival reducedMotion={reducedMotion} number="SECTION 2" title={'TOGETHER\nIN THE\nNET'} subtitle={'COMMUNITY, MEMORY AND\nCOLLECTIVE WORLDBUILDING'} tone="blue" variant="two" align="center" />
           </AppShell>
         )}
 
         {screen === 'sectionTwoIntro' && (
-          <AppShell blue onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('sectionTwoCover')} onNext={() => go('mapTwo')}>
+          <AppShell blue onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('sectionTwoCover')} onNext={() => go('mapTwo')}>
             <SectionIntroScreen content={sectionTwoIntro} />
           </AppShell>
         )}
 
         {screen === 'mapTwo' && (
-          <AppShell blue onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('sectionTwoIntro')} onNext={() => go('altar')}>
-            <MapScreen marker="two" image="/assets/map-step-2.png" alt="Map of the exhibition showing the route into Together in the Net" note={['FOLLOW THE CURVE INTO SECTION 2.', 'THIS PART OF THE EXHIBITION INVITES YOU TO LINGER TOGETHER.']} />
+          <AppShell blue onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('sectionTwoIntro')} onNext={() => go('commons')}>
+            <MapScreen heading={`STEP INTO THE COMMON AREA, ${displayName.toUpperCase()}.`} marker="two" image="/assets/map-step-2.png" alt="Map of the exhibition showing the route into Together in the Net" note={['FOLLOW THE LIGHTS INTO THE SPACE.', 'THIS SECTION OF THE EXHIBITION INVITES YOU TO STAY, TOGETHER.']} />
           </AppShell>
         )}
 
         {screen === 'altar' && (
-          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('mapTwo')} onNext={() => go('traces')}>
+          <AppShell onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('commons')} onNext={() => go('traces')}>
             <ArtworkPage artwork={sectionTwoArtworks.altar} />
           </AppShell>
         )}
 
         {screen === 'traces' && (
-          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('altar')} onNext={() => go('commons')}>
+          <AppShell onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('altar')} onNext={() => go('sectionThreeCover')}>
             <ArtworkPage artwork={sectionTwoArtworks.traces} />
           </AppShell>
         )}
 
         {screen === 'commons' && (
-          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('traces')} onNext={() => go('sectionThreeCover')}>
+          <AppShell onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('mapTwo')} onNext={() => go('altar')}>
             <CommonsPage />
           </AppShell>
         )}
 
         {screen === 'sectionThreeCover' && (
-          <AppShell immersive tone="green" onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('commons')} onNext={() => go('sectionThreeIntro')}>
+          <AppShell immersive tone="green" onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('traces')} onNext={() => go('sectionThreeIntro')}>
             <SectionArrival reducedMotion={reducedMotion} number="SECTION 3" title={'HERE IN\nTHE NET'} subtitle={'SOUTHEAST ASIA AND ITS\nTECHNOLOGICAL FUTURES'} tone="green" variant="three" align="center" />
           </AppShell>
         )}
 
         {screen === 'sectionThreeIntro' && (
-          <AppShell tone="red" onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('sectionThreeCover')} onNext={() => go('mapThree')}>
+          <AppShell tone="red" onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('sectionThreeCover')} onNext={() => go('mapThree')}>
             <SectionIntroScreen content={sectionThreeIntro} variant="here" />
           </AppShell>
         )}
 
         {screen === 'mapThree' && (
-          <AppShell tone="green" onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('sectionThreeIntro')} onNext={() => go('asiaMaxxing')}>
-            <MapScreen marker="three" image="/assets/map-step-3.png" alt="Map of the exhibition showing the route into Here in the Net" note={['FOLLOW THE DOTTED PATH INTO SECTION 3.', 'THE FUTURE LOOKS DIFFERENT WHEN IT IS IMAGINED FROM HERE.']} />
+          <AppShell tone="green" onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('sectionThreeIntro')} onNext={() => go('asiaMaxxing')}>
+            <MapScreen heading={`FIND YOURSELF HERE, ${displayName.toUpperCase()}.`} marker="three" image="/assets/map-step-3.png" alt="Map of the exhibition showing the route into Here in the Net" note={['FOLLOW THE LIGHTS.', 'THE FUTURE LOOKS DIFFERENT IMAGINED FROM HERE.']} />
           </AppShell>
         )}
 
         {screen === 'asiaMaxxing' && (
-          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('mapThree')} onNext={() => go('hexagram')}>
+          <AppShell onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('mapThree')} onNext={() => go('hexagram')}>
             <ArtworkPage artwork={sectionThreeArtworks['asia-maxxing']} />
           </AppShell>
         )}
 
         {screen === 'hexagram' && (
-          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('asiaMaxxing')} onNext={() => go('xo')}>
+          <AppShell onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('asiaMaxxing')} onNext={() => go('xo')}>
             <ArtworkPage artwork={sectionThreeArtworks.hexagram} />
           </AppShell>
         )}
 
         {screen === 'xo' && (
-          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('hexagram')} onNext={() => go('readingRoomCover')}>
+          <AppShell onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('hexagram')} onNext={() => go('readingRoomCover')}>
             <ArtworkPage artwork={sectionThreeArtworks.xo} />
           </AppShell>
         )}
 
         {screen === 'readingRoomCover' && (
-          <AppShell immersive onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('xo')} onNext={() => go('readingRoom')}>
+          <AppShell immersive onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('xo')} onNext={() => go('readingRoom')}>
             <ReadingRoomArrival reducedMotion={reducedMotion} />
           </AppShell>
         )}
 
         {screen === 'readingRoom' && (
-          <AppShell tone="yellow" onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('readingRoomCover')} onNext={() => go('closing')}>
+          <AppShell tone="yellow" onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('readingRoomCover')} onNext={() => go('closing')}>
             <ReadingRoomPage />
           </AppShell>
         )}
 
         {screen === 'closing' && (
-          <AppShell tone="yellow" onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('readingRoom')} onNext={() => go('credits')} nextLabel="FINISH">
+          <AppShell tone="yellow" onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('readingRoom')} onNext={() => go('credits')} nextLabel="FINISH">
             <ClosingReflectionPage visitorName={displayName} />
           </AppShell>
         )}
 
         {screen === 'credits' && (
-          <AppShell immersive onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('closing')} hideNext>
+          <AppShell immersive onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('closing')} hideNext>
             <CreditsPage visitorName={displayName} onRestart={restart} />
           </AppShell>
+        )}
+
+        {menuOpen && (
+          <SectionMenu
+            currentSection={sectionForScreen(screen)}
+            onClose={() => setMenuOpen(false)}
+            onSelect={(destination) => go(destination)}
+          />
         )}
       </div>
 
@@ -457,8 +529,12 @@ export default function App() {
         <SettingsDialog
           name={name}
           reducedMotion={reducedMotion}
+          textSize={textSize}
+          colourMode={colourMode}
           onNameChange={updateNameFromSettings}
           onMotionChange={setReducedMotion}
+          onTextSizeChange={setTextSize}
+          onColourModeChange={setColourMode}
           onRestart={restart}
           onClose={() => setDialog(null)}
         />
@@ -548,10 +624,10 @@ function NameScreen({
   )
 }
 
-function MapScreen({ image, alt, note, marker }: { image: string; alt: string; note: string[]; marker: 'one' | 'two' | 'three' }) {
+function MapScreen({ heading, image, alt, note, marker }: { heading: string; image: string; alt: string; note: string[]; marker: 'one' | 'two' | 'three' }) {
   return (
     <article className={`map-screen map-step-${marker} screen-enter`}>
-      <h1>STEP INTO THE NET</h1>
+      <h1>{heading}</h1>
       <div className="map-wrap">
         <img src={image} alt={alt} />
         <span className="map-pulse" aria-hidden="true" />
@@ -656,24 +732,59 @@ function InfoDialog({ onClose }: { onClose: () => void }) {
 function SettingsDialog({
   name,
   reducedMotion,
+  textSize,
+  colourMode,
   onNameChange,
   onMotionChange,
+  onTextSizeChange,
+  onColourModeChange,
   onRestart,
   onClose,
 }: {
   name: string
   reducedMotion: boolean
+  textSize: TextSize
+  colourMode: ColourMode
   onNameChange: (value: string) => void
   onMotionChange: (value: boolean) => void
+  onTextSizeChange: (value: TextSize) => void
+  onColourModeChange: (value: ColourMode) => void
   onRestart: () => void
   onClose: () => void
 }) {
+  const sizeOrder: TextSize[] = ['small', 'standard', 'large']
+  const sizeIndex = sizeOrder.indexOf(textSize)
+  const changeSize = (direction: -1 | 1) => {
+    const next = Math.max(0, Math.min(sizeOrder.length - 1, sizeIndex + direction))
+    onTextSizeChange(sizeOrder[next])
+  }
+
   return (
     <Modal title="GUIDE SETTINGS" onClose={onClose}>
       <label className="settings-field">
         <span>YOUR NAME</span>
         <input value={name} onChange={(event) => onNameChange(event.target.value)} maxLength={32} />
       </label>
+
+      <div className="settings-control-group">
+        <span>TEXT SIZE</span>
+        <div className="settings-stepper" role="group" aria-label="Text size">
+          <button type="button" onClick={() => changeSize(-1)} disabled={sizeIndex === 0} aria-label="Decrease text size">A−</button>
+          <output aria-live="polite">{textSize.toUpperCase()}</output>
+          <button type="button" onClick={() => changeSize(1)} disabled={sizeIndex === sizeOrder.length - 1} aria-label="Increase text size">A+</button>
+        </div>
+      </div>
+
+      <label className="settings-select">
+        <span>COLOUR ACCESSIBILITY</span>
+        <select value={colourMode} onChange={(event) => onColourModeChange(event.target.value as ColourMode)}>
+          <option value="standard">STANDARD PALETTE</option>
+          <option value="red-green-safe">RED / GREEN SAFE</option>
+          <option value="blue-yellow-safe">BLUE / YELLOW SAFE</option>
+          <option value="high-contrast">HIGH CONTRAST</option>
+        </select>
+      </label>
+
       <label className="settings-toggle">
         <span>REDUCE MOTION</span>
         <input

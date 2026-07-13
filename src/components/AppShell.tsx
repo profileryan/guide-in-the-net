@@ -4,6 +4,7 @@ type ShellTone = 'black' | 'blue' | 'green' | 'red' | 'yellow'
 
 type Props = {
   children: ReactNode
+  onMenu: () => void
   onInfo: () => void
   onSettings: () => void
   onBack?: () => void
@@ -19,6 +20,7 @@ type Props = {
 
 export default function AppShell({
   children,
+  onMenu,
   onInfo,
   onSettings,
   onBack,
@@ -36,7 +38,9 @@ export default function AppShell({
   return (
     <div className={`shell shell-${resolvedTone} ${immersive ? 'shell-immersive' : ''}`}>
       <header className="topbar">
-        <img className="corner-logo" src="/assets/upper-corner-logo-transparent.png" alt="Islands in the Net" />
+        <button type="button" className="corner-logo-button" onClick={onMenu} aria-label="Open section menu">
+          <img className="corner-logo" src="/assets/upper-corner-logo-transparent.png" alt="Islands in the Net" />
+        </button>
         <div className="topbar-actions">
           <button type="button" onClick={onInfo} className="icon-button" aria-label="Exhibition information">
             <img src="/assets/info-icon.png" alt="" />

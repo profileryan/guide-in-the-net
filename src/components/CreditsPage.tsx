@@ -9,8 +9,6 @@ export default function CreditsPage({ visitorName, onRestart }: Props) {
       <div className="credits-glitch" aria-hidden="true">
         <span /><span /><span /><span /><span />
       </div>
-      <img className="credits-logo" src="/assets/main-splash-logo.png" alt="Islands in the Net" />
-
       <div className="credits-message">
         <p>THANK YOU, {visitorName.toUpperCase()}.</p>
         <h1>KEEP<br />THE NET<br />OPEN.</h1>
@@ -23,7 +21,7 @@ export default function CreditsPage({ visitorName, onRestart }: Props) {
         </section>
         <section>
           <p>CURATED, PROGRAMMED AND DESIGNED BY</p>
-          <span>Kathleen Ditzig, Ryan Ho, Joshua Comaroff<br />with Lekker Architects</span>
+          <span>Kathleen Ditzig, Ryan Ho, Joshua Comaroff</span>
         </section>
       </div>
 

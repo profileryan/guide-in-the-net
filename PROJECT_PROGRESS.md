@@ -1,174 +1,151 @@
 # Guide in the Net — Project Progress
 
-_Last updated: 13 July 2026_
-_Current package: v0.7.0 — complete guide journey_
+_Last updated: 14 July 2026_  
+_Current package: v0.7.1 — accessibility and navigation polish_
 
-## 1. Product Purpose
+## Current experience
 
-Guide in the Net is a mobile-first digital guide for **Islands in the Net** at Padimai Art & Tech Studio. It translates the printed exhibition guide into a slow, atmospheric visitor journey with local personalisation, guided navigation, artwork interpretation, reflection prompts and a concluding departure experience.
+The complete guide journey remains:
 
-The canonical design viewport remains **440 × 956 px**, with responsive behaviour for smaller phones.
+1. Opening and visitor-name personalisation
+2. **You and the Net**
+3. **Together in the Net**
+4. **Here in the Net**
+5. Futures Reading Room
+6. Closing questions
+7. Credits / restart
 
-## 2. Complete Experience Flow
+### Section 1 artwork order
 
-1. Loading sequence
-2. Exhibition cover
-3. Visitor name entry
-4. Personalised welcome
-5. How to use the space
-6. Section 1 map
-7. **You and the Net** cover
-8. personalised Section 1 introduction: **[VISITOR NAME] AND THE NET**
-9. Heman Chong — **Safe Entry (Version 2.0–2.7)**
-10. Ho Rui An — **A History of Intelligence in ((South)(East)) Asia**
-11. MIT Media Lab ft. Rachel Poonsiriwong — **Future You**
-12. MIT Media Lab × Ryan Ho — **ImpactBench × CereaLLM**
-13. Grace Quek — **Art in the Age of Human Cloning & AI**
-14. **Together in the Net** cover and introduction
-15. Section 2 map
-16. BussyTemple — **F4NT4SY_H4RD_DR1VE://ALTAR (2026)**
-17. Ryan Ho, Emotional Technologies Lab and Vignesh Sundaresan — **Traces in the Net**
-18. **The Commons**
-19. **Here in the Net** cover and introduction
-20. Section 3 map
-21. Weiwei Xu — **ASIAMAXXING**
-22. Weiwei Xu — **Hexagram Today**
-23. Fyerool Darma — **XO (2026)**
-24. **Futures Reading Room** arrival
-25. Reading Room and Research Archive interpretation
-26. personalised **Continue?** closing reflection
-27. final credits and restart
+1. Safe Entry
+2. A History of Intelligence in ((South)(East)) Asia
+3. Future You
+4. ImpactBench × CereaLLM
+5. Art in the Age of Human Cloning & AI
 
-## 3. What Changed in v0.7.0
+### Section 2 order
 
-### Futures Reading Room
+1. **The Commons**
+2. **F4NT4SY_H4RD_DR1VE://ALTAR (2026)**
+3. **Traces in the Net**
 
-The temporary handoff after XO has been replaced by a complete final-space sequence:
+### Section 3 artwork order
 
-- a full-screen yellow-and-black Reading Room arrival
-- a dedicated editorial interpretation page
-- the complete archive text from the printed guide
-- five prompts encouraging visitors to browse, follow references, notice absences and contribute missing histories
+1. ASIAMAXXING
+2. Hexagram Today
+3. XO (2026)
 
-### Closing reflection
+## Changes in v0.7.1
 
-The guide now ends with the printed guide’s **Continue?** text and three departure questions:
+### Typography
 
-1. What do you want technology to help us become?
-2. What should it never be allowed to decide for us?
-3. What will you contribute to the net?
-
-Each question has an optional private note field. Notes are stored in `localStorage` under:
+The bundled font reference now uses the font’s real family name:
 
 ```text
-iitn-guide-closing-reflections
+PxPlus IBM BIOS
 ```
 
-They are not uploaded or shared.
+All headings resolve through the shared `--header` CSS variable. Codex must preserve the existing file at `public/fonts/Header_Font.ttf`.
 
-### Final credits
+### Copy and responsive polish
 
-A final full-screen credits page now includes:
+- Added: **“This space is yours to inhabit. We invite you to...”**
+- Replaced the six How to Use This Space descriptions with the approved concise copy
+- Made the name-entry placeholder shrink responsively on narrow screens
+- Removed the provisional-image disclaimer from Ho Rui An’s page
 
-- personalised thank-you
-- exhibition presentation credit
-- curatorial / programming / design credit
-- a **Start Again** action
+### Personalised maps
 
-### Final navigation correction
+- Section 1: `STEP INTO THE NET, [NAME].`
+- Section 2: `STEP INTO THE COMMON AREA, [NAME].`
+- Section 3: `FIND YOURSELF HERE, [NAME].`
 
-The end sequence is now:
+Map body copy was updated to the approved wording.
+
+### Section navigation
+
+The top-left exhibition logo is now a button. It opens a left-sliding menu with four destinations:
+
+- Beginning / Restart
+- You and the Net
+- Together in the Net
+- Here in the Net
+
+Jumping sections preserves the visitor name, settings and private closing notes.
+
+### Settings
+
+New locally persisted settings:
 
 ```text
-XO → Futures Reading Room cover → Reading Room → Continue? → Credits
+iitn-guide-text-size
+iitn-guide-colour-mode
 ```
 
-The old `sectionThreeComplete` handoff route has been removed.
+Text size options:
 
-## 4. Direct Test Routes
+- Small
+- Standard
+- Large
+
+Colour-accessibility options:
+
+- Standard palette
+- Red / green safe
+- Blue / yellow safe
+- High contrast
+
+The existing reduced-motion option remains available.
+
+### Credits
+
+- Removed the secondary large logo, leaving the persistent clickable top-left logo
+- Removed the Lekker Architects line
+
+## Key files
+
+- `src/App.tsx` — complete flow, settings state, map headings and Section 2 order
+- `src/components/AppShell.tsx` — clickable logo/menu trigger
+- `src/components/SectionMenu.tsx` — sliding section selector
+- `src/components/CreditsPage.tsx` — simplified credits
+- `src/content/guideContent.ts` — artwork copy and image metadata
+- `src/styles.css` — font, responsive text, accessibility palettes and menu animation
+
+## Direct test routes
 
 ```text
-?screen=sectionIntro
+?screen=how
 ?screen=map
-?screen=sectionTwoCover
+?screen=history
 ?screen=mapTwo
 ?screen=commons
-?screen=sectionThreeCover
+?screen=altar
+?screen=traces
 ?screen=mapThree
-?screen=asiaMaxxing
-?screen=hexagram
-?screen=xo
-?screen=readingRoomCover
-?screen=readingRoom
-?screen=closing
 ?screen=credits
 ```
 
-## 5. Technical Architecture
-
-- Vite
-- React 18
-- TypeScript
-- CSS
-- localStorage for visitor name, reduced-motion preference and optional closing notes
-- Vercel deployment from GitHub
-- no backend or environment variables
-
-Important files:
-
-- `src/App.tsx` — complete screen flow, personalisation and navigation
-- `src/content/guideContent.ts` — section, artwork, Reading Room and closing content
-- `src/components/ArtworkPage.tsx` — reusable editorial artwork template
-- `src/components/CommonsPage.tsx` — Commons page
-- `src/components/ReadingRoomPage.tsx` — Reading Room interpretation
-- `src/components/ClosingReflectionPage.tsx` — closing questions and private local notes
-- `src/components/CreditsPage.tsx` — final credit / restart screen
-- `src/components/AppShell.tsx` — persistent shell, navigation and colour tones
-- `src/components/GlitchCanvas.tsx` — procedural backgrounds, including the new yellow tone
-- `src/styles.css` — complete visual system
-
-## 6. Design Decisions to Preserve
-
-- restrained movement rather than app-like animation
-- strong editorial hierarchy
-- deliberate section transitions
-- persistent information and settings access
-- no account requirement
-- visitor data stored locally
-- reduced-motion support
-- no forced response at closing
-- clear statement that closing notes stay on the device
-- Restart does not send, export or publish notes
-
-## 7. Known Limitations / Optional Later Work
-
-- Ho Rui An’s artwork image remains provisional.
-- The Commons uses an editorial treatment rather than a documentary room photograph.
-- The final exhibition font is intentionally not bundled. Preserve `public/fonts/Header_Font.ttf` from the live repository.
-- No external links, live submissions, shared voting backend, analytics or CMS features are included.
-- A future production decision may be needed on whether **Start Again** should also clear the stored name and closing notes on shared devices.
-
-## 8. Final QA Checklist
+## QA checklist
 
 - [ ] Preserve `public/fonts/Header_Font.ttf`
 - [ ] Run `npm install`
 - [ ] Run `npm run check`
 - [ ] Run `npm run build`
-- [ ] Test the complete journey from cover through credits
-- [ ] Test Back / Next on the four new final screens
-- [ ] Confirm `XO → readingRoomCover` directly
-- [ ] Confirm no `sectionThreeComplete` route remains
-- [ ] Confirm Reading Room content can scroll fully above the fixed navigation
-- [ ] Enter closing notes, navigate away, return and confirm they persist
-- [ ] Confirm the closing note privacy statement is visible
-- [ ] Confirm Start Again returns to the opening sequence
-- [ ] Test at 440 × 956 and a shorter phone viewport
-- [ ] Test reduced-motion mode
-- [ ] Test iOS Safari and Android Chrome
+- [ ] Test name placeholder at 320px–360px wide
+- [ ] Confirm all headings use PxPlus IBM BIOS
+- [ ] Confirm Section 2 flows Map → Commons → Altar → Traces → Section 3
+- [ ] Test personalised headings with a long 32-character name
+- [ ] Open and close the section menu on multiple screens
+- [ ] Test every section-menu destination
+- [ ] Test text-size decrease / increase and persistence
+- [ ] Test all four colour modes
+- [ ] Test reduced motion with the sliding menu
+- [ ] Confirm credits contain only one visible exhibition logo
+- [ ] Confirm closing notes still persist locally
 
-## 9. Repository Workflow
+## Repository workflow
 
-Target repository: `profileryan/guide-in-the-net`
+Target repository: `profileryan/guide-in-the-net`  
 Target Vercel project: `guide-in-the-net`
 
-ChatGPT develops and packages reviewed builds. Codex handles Git writes and deployment. Vercel should redeploy automatically after the production branch is updated.
+ChatGPT prepares validated packages. Codex merges them into GitHub and Vercel deploys from the production branch.

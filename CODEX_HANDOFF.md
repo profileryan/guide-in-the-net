@@ -1,26 +1,34 @@
-# Codex Handoff — v0.7.0
+# Codex Handoff — v0.7.1
 
 ## Objective
 
-Merge this package into `profileryan/guide-in-the-net` and deploy it through the existing Vercel project `guide-in-the-net`.
+Merge this complete project snapshot into:
 
-This full project snapshot completes the guide journey through the Futures Reading Room, closing questions and credits.
+```text
+profileryan/guide-in-the-net
+```
 
-## Important preservation rules
+The Vercel project is:
 
-1. Preserve the live custom font:
+```text
+guide-in-the-net
+```
 
-   `public/fonts/Header_Font.ttf`
+## Preservation rules
 
-2. Preserve or regenerate `package-lock.json`.
+1. Preserve the live font file:
 
-3. Do not commit:
+   ```text
+   public/fonts/Header_Font.ttf
+   ```
 
-   - `node_modules/`
-   - `dist/`
-   - `.vercel/`
+   Its internal family name is **PxPlus IBM BIOS**. The ZIP intentionally does not distribute the binary font.
 
-## Suggested merge procedure
+2. Use the included `package-lock.json` or regenerate it cleanly.
+
+3. Do not commit `node_modules/`, `dist/` or `.vercel/`.
+
+## Suggested merge
 
 ```bash
 rsync -av --exclude 'public/fonts/Header_Font.ttf' /path/to/unzipped-package/ ./
@@ -30,80 +38,68 @@ npm run check
 npm run build
 
 git add .
-git commit -m "Complete Reading Room and closing guide flow"
+git commit -m "Polish guide navigation accessibility and copy"
 git push
 ```
 
-## New final flow
-
-```text
-xo
-→ readingRoomCover
-→ readingRoom
-→ closing
-→ credits
-```
-
-The old `sectionThreeComplete` screen is removed.
-
-## Key files added
-
-```text
-src/components/ReadingRoomPage.tsx
-src/components/ClosingReflectionPage.tsx
-src/components/CreditsPage.tsx
-```
-
-## Key files changed
+## Important changes
 
 ### `src/App.tsx`
 
-- adds the four final screens
-- routes XO directly into the Reading Room
-- passes the stored visitor name to the closing and credits screens
-
-### `src/content/guideContent.ts`
-
-Adds:
-
-- `readingRoomContent`
-- `closingContent`
+- new text-size and colour-accessibility settings
+- persisted settings in localStorage
+- approved How to Use This Space copy
+- personalised headings on all three maps
+- Section 2 sequence changed to Commons → Altar → Traces
+- section-menu state and destinations
 
 ### `src/components/AppShell.tsx`
 
-- adds `yellow` as a supported shell tone
+- top-left logo is now an accessible menu button
 
-### `src/components/GlitchCanvas.tsx`
+### `src/components/SectionMenu.tsx`
 
-- adds a yellow procedural background tone
+- new left-sliding four-destination navigation menu
+
+### `src/components/CreditsPage.tsx`
+
+- removed duplicate logo
+- removed Lekker Architects credit line
+
+### `src/content/guideContent.ts`
+
+- removed the visible provisional-crop disclaimer from Ho Rui An’s page
 
 ### `src/styles.css`
 
-Adds the complete visual system for:
+- uses `PxPlus IBM BIOS` for display headings
+- responsive name-placeholder sizing
+- text-size presets
+- colour-accessibility palettes
+- settings control styling
+- section-menu animation and layout
 
-- Reading Room cover
-- Reading Room editorial content
-- closing reflection fields
-- credits screen
-- yellow shell navigation / icon behaviour
-
-## Private closing notes
-
-Closing responses are optional and stored locally at:
+## Sequence to verify
 
 ```text
-iitn-guide-closing-reflections
+mapTwo
+→ commons
+→ altar
+→ traces
+→ sectionThreeCover
 ```
 
-Do not replace this with network submission or analytics logic without explicit approval.
-
-## Direct routes to verify
+## Direct routes
 
 ```text
-?screen=xo
-?screen=readingRoomCover
-?screen=readingRoom
-?screen=closing
+?screen=how
+?screen=map
+?screen=history
+?screen=mapTwo
+?screen=commons
+?screen=altar
+?screen=traces
+?screen=mapThree
 ?screen=credits
 ```
 
@@ -117,16 +113,15 @@ npm run build
 
 Then verify:
 
-- XO advances to Reading Room cover
-- Reading Room content scrolls correctly
-- each closing text field accepts input
-- closing notes persist after navigating Back / Next
-- credits page Start Again works
-- reduced-motion mode disables new ambient animations
+- the live font is preserved and loads
+- map headings include the stored visitor name
+- the narrow name-entry placeholder remains fully visible
+- the section menu opens from the logo and routes correctly
+- text-size and colour settings persist after refresh
+- reduced motion disables the menu animation
+- the credit screen shows only the top-left logo
 
-## Build expectation
-
-Vercel framework: Vite
-Build command: `npm run build`
-Output: `dist`
+Vercel framework: Vite  
+Build command: `npm run build`  
+Output directory: `dist`  
 Environment variables: none
