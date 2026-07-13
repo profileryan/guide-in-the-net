@@ -2,25 +2,29 @@
 
 A mobile-first digital exhibition guide for **Islands in the Net**, presented at Padimai Art & Tech Studio, Tanjong Pagar Distripark.
 
-## Current build: v0.6.0
+## Current build: v0.6.1 — polish pass
 
-This package now contains:
+This package includes:
 
 - the complete opening journey
 - the full **You and the Net** section
 - the full **Together in the Net** section
 - the full **Here in the Net** section
+- the latest Section 1, 2 and 3 map images
+- final supplied images for **ASIAMAXXING**, **Hexagram Today** and **XO (2026)**
 - a handoff into the **Futures Reading Room**
 
-It also corrects the Section 2 map marker and explicitly locks the intended section-title alignment:
+Key polish changes:
 
-- Section 1 cover: centred
-- Section 2 cover: left-aligned
-- Section 3 cover: centred
+- map-note line-break bugs removed
+- Section 1 intro title now uses the visitor’s chosen name
+- all three section covers are centred
+- the obsolete Section 2 completion screen has been removed
+- Fyerool Darma’s work is now titled **XO (2026)**
 
 Start with:
 
-- `PROJECT_PROGRESS.md` — current product state, architecture, completed flow and next steps
+- `PROJECT_PROGRESS.md` — current product state, implemented flow and next steps
 - `CODEX_HANDOFF.md` — merge and deployment instructions for Codex
 
 ## Run locally
@@ -31,8 +35,6 @@ Use Node.js 18–22.
 npm install
 npm run dev
 ```
-
-Vite will print a local URL, normally `http://localhost:5173`.
 
 ## Check and build
 

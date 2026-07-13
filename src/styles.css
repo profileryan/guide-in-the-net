@@ -2062,14 +2062,14 @@ button {
   mask-image: none;
 }
 
-.artwork-xenographer .artwork-hero-placeholder {
+.artwork-xo .artwork-hero-placeholder {
   background:
     radial-gradient(ellipse at 68% 33%, rgba(227,166,30,.2), transparent 24%),
     repeating-linear-gradient(90deg, rgba(255,255,255,.03) 0 1px, transparent 1px 36px),
     linear-gradient(135deg, #2b1c06 0%, #080604 100%);
 }
 
-.artwork-xenographer .artwork-hero-placeholder-disc {
+.artwork-xo .artwork-hero-placeholder-disc {
   width: 270px;
   height: 360px;
   right: -32px;
@@ -2083,13 +2083,13 @@ button {
 
 .artwork-asia-maxxing .artwork-heading h1 { font-size: 47px; }
 .artwork-hexagram .artwork-heading h1 { font-size: 48px; }
-.artwork-xenographer .artwork-heading h1 { font-size: 39px; }
+.artwork-xo .artwork-heading h1 { font-size: 39px; }
 
 @media (max-width: 430px) {
   .section-arrival-three h1 { font-size: 61px; }
   .section-intro-lead { font-size: 23px; }
   .artwork-asia-maxxing .artwork-heading h1 { font-size: 43px; }
-  .artwork-xenographer .artwork-heading h1 { font-size: 36px; }
+  .artwork-xo .artwork-heading h1 { font-size: 36px; }
 }
 
 .map-step-two .map-pulse {
@@ -2098,4 +2098,69 @@ button {
   border-color: #d9ff75;
   background: rgba(217,255,117,.08);
   filter: drop-shadow(0 0 5px rgba(217,255,117,.9));
+}
+
+/* ---- v0.6.1 polish pass ---- */
+.map-note span {
+  display: block;
+}
+
+/* All three section covers use a centred title composition. */
+.section-arrival-two.section-align-center .section-arrival-content {
+  align-items: center;
+  text-align: center;
+}
+
+.section-arrival-two.section-align-center .section-number {
+  margin-left: 0;
+}
+
+/* Supplied Section 3 thumbnails sit as editorial plates rather than being cropped. */
+.artwork-asia-maxxing .artwork-hero,
+.artwork-hexagram .artwork-hero,
+.artwork-xo .artwork-hero {
+  background:
+    radial-gradient(circle at 50% 25%, color-mix(in srgb, var(--accent) 24%, transparent), transparent 48%),
+    var(--hero-bg);
+}
+
+.artwork-asia-maxxing .artwork-hero-figure,
+.artwork-hexagram .artwork-hero-figure,
+.artwork-xo .artwork-hero-figure {
+  inset: calc(var(--safe-top) + 78px) 0 auto;
+  height: 49%;
+}
+
+.artwork-asia-maxxing .artwork-hero-figure::after,
+.artwork-hexagram .artwork-hero-figure::after,
+.artwork-xo .artwork-hero-figure::after {
+  background: linear-gradient(180deg, transparent 58%, var(--hero-bg) 100%);
+}
+
+.artwork-asia-maxxing .artwork-hero-figure img,
+.artwork-hexagram .artwork-hero-figure img,
+.artwork-xo .artwork-hero-figure img {
+  object-fit: contain;
+  filter: saturate(1.02) contrast(1.02);
+}
+
+.artwork-asia-maxxing .artwork-hero-copy,
+.artwork-hexagram .artwork-hero-copy,
+.artwork-xo .artwork-hero-copy {
+  padding-bottom: 43px;
+}
+
+.artwork-asia-maxxing .artwork-hero-no,
+.artwork-hexagram .artwork-hero-no,
+.artwork-xo .artwork-hero-no {
+  top: 50%;
+}
+
+.artwork-xo .artwork-heading h1 {
+  font-size: 48px;
+}
+
+.section-intro-personalized h1 {
+  font-size: clamp(27px, 8vw, 35px);
+  overflow-wrap: anywhere;
 }

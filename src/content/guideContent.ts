@@ -8,7 +8,7 @@ export type ArtworkId =
   | 'traces'
   | 'asia-maxxing'
   | 'hexagram'
-  | 'xenographer'
+  | 'xo'
 
 export type ArtworkContent = {
   id: ArtworkId
@@ -311,7 +311,7 @@ export const sectionTwoArtworks: Record<Extract<ArtworkId, 'altar' | 'traces'>, 
 }
 
 
-export const sectionThreeArtworks: Record<Extract<ArtworkId, 'asia-maxxing' | 'hexagram' | 'xenographer'>, ArtworkContent> = {
+export const sectionThreeArtworks: Record<Extract<ArtworkId, 'asia-maxxing' | 'hexagram' | 'xo'>, ArtworkContent> = {
   'asia-maxxing': {
     id: 'asia-maxxing',
     title: 'ASIAMAXXING',
@@ -324,6 +324,12 @@ export const sectionThreeArtworks: Record<Extract<ArtworkId, 'asia-maxxing' | 'h
     titleAlign: 'left',
     titleSize: '44px',
     heroLabel: 'ALTERNATE-LIFE PHOTOBOOTH',
+    image: {
+      src: '/assets/works/asia-maxxing.jpg',
+      alt: 'A diagram of an imagined Asia Maxxing life across home, café, commute, work and leisure platforms',
+      position: 'center',
+      aspect: '16 / 9',
+    },
     description: [
       'What might your life have looked like if it had unfolded somewhere else in Asia?',
       'Developed from Weiwei Xu’s earlier project Chinamaxxing, this participatory photobooth generates an alternative version of your “Asian life.” Your image becomes the starting point for a speculative biography shaped through computational storytelling, popular imagery and assumptions about identity, place and possibility.',
@@ -353,6 +359,12 @@ export const sectionThreeArtworks: Record<Extract<ArtworkId, 'asia-maxxing' | 'h
     titleAlign: 'right',
     titleSize: '46px',
     heroLabel: 'DIGITAL DIVINATION INTERFACE',
+    image: {
+      src: '/assets/works/hexagram-today.png',
+      alt: 'A field of I Ching hexagrams with several symbols glowing in electric blue',
+      position: 'center',
+      aspect: '1 / 1',
+    },
     description: [
       'Hexagram Today translates the ancient Chinese divination system of the I Ching, or Book of Changes, into a contemporary digital interface.',
       'The I Ching is organised around 64 hexagrams: figures composed of broken and unbroken lines whose changing arrangements are interpreted in relation to a question or situation. Rather than offering a single fixed forecast, its texts invite reflection upon change, uncertainty, timing and the relationships between different forces.',
@@ -369,9 +381,9 @@ export const sectionThreeArtworks: Record<Extract<ArtworkId, 'asia-maxxing' | 'h
       'What is the difference between divination, prediction and recommendation?',
     ],
   },
-  xenographer: {
-    id: 'xenographer',
-    title: 'A XENOGRAPHER’S\nINDEX',
+  xo: {
+    id: 'xo',
+    title: 'XO\n(2026)',
     artist: 'BY FYEROOL DARMA',
     sequence: '03',
     total: '03',
@@ -381,8 +393,14 @@ export const sectionThreeArtworks: Record<Extract<ArtworkId, 'asia-maxxing' | 'h
     titleAlign: 'left',
     titleSize: '38px',
     heroLabel: 'SPECULATIVE ARCHIVE',
+    image: {
+      src: '/assets/works/xo.jpeg',
+      alt: 'Fyerool Darma’s XO installation: a monumental illuminated terrain model surrounded by industrial structures',
+      position: 'center',
+      aspect: '16 / 9',
+    },
     description: [
-      'Fyerool Darma’s installation takes the form of a speculative archive from another possible Southeast Asia.',
+      'XO (2026) takes the form of a speculative archive from another possible Southeast Asia.',
       'The work imagines a group of “xenographers” from the Nusanatra who have returned from an expedition to Nooantara: a parallel reality in which mind and body, land and water, and physical and virtual life are not understood as separate categories. Its objects and moving images appear as fragments from this world, indexed for a collective history.',
       'Nooantara brings together the “noosphere” — a realm of shared human thought and cultural imagination — and writer Sutan Takdir Alisjahbana’s idea of Bumantara, Southeast Asia as interconnected “lands between.”',
       'At the centre of the mythology is a 3D-printed mask known variously as the Flaming Knotted Heart, the Apparatus and the Ongoing Processing Intake System. Its shifting names resist the stable classifications normally imposed by museums, databases and archives.',

@@ -1,18 +1,16 @@
-# Codex Handoff — v0.6.0
+# Codex Handoff — v0.6.1
 
 ## Objective
 
 Merge this package into `profileryan/guide-in-the-net` and deploy it through the existing Vercel project `guide-in-the-net`.
 
-This ZIP is a complete project snapshot containing the opening journey and all three exhibition sections through **Here in the Net**.
+This is a full project snapshot and supersedes v0.6.0.
 
 ## Important preservation rules
 
-1. Preserve the live custom font at:
+1. Preserve the live custom font:
 
    `public/fonts/Header_Font.ttf`
-
-   This package intentionally does not distribute it.
 
 2. Preserve or regenerate `package-lock.json`.
 
@@ -25,7 +23,6 @@ This ZIP is a complete project snapshot containing the opening journey and all t
 ## Suggested merge procedure
 
 ```bash
-# From a clean checkout of profileryan/guide-in-the-net
 rsync -av --exclude 'public/fonts/Header_Font.ttf' /path/to/unzipped-package/ ./
 
 npm install
@@ -33,87 +30,110 @@ npm run check
 npm run build
 
 git add .
-git commit -m "Add Here in the Net section"
+git commit -m "Polish maps, personalisation and Section 3 artwork"
 git push
 ```
 
-## High-priority checks
+## High-priority changes
 
-### Map marker fix
+### 1. Map note formatting
 
-Open:
+`MapScreen` now receives `note: string[]`. Do not convert these back to JSX string attributes containing `\\n`.
+
+Verify:
 
 ```text
+?screen=map
 ?screen=mapTwo
-```
-
-The glow must be around the **2 / Together in the Net** marker. It must no longer sit on **1 / You and the Net**.
-
-Then open:
-
-```text
 ?screen=mapThree
 ```
 
-The glow should sit over **3 / Here in the Net**.
+No literal `\\n` should be visible.
 
-### Cover alignment
+### 2. Personalised Section 1 intro
 
-- `?screen=section` — centred
-- `?screen=sectionTwoCover` — left-aligned
-- `?screen=sectionThreeCover` — centred
-
-## Key changes
-
-- `src/App.tsx`
-  - adds Section 3 flow and direct routes
-  - adds marker identities to each map screen
-  - passes explicit cover alignment
-
-- `src/content/guideContent.ts`
-  - adds Section 3 introduction
-  - adds ASIAMAXXING, Hexagram Today and A Xenographer’s Index
-  - adds Section 3 palette and placeholder metadata
-
-- `src/components/AppShell.tsx`
-  - supports black, blue, green and red shell tones
-
-- `src/components/ArtworkPage.tsx`
-  - supports per-artwork placeholder labels
-
-- `src/styles.css`
-  - corrects map marker coordinates
-  - locks cover alignment
-  - adds green/red Section 3 language
-  - adds Section 3 artwork placeholder designs
-
-- `public/assets/map-step-3.png`
-  - Section 3 map base; currently reuses the supplied exhibition map while the marker is positioned through CSS
-
-## Screen order to verify
+The Section 1 cover remains static. The following intro screen is dynamic:
 
 ```text
-commons
-→ sectionTwoComplete
-→ sectionThreeCover
-→ sectionThreeIntro
-→ mapThree
-→ asiaMaxxing
-→ hexagram
-→ xenographer
-→ sectionThreeComplete
+?screen=sectionIntro
 ```
+
+It should display the locally stored visitor name followed by **AND THE NET**.
+
+### 3. Cover alignment
+
+All are centred:
+
+```text
+?screen=section
+?screen=sectionTwoCover
+?screen=sectionThreeCover
+```
+
+### 4. Removed Section 2 completion screen
+
+The correct flow is:
+
+```text
+traces → commons → sectionThreeCover
+```
+
+There is no `sectionTwoComplete` route.
+
+### 5. Final map assets
+
+The three supplied files have replaced previous versions:
+
+```text
+public/assets/map-step-1.png
+public/assets/map-step-2.png
+public/assets/map-step-3.png
+```
+
+### 6. Section 3 artwork update
+
+The final Section 3 sequence is:
+
+```text
+asiaMaxxing → hexagram → xo → sectionThreeComplete
+```
+
+The old `xenographer` route and content key have been replaced by `xo`.
+
+New assets:
+
+```text
+public/assets/works/asia-maxxing.jpg
+public/assets/works/hexagram-today.png
+public/assets/works/xo.jpeg
+```
+
+## Key files changed
+
+- `src/App.tsx`
+- `src/content/guideContent.ts`
+- `src/styles.css`
+- `public/assets/map-step-1.png`
+- `public/assets/map-step-2.png`
+- `public/assets/map-step-3.png`
+- `public/assets/works/asia-maxxing.jpg`
+- `public/assets/works/hexagram-today.png`
+- `public/assets/works/xo.jpeg`
+- project documentation
 
 ## Direct routes
 
 ```text
+?screen=sectionIntro
+?screen=map
+?screen=sectionTwoCover
 ?screen=mapTwo
+?screen=commons
 ?screen=sectionThreeCover
-?screen=sectionThreeIntro
 ?screen=mapThree
 ?screen=asiaMaxxing
 ?screen=hexagram
-?screen=xenographer
+?screen=xo
 ?screen=sectionThreeComplete
 ```
 
