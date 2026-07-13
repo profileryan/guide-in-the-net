@@ -1,21 +1,23 @@
-# Codex Handoff — v0.5.1
+# Codex Handoff — v0.6.0
 
 ## Objective
 
 Merge this package into `profileryan/guide-in-the-net` and deploy it through the existing Vercel project `guide-in-the-net`.
 
-This ZIP is a complete project snapshot containing the full opening journey, the completed **You and the Net** section, the implemented **Together in the Net** section and the newly supplied BussyTemple / Traces artwork images.
+This ZIP is a complete project snapshot containing the opening journey and all three exhibition sections through **Here in the Net**.
 
 ## Important preservation rules
 
-1. **Preserve the live custom font** at:
+1. Preserve the live custom font at:
+
    `public/fonts/Header_Font.ttf`
 
-   This package intentionally does not distribute the font file.
+   This package intentionally does not distribute it.
 
-2. **Preserve or regenerate `package-lock.json`.**
+2. Preserve or regenerate `package-lock.json`.
 
 3. Do not commit:
+
    - `node_modules/`
    - `dist/`
    - `.vercel/`
@@ -24,8 +26,6 @@ This ZIP is a complete project snapshot containing the full opening journey, the
 
 ```bash
 # From a clean checkout of profileryan/guide-in-the-net
-# Preserve the existing font somewhere temporarily if needed.
-
 rsync -av --exclude 'public/fonts/Header_Font.ttf' /path/to/unzipped-package/ ./
 
 npm install
@@ -33,78 +33,88 @@ npm run check
 npm run build
 
 git add .
-git commit -m "Add Section 2 artwork images"
+git commit -m "Add Here in the Net section"
 git push
 ```
 
-A normal file copy is also fine. The `rsync` example simply makes the font-preservation requirement explicit.
+## High-priority checks
 
-## Key changes to review
+### Map marker fix
+
+Open:
+
+```text
+?screen=mapTwo
+```
+
+The glow must be around the **2 / Together in the Net** marker. It must no longer sit on **1 / You and the Net**.
+
+Then open:
+
+```text
+?screen=mapThree
+```
+
+The glow should sit over **3 / Here in the Net**.
+
+### Cover alignment
+
+- `?screen=section` — centred
+- `?screen=sectionTwoCover` — left-aligned
+- `?screen=sectionThreeCover` — centred
+
+## Key changes
 
 - `src/App.tsx`
-  - extended screen flow through Section 2
-  - new map step and navigation sequence
-  - Section 2 cover and completion handoff
+  - adds Section 3 flow and direct routes
+  - adds marker identities to each map screen
+  - passes explicit cover alignment
 
 - `src/content/guideContent.ts`
-  - corrected ImpactBench credit
-  - added Section 2 intro, artworks and Commons content
-  - added supplied image references for BussyTemple and Traces
-  - added per-artwork section labels and totals
+  - adds Section 3 introduction
+  - adds ASIAMAXXING, Hexagram Today and A Xenographer’s Index
+  - adds Section 3 palette and placeholder metadata
+
+- `src/components/AppShell.tsx`
+  - supports black, blue, green and red shell tones
 
 - `src/components/ArtworkPage.tsx`
-  - now supports section-specific labels and totals
-  - supports both supplied artwork images and designed hero placeholders
-
-- `src/components/CommonsPage.tsx`
-  - new dedicated page for the reflective communal space
-
-- `src/components/GlitchCanvas.tsx`
-  - now supports a blue tone for Section 2 arrival
+  - supports per-artwork placeholder labels
 
 - `src/styles.css`
-  - new Section 2 and Commons styling
-  - new cobalt and moss palettes
-  - editorial plate styling for the supplied BussyTemple and Traces images
+  - corrects map marker coordinates
+  - locks cover alignment
+  - adds green/red Section 3 language
+  - adds Section 3 artwork placeholder designs
 
-- `public/assets/map-step-2.png`
-  - supplied Section 2 map image
-
-- `public/assets/works/bussytemple-altar.jpg`
-  - supplied BussyTemple image
-
-- `public/assets/works/traces-in-the-net.jpg`
-  - supplied Traces image
+- `public/assets/map-step-3.png`
+  - Section 3 map base; currently reuses the supplied exhibition map while the marker is positioned through CSS
 
 ## Screen order to verify
 
 ```text
-sectionIntro
-→ safeEntry
-→ history
-→ futureYou
-→ impactBench
-→ graceQuek
-→ sectionTwoCover
-→ sectionTwoIntro
-→ mapTwo
-→ altar
-→ traces
-→ commons
+commons
 → sectionTwoComplete
+→ sectionThreeCover
+→ sectionThreeIntro
+→ mapThree
+→ asiaMaxxing
+→ hexagram
+→ xenographer
+→ sectionThreeComplete
 ```
 
 ## Direct routes
 
 ```text
-?screen=graceQuek
-?screen=sectionTwoCover
-?screen=sectionTwoIntro
 ?screen=mapTwo
-?screen=altar
-?screen=traces
-?screen=commons
-?screen=sectionTwoComplete
+?screen=sectionThreeCover
+?screen=sectionThreeIntro
+?screen=mapThree
+?screen=asiaMaxxing
+?screen=hexagram
+?screen=xenographer
+?screen=sectionThreeComplete
 ```
 
 ## Build expectation

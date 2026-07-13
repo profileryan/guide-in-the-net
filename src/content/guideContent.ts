@@ -6,18 +6,22 @@ export type ArtworkId =
   | 'grace-quek'
   | 'altar'
   | 'traces'
+  | 'asia-maxxing'
+  | 'hexagram'
+  | 'xenographer'
 
 export type ArtworkContent = {
   id: ArtworkId
   title: string
   artist: string
   sequence: '01' | '02' | '03' | '04' | '05'
-  total: '02' | '05'
-  sectionLabel: 'YOU AND THE NET' | 'TOGETHER IN THE NET'
-  palette: 'coral' | 'magenta' | 'violet' | 'blue' | 'rose' | 'cobalt' | 'moss'
+  total: '02' | '03' | '05'
+  sectionLabel: 'YOU AND THE NET' | 'TOGETHER IN THE NET' | 'HERE IN THE NET'
+  palette: 'coral' | 'magenta' | 'violet' | 'blue' | 'rose' | 'cobalt' | 'moss' | 'signal-red' | 'jade' | 'ochre'
   pullQuote: string
   titleAlign?: 'left' | 'center' | 'right'
   titleSize?: string
+  heroLabel?: string
   image?: {
     src: string
     alt: string
@@ -33,6 +37,7 @@ export type ArtworkContent = {
 export type SectionIntroContent = {
   number: string
   title: string
+  lead?: string
   paragraphs: string[]
 }
 
@@ -57,6 +62,16 @@ export const sectionTwoIntro: SectionIntroContent = {
     'Here, visitors are invited to listen, respond and add something of their own. Across a living shrine, voices gathered from the city, changing public questions and spaces for reflection, the exhibition becomes something made collectively rather than simply observed.',
     'Together in the Net asks how a crowd becomes a community: not through automatic agreement, but through participation, difference, care and exchange.',
     'What do we preserve? What do we make visible? And what kinds of worlds can many different lives build together?',
+  ],
+}
+
+export const sectionThreeIntro: SectionIntroContent = {
+  number: 'SECTION 3',
+  title: 'HERE IN\nTHE NET',
+  lead: 'The stories told about technology are never universal. They emerge from particular places: from their languages, beliefs, histories, infrastructures and relationships to power.',
+  paragraphs: [
+    'In Southeast Asia, contemporary technologies encounter older systems of divination, regional imaginaries, colonial and postcolonial histories, networked identities and local ways of knowing. The works in this section move between computational ritual, speculative lives, alternate worlds, digital art and historical research.',
+    'Here in the Net asks how technology is absorbed, translated and reinvented across the region, and what Southeast Asian futures might look like when they are imagined from here, rather than imported from elsewhere.',
   ],
 }
 
@@ -291,6 +306,95 @@ export const sectionTwoArtworks: Record<Extract<ArtworkId, 'altar' | 'traces'>, 
       'What would your city look like if it were mapped by feeling?',
       'When does a private thought become part of public memory?',
       'What trace would you leave for a stranger to find?',
+    ],
+  },
+}
+
+
+export const sectionThreeArtworks: Record<Extract<ArtworkId, 'asia-maxxing' | 'hexagram' | 'xenographer'>, ArtworkContent> = {
+  'asia-maxxing': {
+    id: 'asia-maxxing',
+    title: 'ASIAMAXXING',
+    artist: 'BY WEIWEI XU',
+    sequence: '01',
+    total: '03',
+    sectionLabel: 'HERE IN THE NET',
+    palette: 'signal-red',
+    pullQuote: 'The question is not really about who you could have been, but what the fiction reveals about the systems imagining you.',
+    titleAlign: 'left',
+    titleSize: '44px',
+    heroLabel: 'ALTERNATE-LIFE PHOTOBOOTH',
+    description: [
+      'What might your life have looked like if it had unfolded somewhere else in Asia?',
+      'Developed from Weiwei Xu’s earlier project Chinamaxxing, this participatory photobooth generates an alternative version of your “Asian life.” Your image becomes the starting point for a speculative biography shaped through computational storytelling, popular imagery and assumptions about identity, place and possibility.',
+      'The title borrows the internet suffix “-maxxing” — used online to describe the deliberate optimisation or performance of an identity. It also refers to recent social-media fascination with imagined Asian lifestyles, aesthetics and social values.',
+      'The resulting life is not a prediction, nor an authentic account of any single Asian experience. It is a constructed fiction: part algorithm, part cultural stereotype and part projection by the person standing before it.',
+    ],
+    whyNow: [
+      'AI can create convincing stories and identities. Yet these narratives are assembled from patterns in existing data that carry assumptions about race, gender, class, nationality and what an “Asian life” is supposed to look like.',
+      'At the same time, “Asia” itself is far from a single, stable identity. It is a vast and contested idea, shaped differently by people living within the region, its diasporas and those viewing it from elsewhere. This work makes this construction visible. Its alternate life may feel exciting, recognisable or absurd.',
+      'The question is not really about who you could have been, but what its fiction reveals about the systems imagining you.',
+    ],
+    reflection: [
+      'What assumptions did the experience make about Asia, and about you?',
+      'Which parts felt culturally specific, and which felt like stereotype?',
+      'Who gets to decide what an “Asian future” looks like?',
+    ],
+  },
+  hexagram: {
+    id: 'hexagram',
+    title: 'HEXAGRAM\nTODAY',
+    artist: 'BY WEIWEI XU',
+    sequence: '02',
+    total: '03',
+    sectionLabel: 'HERE IN THE NET',
+    palette: 'jade',
+    pullQuote: 'The work places an old predictive technology inside a new one.',
+    titleAlign: 'right',
+    titleSize: '46px',
+    heroLabel: 'DIGITAL DIVINATION INTERFACE',
+    description: [
+      'Hexagram Today translates the ancient Chinese divination system of the I Ching, or Book of Changes, into a contemporary digital interface.',
+      'The I Ching is organised around 64 hexagrams: figures composed of broken and unbroken lines whose changing arrangements are interpreted in relation to a question or situation. Rather than offering a single fixed forecast, its texts invite reflection upon change, uncertainty, timing and the relationships between different forces.',
+      'Weiwei Xu brings this cosmological system into conversation with the computational systems through which people now seek guidance. In place of tossed coins, yarrow stalks or a human interpreter, visitors encounter divination through a screen.',
+      'The work places an old predictive technology inside a new one — inviting us to consider what has changed, and what has not, in our desire to make uncertainty legible.',
+    ],
+    whyNow: [
+      'Algorithms already tell us what to watch, where to go, who to meet and what may happen next. These predictions are often presented as objective and based on “data”.',
+      'The I Ching offers a different relationship to prediction. Its answers are poetic, ambiguous and dependent upon interpretation. It does not simply claim to calculate the future; it asks the reader to examine their own position within a changing situation.',
+      'This work asks whether uncertainty and alternative forms of cultural wisdom are something technology should eliminate, or something we can build on.',
+    ],
+    reflection: [
+      'Why might advice feel more trustworthy when it appears on a screen?',
+      'What is the difference between divination, prediction and recommendation?',
+    ],
+  },
+  xenographer: {
+    id: 'xenographer',
+    title: 'A XENOGRAPHER’S\nINDEX',
+    artist: 'BY FYEROOL DARMA',
+    sequence: '03',
+    total: '03',
+    sectionLabel: 'HERE IN THE NET',
+    palette: 'ochre',
+    pullQuote: 'An archive does more than preserve history. Through its categories, it determines what kinds of worlds can be recognised.',
+    titleAlign: 'left',
+    titleSize: '38px',
+    heroLabel: 'SPECULATIVE ARCHIVE',
+    description: [
+      'Fyerool Darma’s installation takes the form of a speculative archive from another possible Southeast Asia.',
+      'The work imagines a group of “xenographers” from the Nusanatra who have returned from an expedition to Nooantara: a parallel reality in which mind and body, land and water, and physical and virtual life are not understood as separate categories. Its objects and moving images appear as fragments from this world, indexed for a collective history.',
+      'Nooantara brings together the “noosphere” — a realm of shared human thought and cultural imagination — and writer Sutan Takdir Alisjahbana’s idea of Bumantara, Southeast Asia as interconnected “lands between.”',
+      'At the centre of the mythology is a 3D-printed mask known variously as the Flaming Knotted Heart, the Apparatus and the Ongoing Processing Intake System. Its shifting names resist the stable classifications normally imposed by museums, databases and archives.',
+    ],
+    whyNow: [
+      'Many technological futures inherit divisions associated with Western modernity: nature against technology, body against mind, real against virtual and past against future.',
+      'Fyerool asks what futures might emerge from different intellectual and cultural foundations. Rather than placing Southeast Asian artefacts inside a generic sci-fi world, he extrapolates from regional language, histories and cosmologies to construct another reality altogether.',
+      'The work also reminds us that an archive does more than preserve history. Through the categories it uses, it determines what kinds of relationships, and therefore what kinds of worlds, can be recognised.',
+    ],
+    reflection: [
+      'What might become possible if the physical and virtual were not treated as opposites?',
+      'Is the archive documenting this world — or helping to produce it?',
     ],
   },
 }

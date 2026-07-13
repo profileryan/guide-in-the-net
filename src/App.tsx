@@ -10,6 +10,8 @@ import {
   sectionOneIntro,
   sectionTwoArtworks,
   sectionTwoIntro,
+  sectionThreeArtworks,
+  sectionThreeIntro,
   type SectionIntroContent,
 } from './content/guideContent'
 
@@ -34,6 +36,13 @@ type Screen =
   | 'traces'
   | 'commons'
   | 'sectionTwoComplete'
+  | 'sectionThreeCover'
+  | 'sectionThreeIntro'
+  | 'mapThree'
+  | 'asiaMaxxing'
+  | 'hexagram'
+  | 'xenographer'
+  | 'sectionThreeComplete'
 type Dialog = 'info' | 'settings' | null
 
 const introParagraphs = [
@@ -114,6 +123,13 @@ const validScreens: Screen[] = [
   'traces',
   'commons',
   'sectionTwoComplete',
+  'sectionThreeCover',
+  'sectionThreeIntro',
+  'mapThree',
+  'asiaMaxxing',
+  'hexagram',
+  'xenographer',
+  'sectionThreeComplete',
 ]
 
 function initialScreen(): Screen {
@@ -274,7 +290,7 @@ export default function App() {
             onBack={() => go('how')}
             onNext={() => go('section')}
           >
-            <MapScreen image="/assets/map-step-1.png" alt="Map of the exhibition showing the route into You and the Net" note="FOLLOW THE LIGHTS.\nSTAY IN EACH SECTION AS LONG AS YOU WOULD LIKE." />
+            <MapScreen marker="one" image="/assets/map-step-1.png" alt="Map of the exhibition showing the route into You and the Net" note="FOLLOW THE LIGHTS.\nSTAY IN EACH SECTION AS LONG AS YOU WOULD LIKE." />
           </AppShell>
         )}
 
@@ -286,7 +302,7 @@ export default function App() {
             onBack={() => go('map')}
             onNext={() => go('sectionIntro')}
           >
-            <SectionArrival reducedMotion={reducedMotion} number="SECTION 1" title={'YOU AND\nTHE NET'} subtitle={'TECHNOLOGY, IDENTITY AND\nTHE POSSIBLE SELF'} tone="pink" variant="one" />
+            <SectionArrival reducedMotion={reducedMotion} number="SECTION 1" title={'YOU AND\nTHE NET'} subtitle={'TECHNOLOGY, IDENTITY AND\nTHE POSSIBLE SELF'} tone="pink" variant="one" align="center" />
           </AppShell>
         )}
 
@@ -334,7 +350,7 @@ export default function App() {
 
         {screen === 'sectionTwoCover' && (
           <AppShell immersive onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('graceQuek')} onNext={() => go('sectionTwoIntro')}>
-            <SectionArrival reducedMotion={reducedMotion} number="SECTION 2" title={'TOGETHER\nIN THE\nNET'} subtitle={'COMMUNITY, MEMORY AND\nCOLLECTIVE WORLDBUILDING'} tone="blue" variant="two" />
+            <SectionArrival reducedMotion={reducedMotion} number="SECTION 2" title={'TOGETHER\nIN THE\nNET'} subtitle={'COMMUNITY, MEMORY AND\nCOLLECTIVE WORLDBUILDING'} tone="blue" variant="two" align="left" />
           </AppShell>
         )}
 
@@ -346,7 +362,7 @@ export default function App() {
 
         {screen === 'mapTwo' && (
           <AppShell blue onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('sectionTwoIntro')} onNext={() => go('altar')}>
-            <MapScreen image="/assets/map-step-2.png" alt="Map of the exhibition showing the route into Together in the Net" note="FOLLOW THE CURVE INTO SECTION 2.\nTHIS PART OF THE EXHIBITION INVITES YOU TO LINGER TOGETHER." />
+            <MapScreen marker="two" image="/assets/map-step-2.png" alt="Map of the exhibition showing the route into Together in the Net" note="FOLLOW THE CURVE INTO SECTION 2.\nTHIS PART OF THE EXHIBITION INVITES YOU TO LINGER TOGETHER." />
           </AppShell>
         )}
 
@@ -369,8 +385,50 @@ export default function App() {
         )}
 
         {screen === 'sectionTwoComplete' && (
-          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('commons')} hideNext>
+          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('commons')} onNext={() => go('sectionThreeCover')}>
             <SectionComplete title={'HERE IN\nTHE NET'} kicker="SECTION 2 COMPLETE" body="You have completed Together in the Net. The next section turns toward Southeast Asian imaginaries, situated technologies and futures built from here." />
+          </AppShell>
+        )}
+
+        {screen === 'sectionThreeCover' && (
+          <AppShell immersive tone="green" onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('sectionTwoComplete')} onNext={() => go('sectionThreeIntro')}>
+            <SectionArrival reducedMotion={reducedMotion} number="SECTION 3" title={'HERE IN\nTHE NET'} subtitle={'SOUTHEAST ASIA AND ITS\nTECHNOLOGICAL FUTURES'} tone="green" variant="three" align="center" />
+          </AppShell>
+        )}
+
+        {screen === 'sectionThreeIntro' && (
+          <AppShell tone="red" onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('sectionThreeCover')} onNext={() => go('mapThree')}>
+            <SectionIntroScreen content={sectionThreeIntro} variant="here" />
+          </AppShell>
+        )}
+
+        {screen === 'mapThree' && (
+          <AppShell tone="green" onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('sectionThreeIntro')} onNext={() => go('asiaMaxxing')}>
+            <MapScreen marker="three" image="/assets/map-step-3.png" alt="Map of the exhibition showing the route into Here in the Net" note={'FOLLOW THE DOTTED PATH INTO SECTION 3.\nTHE FUTURE LOOKS DIFFERENT WHEN IT IS IMAGINED FROM HERE.'} />
+          </AppShell>
+        )}
+
+        {screen === 'asiaMaxxing' && (
+          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('mapThree')} onNext={() => go('hexagram')}>
+            <ArtworkPage artwork={sectionThreeArtworks['asia-maxxing']} />
+          </AppShell>
+        )}
+
+        {screen === 'hexagram' && (
+          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('asiaMaxxing')} onNext={() => go('xenographer')}>
+            <ArtworkPage artwork={sectionThreeArtworks.hexagram} />
+          </AppShell>
+        )}
+
+        {screen === 'xenographer' && (
+          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('hexagram')} onNext={() => go('sectionThreeComplete')}>
+            <ArtworkPage artwork={sectionThreeArtworks.xenographer} />
+          </AppShell>
+        )}
+
+        {screen === 'sectionThreeComplete' && (
+          <AppShell onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('xenographer')} hideNext>
+            <SectionComplete title={'FUTURES\nREADING ROOM'} kicker="SECTION 3 COMPLETE" body="You have completed Here in the Net. The next part of the guide will lead into the Futures Reading Room and its research archive of Southeast Asian futures." />
           </AppShell>
         )}
       </div>
@@ -471,9 +529,9 @@ function NameScreen({
   )
 }
 
-function MapScreen({ image, alt, note }: { image: string; alt: string; note: string }) {
+function MapScreen({ image, alt, note, marker }: { image: string; alt: string; note: string; marker: 'one' | 'two' | 'three' }) {
   return (
-    <article className="map-screen screen-enter">
+    <article className={`map-screen map-step-${marker} screen-enter`}>
       <h1>STEP INTO THE NET</h1>
       <div className="map-wrap">
         <img src={image} alt={alt} />
@@ -491,19 +549,21 @@ function SectionArrival({
   subtitle,
   tone,
   variant,
+  align,
 }: {
   reducedMotion: boolean
   number: string
   title: string
   subtitle: string
-  tone: 'pink' | 'blue'
-  variant: 'one' | 'two'
+  tone: 'pink' | 'blue' | 'green'
+  variant: 'one' | 'two' | 'three'
+  align: 'left' | 'center'
 }) {
   return (
-    <section className={`section-arrival section-arrival-${variant} screen-enter`}>
+    <section className={`section-arrival section-arrival-${variant} section-align-${align} screen-enter`}>
       <GlitchCanvas reducedMotion={reducedMotion} tone={tone} />
-      <IslandBlob className="section-blob section-blob-a" variant={tone === 'blue' ? 1 : 2} />
-      <IslandBlob className="section-blob section-blob-b" variant={tone === 'blue' ? 3 : 3} />
+      <IslandBlob className="section-blob section-blob-a" variant={tone === 'blue' ? 1 : tone === 'green' ? 3 : 2} />
+      <IslandBlob className="section-blob section-blob-b" variant={tone === 'green' ? 1 : 3} />
       <IslandBlob className="section-blob section-blob-c" variant={tone === 'blue' ? 2 : 1} />
       <div className="section-arrival-content">
         <p className="section-number">{number}</p>
@@ -514,13 +574,14 @@ function SectionArrival({
   )
 }
 
-function SectionIntroScreen({ content }: { content: SectionIntroContent }) {
+function SectionIntroScreen({ content, variant = 'default' }: { content: SectionIntroContent; variant?: 'default' | 'here' }) {
   return (
-    <article className="section-intro screen-enter">
+    <article className={`section-intro section-intro-${variant} screen-enter`}>
       <p className="section-intro-number">{content.number}</p>
       <h1>
         {content.title.split('\n').map((line) => <span key={line}>{line}</span>)}
       </h1>
+      {content.lead && <p className="section-intro-lead">{content.lead}</p>}
       <div className="section-intro-copy">
         {content.paragraphs.map((paragraph, index) => (
           <p key={paragraph} style={{ '--reveal-index': index } as React.CSSProperties}>{paragraph}</p>

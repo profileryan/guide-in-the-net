@@ -2,15 +2,21 @@
 
 A mobile-first digital exhibition guide for **Islands in the Net**, presented at Padimai Art & Tech Studio, Tanjong Pagar Distripark.
 
-## Current build: v0.5.1
+## Current build: v0.6.0
 
-This package contains:
+This package now contains:
 
-- the opening journey
+- the complete opening journey
 - the full **You and the Net** section
 - the full **Together in the Net** section
-- supplied Section 2 artwork thumbnails for **BussyTemple** and **Traces**
-- a handoff screen teasing **Here in the Net**
+- the full **Here in the Net** section
+- a handoff into the **Futures Reading Room**
+
+It also corrects the Section 2 map marker and explicitly locks the intended section-title alignment:
+
+- Section 1 cover: centred
+- Section 2 cover: left-aligned
+- Section 3 cover: centred
 
 Start with:
 

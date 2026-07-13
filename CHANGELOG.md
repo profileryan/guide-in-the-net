@@ -1,32 +1,27 @@
 # Changelog
 
+## 0.6.0 — Here in the Net
+
+- Corrected the Together in the Net map marker from Section 1 to Section 2
+- Added explicit cover-heading alignment: Section 1 centred, Section 2 left, Section 3 centred
+- Added Here in the Net cover, introduction and map step
+- Added ASIAMAXXING by Weiwei Xu
+- Added Hexagram Today by Weiwei Xu
+- Added A Xenographer’s Index by Fyerool Darma
+- Added Section 3 editorial placeholder hero treatments
+- Added a handoff into the Futures Reading Room
+- Added green and red shell themes
+- Updated project and Codex documentation
+
 ## 0.5.1 — Section 2 artwork image update
 
-- Added supplied BussyTemple altar image at `public/assets/works/bussytemple-altar.jpg`
-- Added supplied Traces image at `public/assets/works/traces-in-the-net.jpg`
-- Updated Section 2 artwork content to use the supplied images
-- Adjusted Section 2 hero styling so the new wide thumbnails sit as editorial image plates
-- Refreshed project documentation and asset-status notes
+- Added supplied BussyTemple altar image
+- Added supplied Traces image
+- Updated Section 2 artwork pages to use the supplied images
 
-## 0.5.0 — Together in the Net implementation
+## 0.5.0 — Together in the Net
 
 - Added the full Together in the Net section flow
-- Added Section 2 arrival, intro and map step
-- Added BussyTemple — F4NT4SY_H4RD_DR1VE://ALTAR (2026)
-- Added Traces in the Net
-- Added The Commons page
-- Added a handoff screen toward Here in the Net
+- Added Section 2 cover, introduction and map
+- Added BussyTemple, Traces and The Commons
 - Corrected the ImpactBench × CereaLLM credit to MIT Media Lab × Ryan Ho
-- Added blue-tone glitch backgrounds and new Section 2 palette families
-- Added project documentation updates for Codex and future sessions
-
-## 0.4.0 — Section 1 editorial redesign
-
-- Added four supplied artwork thumbnails
-- Rebuilt the reusable artwork page as an editorial digital-catalogue layout
-- Added per-artwork sequence markers and palettes
-- Added pull-quote chapters
-- Redesigned Why Now and Pause / Reflect sections
-- Added restrained image drift and a Grace Quek VHS treatment
-- Preserved reduced-motion support
-- Added comprehensive project-progress and Codex handoff documents

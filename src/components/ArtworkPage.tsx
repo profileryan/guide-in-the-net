@@ -39,7 +39,7 @@ export default function ArtworkPage({ artwork }: Props) {
           <div className="artwork-hero-placeholder" aria-hidden="true">
             <div className="artwork-hero-placeholder-disc" />
             <div className="artwork-hero-placeholder-grid" />
-            <p>PARTICIPATORY INSTALLATION</p>
+            <p>{artwork.heroLabel ?? 'PARTICIPATORY INSTALLATION'}</p>
           </div>
         )}
         <div className="artwork-hero-no" aria-hidden="true">{artwork.sequence}</div>

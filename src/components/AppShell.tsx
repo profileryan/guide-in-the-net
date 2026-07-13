@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react'
 
+type ShellTone = 'black' | 'blue' | 'green' | 'red'
+
 type Props = {
   children: ReactNode
   onInfo: () => void
@@ -9,6 +11,7 @@ type Props = {
   nextLabel?: string
   backLabel?: string
   blue?: boolean
+  tone?: ShellTone
   hideBottom?: boolean
   hideNext?: boolean
   immersive?: boolean
@@ -23,12 +26,15 @@ export default function AppShell({
   nextLabel = 'NEXT',
   backLabel = 'BACK',
   blue = false,
+  tone,
   hideBottom = false,
   hideNext = false,
   immersive = false,
 }: Props) {
+  const resolvedTone: ShellTone = tone ?? (blue ? 'blue' : 'black')
+
   return (
-    <div className={`shell ${blue ? 'shell-blue' : 'shell-black'} ${immersive ? 'shell-immersive' : ''}`}>
+    <div className={`shell shell-${resolvedTone} ${immersive ? 'shell-immersive' : ''}`}>
       <header className="topbar">
         <img className="corner-logo" src="/assets/upper-corner-logo-transparent.png" alt="Islands in the Net" />
         <div className="topbar-actions">
