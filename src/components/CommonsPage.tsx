@@ -29,10 +29,9 @@ export default function CommonsPage() {
         </section>
 
         <section className="reflection-block reflection-block-commons">
-          <p className="reflection-kicker">PAUSE &amp; REFLECT</p>
-          <p className="commons-reflection-lead">{commonsContent.reflectionLead}</p>
+          <p className="reflection-kicker">TRY THIS</p>
           <ol className="commons-bullets">
-            {commonsContent.reflectionBullets.map((tip, index) => (
+            {commonsContent.tryThis.map((tip, index) => (
               <li key={tip}>
                 <span>{String(index + 1).padStart(2, '0')}</span>
                 <p>{tip}</p>

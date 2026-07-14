@@ -45,12 +45,10 @@ export const sectionOneIntro: SectionIntroContent = {
   number: 'SECTION 1',
   title: 'YOU AND\nTHE NET',
   paragraphs: [
-    'Before technology becomes infrastructure, policy or culture, it meets us personally.',
-    'It speaks in our voice, imagines our future, measures our wellbeing and unsettles familiar ideas of identity, originality and what it means to be human.',
-    'The works in this section invite you to examine that encounter.',
-    'What do intelligent systems reflect back about who you are, and who you might become?',
-    'Where might they support human flourishing, and where might they diminish autonomy, connection or care?',
-    'Rather than asking only what these technologies can do, You and the Net asks what they do to us, and what kind of relationship we want to have with them.',
+    'Technology reaches us at an intimate scale: in the voice that answers, the score that judges, the portrait that predicts and the feed that learns what keeps us looking.',
+    'The works in this section examine what happens when systems speak as us, measure us and rehearse who we might become.',
+    'What do they reflect back—and what do they quietly prescribe? Where can they support agency, connection and care, and where do they create dependency?',
+    'The question is not only what these technologies can do. It is what repeated use does to us.',
   ],
 }
 
@@ -58,10 +56,10 @@ export const sectionTwoIntro: SectionIntroContent = {
   number: 'SECTION 2',
   title: 'TOGETHER IN\nTHE NET',
   paragraphs: [
-    'No relationship with technology remains personal for long. Our individual choices and traces accumulate into shared archives, social norms, rituals, memories and ways of belonging.',
-    'Here, visitors are invited to listen, respond and add something of their own. Across a living shrine, voices gathered from the city, changing public questions and spaces for reflection, the exhibition becomes something made collectively rather than simply observed.',
-    'Together in the Net asks how a crowd becomes a community: not through automatic agreement, but through participation, difference, care and exchange.',
-    'What do we preserve? What do we make visible? And what kinds of worlds can many different lives build together?',
+    'No relationship with technology remains personal for long. A private choice becomes a data point; a post becomes an archive; a voice can become part of a shared memory.',
+    'Across a living altar, an emotional map and the Commons, this section asks you not only to look, but to add, listen, disagree and leave something behind.',
+    'A crowd is not yet a community. Community is made through participation, difference, care and the difficult work of staying in relation.',
+    'What do we preserve? What do platforms flatten? What can many different lives build together?',
   ],
 }
 
@@ -70,8 +68,8 @@ export const sectionThreeIntro: SectionIntroContent = {
   title: 'HERE IN\nTHE NET',
   lead: 'The stories told about technology are never universal. They emerge from particular places: from their languages, beliefs, histories, infrastructures and relationships to power.',
   paragraphs: [
-    'In Southeast Asia, contemporary technologies encounter older systems of divination, regional imaginaries, colonial and postcolonial histories, networked identities and local ways of knowing. The works in this section move between computational ritual, speculative lives, alternate worlds, digital art and historical research.',
-    'Here in the Net asks how technology is absorbed, translated and reinvented across the region, and what Southeast Asian futures might look like when they are imagined from here, rather than imported from elsewhere.',
+    'Here, code meets divination. AI rehearses Asian identities. Speculative archives refuse familiar divisions between nature and technology, body and data, past and future.',
+    'These works show technology being absorbed, translated and reinvented across Southeast Asia. They ask what becomes possible when the future is imagined from here, rather than imported from elsewhere.',
   ],
 }
 
@@ -292,19 +290,16 @@ export const sectionTwoArtworks: Record<Extract<ArtworkId, 'altar' | 'traces'>, 
     },
     description: [
       'Traces in the Net offers another way of encountering the city: through the thoughts, stories, feelings and sounds left behind by the people within it.',
-      'Visitors can move through a map or an immersive digital space, listening to fragments of emotions, confessions and soundscapes. Each trace is small and partial. Together, they form a changing portrait of the city — not as infrastructure or geography alone, but as an accumulation of interior lives.',
+      'Visitors can move through a map or an immersive digital space, listening to fragments of emotions, confessions and soundscapes. Each trace is small and partial. Together, they form a changing portrait of the city—not as infrastructure or geography alone, but as an accumulation of interior lives.',
       'After listening, you are invited to leave a trace of your own. A private thought becomes part of a shared environment, available to someone you may never meet.',
       'The project does not attempt to produce a complete or authoritative record. It offers a constellation of voices: intimate, uneven and continually expanding. Some may remain; others may eventually disappear.',
-      'Alongside this living archive, a record of each contribution is preserved on the blockchain. The voice itself is not stored there. Instead, what remains is proof that it once existed: a timestamped mark of presence, even after the original trace is gone. In this way, Traces holds two forms of memory at once — one fragile and human, the other persistent but abstract.',
+      'Each contribution also leaves a timestamped record on the blockchain—not the voice itself, but proof that it once existed. Traces holds two kinds of memory in tension: one intimate and erasable; the other durable and abstract.',
     ],
     whyNow: [
-      'Cities are understood through official maps, demographics, property values and data. These systems can tell us where people travel and what they consume, but not necessarily what a place feels like or means to those living within it.',
-      'This emotional counter-map asks whether digital networks might help us notice one another more carefully, beyond merely making us more visible.',
+      'Cities are increasingly made legible through movement, property and consumption data. Traces maps what those systems miss: feeling, confession, atmosphere and interior life.',
     ],
     reflection: [
-      'What would your city look like if it were mapped by feeling?',
-      'When does a private thought become part of public memory?',
-      'What trace would you leave for a stranger to find?',
+      'What would your city reveal if it were mapped by feeling instead of value?',
     ],
   },
 }
@@ -388,7 +383,7 @@ export const sectionThreeArtworks: Record<Extract<ArtworkId, 'asia-maxxing' | 'h
     total: '03',
     sectionLabel: 'HERE IN THE NET',
     palette: 'ochre',
-    pullQuote: 'An archive does more than preserve history. Through its categories, it determines what kinds of worlds can be recognised.',
+    pullQuote: 'An archive does not simply preserve a world. It helps decide which worlds are legible.',
     titleAlign: 'left',
     titleSize: '38px',
     heroLabel: 'SPECULATIVE ARCHIVE',
@@ -399,39 +394,36 @@ export const sectionThreeArtworks: Record<Extract<ArtworkId, 'asia-maxxing' | 'h
       aspect: '16 / 9',
     },
     description: [
-      'XO (2026) takes the form of a speculative archive from another possible Southeast Asia.',
-      'The work imagines a group of “xenographers” from the Nusanatra who have returned from an expedition to Nooantara: a parallel reality in which mind and body, land and water, and physical and virtual life are not understood as separate categories. Its objects and moving images appear as fragments from this world, indexed for a collective history.',
-      'Nooantara brings together the “noosphere” — a realm of shared human thought and cultural imagination — and writer Sutan Takdir Alisjahbana’s idea of Bumantara, Southeast Asia as interconnected “lands between.”',
-      'At the centre of the mythology is a 3D-printed mask known variously as the Flaming Knotted Heart, the Apparatus and the Ongoing Processing Intake System. Its shifting names resist the stable classifications normally imposed by museums, databases and archives.',
+      'XO is an archive from a Southeast Asia that does not exist—but might.',
+      'The work follows a group of “xenographers” from Nusanatra returning from Nooantara, a parallel world where mind and body, land and water, and physical and virtual life are not treated as opposites. Objects, moving images and a monumental mask appear as fragments from this world, catalogued for a collective history.',
+      'Its mythology folds together the noosphere—a realm of shared thought—with Sutan Takdir Alisjahbana’s Bumantara, an idea of Southeast Asia as interconnected “lands between.”',
+      'Even the central mask refuses a stable identity. It is called the Flaming Knotted Heart, the Apparatus and the Ongoing Processing Intake System. Each name changes what the object can be—and what kind of world the archive allows us to see.',
     ],
     whyNow: [
-      'Many technological futures inherit divisions associated with Western modernity: nature against technology, body against mind, real against virtual and past against future.',
-      'Fyerool asks what futures might emerge from different intellectual and cultural foundations. Rather than placing Southeast Asian artefacts inside a generic sci-fi world, he extrapolates from regional language, histories and cosmologies to construct another reality altogether.',
-      'The work also reminds us that an archive does more than preserve history. Through the categories it uses, it determines what kinds of relationships, and therefore what kinds of worlds, can be recognised.',
+      'Most technological futures inherit the same oppositions: nature or machine, body or data, real or virtual, tradition or progress. XO refuses the choice. It asks what might emerge if the categories themselves came from different intellectual and cultural histories.',
+      'A database, museum or archive does not only store reality. Through its labels, it helps produce it.',
     ],
     reflection: [
-      'What might become possible if the physical and virtual were not treated as opposites?',
-      'Is the archive documenting this world — or helping to produce it?',
+      'Which boundary in your own life feels too rigid: human and machine, real and virtual, nature and technology, or past and future?',
+      'What might become possible if that boundary loosened?',
     ],
   },
 }
 
 export const commonsContent = {
   title: 'THE\nCOMMONS',
-  deck: 'This room is intentionally unfinished.',
+  deck: 'This room has no single object at its centre. Its subject is what happens between people.',
   paragraphs: [
-    'Its low seats, cushions, tables, questions and voting wall do not point toward a single object at the centre. Instead, they create the conditions for something less predictable to happen: sitting, reading, talking, listening, disagreeing, reconsidering or simply spending time together.',
-    'In a conventional exhibition, visitors are often expected to move from one artwork to the next. Here, stopping is also a form of participation. Your attention, conversations and contributions become part of the changing life of the space.',
-    'The public poll offers a visible snapshot of what people think — but not a final answer. Every cluster of stickers represents both a collective position and the limitations of the question being asked. Who participated? Who hesitated? What nuance was lost between the available choices? Could you change your mind?',
-    'This space does not assume that community means consensus. A commons is something people continually negotiate: through difference, responsibility, generosity and care.',
+    'The low seats, cushions, tables, questions and voting wall are not arranged around a single artwork. They create the conditions for something less predictable: sitting, reading, talking, listening, disagreeing, reconsidering or simply spending time together.',
+    'In a conventional exhibition, visitors are expected to move from one artwork to the next. Here, stopping is also participation. Your attention, conversations and contributions become part of the changing life of the room.',
+    'The public poll offers a visible snapshot, not a final answer. Each cluster of stickers records both a collective position and the limits of the question: who participated, who hesitated and what nuance disappeared between the available choices?',
+    'A commons does not require consensus. It is something people continually negotiate through difference, responsibility, generosity and care.',
   ],
-  reflectionLead: 'A community is not simply a group of people in the same place. It begins with what they are willing to make, hold and reconsider together.',
-  reflectionBullets: [
-    'Sit for longer than feels necessary.',
-    'Respond to a question, or leave a better one.',
-    'Place a voting sticker, then see whether the works change your answer.',
-    'Speak with someone whose response differs from yours.',
-    'Leave a thought for whoever arrives next.',
+  tryThis: [
+    'Stay past your first impulse to move on.',
+    'Vote, then return to your answer later.',
+    'Speak with someone who chose differently.',
+    'Leave a thought for the next person.',
   ],
 }
 
@@ -439,31 +431,34 @@ export const readingRoomContent = {
   title: 'READING ROOM &\nRESEARCH ARCHIVE\nOF SOUTHEAST ASIAN\nFUTURES',
   deck: 'The archive is unfinished. So is the future.',
   paragraphs: [
-    'Popular visions of the future are often produced by technology companies and circulated globally as though they belong equally to everyone. This can make the future appear imported, inevitable and without history.',
-    'This reading room offers a counterpoint. It shows that people across Southeast Asia have long been imagining modernity and technological change on their own terms. This archive reveals that networks existed before the internet and that questions now associated with AI — about knowledge, power, ecological crisis and collective life — have deep historical roots.',
-    'It gathers publications and historical material that trace earlier regional attempts to think across technology, culture, ecology and political change. Among these histories are the Pacific Ashrams of the 1970s: gatherings through which artists, intellectuals and cultural workers used exchange and networking to imagine forms of international cooperation beyond a world order dominated by the United States.',
-    'Recovering these histories is not an exercise in nostalgia. It expands the material available for imagining what comes next, and reminds us that the future has always been a cultural and political project.',
+    'Most visions of the future arrive already branded. They are produced by technology companies, circulated globally and presented as though everyone is travelling to the same destination.',
+    'This room offers a counter-archive. It gathers Southeast Asian experiments in modernity, ecology, networks and collective life—evidence that the region has long imagined technological change on its own terms.',
+    'These histories show that networks existed before the internet, and that questions now associated with AI—about knowledge, power, ecological crisis and collective life—have much deeper roots.',
+    'Recovering them is not nostalgia. It widens the material from which the future can be made.',
   ],
-  prompts: [
-    'Pick up something you would not ordinarily read.',
+  browsingCues: [
+    'Pick up something outside your usual field.',
     'Follow one reference into another.',
-    'Notice which countries, languages and communities are present, and which are absent.',
-    'Leave behind a title, person or history that belongs in this collection.',
-    'Ask not only what the future will be, but whose ideas it is being built from.',
+    'Notice who and what is absent.',
+  ],
+  reflectionQuestions: [
+    'Whose future is missing from this archive?',
+    'Which idea here deserves to be put back into circulation?',
+    'What history, person or publication would you add?',
   ],
 }
 
 export const closingContent = {
   title: 'CONTINUE?',
   paragraphs: [
-    'You began with the self: the identities, choices and possible futures that technology reflects back to us. From there, the view widened to the communities, memories and shared worlds formed when our individual traces meet. Finally, it expanded again toward the histories, beliefs and regional imaginations through which Southeast Asian futures are being made.',
-    'But these scales are never truly separate. Every personal choice contributes to a collective pattern. Every community inherits a history. Every imagined future privileges certain values, voices and ways of living over others.',
-    'Islands in the Net does not offer a single vision of what comes next. It asks us to recognise that the future is already being produced — through the systems we use, the stories we repeat, the relationships we sustain and the possibilities we choose to make visible.',
+    'You began with the self: how technology speaks back to us, measures us and rehearses who we might become. The view then widened to communities and shared memory, before turning to the histories and beliefs from which Southeast Asian futures are made.',
+    'These scales are inseparable. Personal choices become collective patterns. Communities inherit histories. Every imagined future elevates some values, voices and ways of living over others.',
+    'The future is not waiting somewhere else. It is being produced now—by the systems we use, the stories we repeat and the relationships we choose to sustain.',
   ],
   questions: [
     'What do you want technology to help us become?',
     'What should it never be allowed to decide for us?',
-    'What will you contribute to the net?',
+    'What will you contribute to the net—and what will you refuse to give it?',
   ],
   ending: ['The exhibition ends here.', 'The questions leave with you.'],
 }

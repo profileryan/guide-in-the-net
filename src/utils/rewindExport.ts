@@ -135,7 +135,7 @@ function drawHeader(
   context.fillStyle = '#ffffff'
   context.font = `60px ${fonts.display}`
   context.letterSpacing = '1px'
-  context.fillText('YOUR NET REWIND', left, y)
+  context.fillText('FIELD NOTES FROM THE NET', left, y)
 
   y += 52
   context.fillStyle = 'rgba(255,255,255,.72)'
@@ -459,7 +459,7 @@ export async function downloadRewindAsJpg(visitorName: string, entries: Reflecti
   drawContinuousRewind(context, visitorName, entries, groups, fonts, brandLogo, height)
 
   const bytes = await canvasToJpegBytes(canvas, 0.94)
-  triggerDownload(new Blob([bytes], { type: 'image/jpeg' }), `islands-in-the-net-rewind-${safeFileName(visitorName)}.jpg`)
+  triggerDownload(new Blob([bytes], { type: 'image/jpeg' }), `islands-in-the-net-field-notes-${safeFileName(visitorName)}.jpg`)
 }
 
 export async function downloadRewindAsPdf(visitorName: string, entries: ReflectionEntry[]) {
@@ -492,5 +492,5 @@ export async function downloadRewindAsPdf(visitorName: string, entries: Reflecti
     images.push({ bytes: await canvasToJpegBytes(canvas, 0.92), width: PAGE_WIDTH, height: PAGE_HEIGHT })
   }
 
-  triggerDownload(buildPdfFromJpegs(images), `islands-in-the-net-rewind-${safeFileName(visitorName)}.pdf`)
+  triggerDownload(buildPdfFromJpegs(images), `islands-in-the-net-field-notes-${safeFileName(visitorName)}.pdf`)
 }

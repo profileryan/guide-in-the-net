@@ -1,4 +1,5 @@
 import { readingRoomContent } from '../content/guideContent'
+import ReflectionResponseList, { type ReflectionPromptItem } from './ReflectionResponseList'
 
 function MultilineTitle({ text }: { text: string }) {
   return (
@@ -26,17 +27,32 @@ export default function ReadingRoomPage() {
           ))}
         </section>
 
-        <section className="reading-room-pause" aria-labelledby="reading-room-pause-title">
-          <p className="reading-room-pause-kicker" id="reading-room-pause-title">PAUSE &amp; REFLECT</p>
-          <p className="reading-room-pause-lead">THE ARCHIVE IS UNFINISHED.<br />SO IS THE FUTURE.</p>
+        <section className="reading-room-browse" aria-labelledby="reading-room-browse-title">
+          <p className="reading-room-browse-kicker" id="reading-room-browse-title">BROWSE THE ARCHIVE</p>
           <ol className="reading-room-prompts">
-            {readingRoomContent.prompts.map((tip, index) => (
-              <li key={tip}>
+            {readingRoomContent.browsingCues.map((cue, index) => (
+              <li key={cue}>
                 <span>{String(index + 1).padStart(2, '0')}</span>
-                <p>{tip}</p>
+                <p>{cue}</p>
               </li>
             ))}
           </ol>
+        </section>
+
+        <section className="reading-room-pause" aria-labelledby="reading-room-pause-title">
+          <p className="reading-room-pause-kicker" id="reading-room-pause-title">PAUSE &amp; REFLECT</p>
+          <p className="reading-room-pause-lead">Choose a question. Leave a private note—or keep it with you.</p>
+          <ReflectionResponseList
+            items={readingRoomContent.reflectionQuestions.map((prompt, index): ReflectionPromptItem => ({
+              id: `reading-room:${index}`,
+              section: 'FUTURES READING ROOM',
+              source: 'READING ROOM & RESEARCH ARCHIVE',
+              prompt,
+              order: 4000 + index,
+            }))}
+            actionLabel="RESPOND"
+          />
+          <p className="reflection-storage-note">OPTIONAL · STORED ON THIS DEVICE · NOT UPLOADED</p>
         </section>
 
         <footer className="reading-room-endmark" aria-hidden="true">

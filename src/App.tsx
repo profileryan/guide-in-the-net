@@ -55,49 +55,48 @@ type TextSize = 'small' | 'standard' | 'large'
 type ColourMode = 'standard' | 'red-green-safe' | 'blue-yellow-safe' | 'high-contrast'
 
 const introParagraphs = [
-  'From algorithms that shape reality for millions of people to AI that’s rapidly changing how we create and work, technology is no longer separate from our everyday lives. It is part of our language, labour, identity and culture.',
-  'Yet, the dominant headlines about these changes are led disproportionately by commercial platforms, techno-solutionist narratives, or design and policy frameworks that assume this technology is neutral or inevitable.',
-  'Islands in the Net exists to host a different kind of conversation.',
-  'The exhibition takes its name from Bruce Sterling’s 1988 cyberpunk novel Islands in the Net, which imagined Singapore as an important node in a new global network of data and influence. Nearly four decades later, we return to that image from a Southeast Asian perspective.',
-  'Here, “islands” are not isolated. They form an archipelago of distinct histories, communities and ways of knowing, connected through shifting flows of people, culture, capital and information.',
+  'Technology no longer sits outside everyday life. It recommends what we watch, verifies who we are, speaks in our voices and increasingly helps decide how we work, move and imagine the future.',
+  'Most stories about these systems still arrive from technology companies: faster, smarter, frictionless, inevitable. Islands in the Net begins somewhere else.',
+  'The exhibition takes its name from Bruce Sterling’s 1988 cyberpunk novel, which imagined Singapore as a node in a new global network of data and influence. Nearly four decades later, we return to that image from Southeast Asia.',
+  'Here, islands are not isolated. They form an archipelago: distinct histories, cultures and ways of knowing, connected by uneven flows of people, capital and information.',
 ]
 
 const guideActions = [
   {
     icon: '/assets/linger.png',
     iconHeight: '146px',
-    label: 'Linger',
-    text: 'Sit with an idea longer than your first impression.',
+    label: 'LINGER',
+    text: 'Stay with an idea beyond your first reaction.',
   },
   {
     icon: '/assets/form-thoughts.png',
     iconHeight: '60px',
-    label: 'Decide',
-    text: 'Form your own view about technology, community and the future.',
+    label: 'TAKE A POSITION',
+    text: 'Form your own view. Change it if the work gives you reason.',
   },
   {
     icon: '/assets/converse.png',
     iconHeight: '70px',
-    label: 'Join In',
-    text: 'Talk with someone here, or leave a note for whoever comes next.',
+    label: 'JOIN IN',
+    text: 'Talk with someone, vote, or leave a thought for whoever comes next.',
   },
   {
     icon: '/assets/reflect.png',
     iconHeight: '95px',
-    label: 'Be',
-    text: 'Use this as a safe place to sit, listen, read, write, reflect and imagine.',
+    label: 'PAUSE',
+    text: 'Sit, listen, read, write—or do nothing for a while.',
   },
   {
     icon: '/assets/return.png',
     iconHeight: '108px',
-    label: 'Come Back',
+    label: 'RETURN',
     text: 'Return after dark for screenings, performances, talks and late-night takeovers.',
   },
   {
     icon: '/assets/share.png',
     iconHeight: '118px',
-    label: "Share, Or Don't",
-    text: 'Snap and share, or keep it offline. Feed the algorithm with #IslandsintheNetSG',
+    label: 'SHARE, OR DON’T',
+    text: 'Photograph and post, remix, or keep the experience offline. Feed the algorithm with #IslandsInTheNetSG',
   },
 ]
 
@@ -204,11 +203,12 @@ const validScreens: Screen[] = [
   'credits',
 ]
 
-function sectionForScreen(screen: Screen): 'beginning' | 'one' | 'two' | 'three' | 'finale' {
+function sectionForScreen(screen: Screen): 'beginning' | 'one' | 'two' | 'three' | 'four' | 'finale' {
   if (['loading', 'cover', 'name', 'welcome', 'how', 'map'].includes(screen)) return 'beginning'
   if (['section', 'sectionIntro', 'safeEntry', 'history', 'futureYou', 'impactBench', 'graceQuek'].includes(screen)) return 'one'
   if (['sectionTwoCover', 'sectionTwoIntro', 'mapTwo', 'commons', 'altar', 'traces'].includes(screen)) return 'two'
   if (['sectionThreeCover', 'sectionThreeIntro', 'mapThree', 'asiaMaxxing', 'hexagram', 'xo'].includes(screen)) return 'three'
+  if (['readingRoomCover', 'mapFour', 'readingRoom'].includes(screen)) return 'four'
   return 'finale'
 }
 
@@ -354,13 +354,19 @@ export default function App() {
             <article className="welcome-screen screen-enter">
               <h1 className="welcome-heading">
                 WELCOME, {displayName.toUpperCase()}.
-                <span>TO A MEETING SPACE</span>
-                <span>FOR THE FUTURE</span>
+                <span>TO A MEETING PLACE</span>
+                <span>FOR WHAT COMES NEXT</span>
               </h1>
               <div className="intro-copy">
                 {introParagraphs.map((paragraph, index) => (
                   <p key={paragraph} style={{ '--reveal-index': index } as React.CSSProperties}>
-                    {paragraph}
+                    {paragraph.includes('Islands in the Net') ? (
+                      <>
+                        {paragraph.split('Islands in the Net')[0]}
+                        <em>Islands in the Net</em>
+                        {paragraph.split('Islands in the Net')[1]}
+                      </>
+                    ) : paragraph}
                   </p>
                 ))}
               </div>
@@ -394,8 +400,7 @@ export default function App() {
                 ))}
               </div>
               <p className="closing-invitation">
-                As you move through the space, linger. Sit with an idea. Follow a link. Speak to someone.
-                Disagree. Leave something behind.
+                There is no correct route through this exhibition, and no final answer waiting at the end. Linger, disagree, change your mind and leave something behind.
               </p>
             </article>
           </AppShell>
@@ -410,7 +415,7 @@ export default function App() {
             onBack={() => go('how')}
             onNext={() => go('section')}
           >
-            <MapScreen heading={`STEP INTO THE NET, ${displayName.toUpperCase()}.`} marker="one" image="/assets/map-step-1.png" alt="Map of the exhibition showing the route into You and the Net" note={['FOLLOW THE LIGHT']} />
+            <MapScreen heading={`STEP INTO THE NET, ${displayName.toUpperCase()}.`} marker="one" image="/assets/map-step-1.png" alt="Map of the exhibition showing the route into You and the Net" note={['FOLLOW THE LIGHTS.', 'TAKE YOUR TIME.']} />
           </AppShell>
         )}
 
@@ -484,7 +489,7 @@ export default function App() {
 
         {screen === 'mapTwo' && (
           <AppShell blue onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('sectionTwoIntro')} onNext={() => go('commons')}>
-            <MapScreen heading={`STEP INTO THE COMMON AREA, ${displayName.toUpperCase()}.`} marker="two" image="/assets/map-step-2.png" alt="Map of the exhibition showing the route into Together in the Net" note={['FOLLOW THE LIGHT']} />
+            <MapScreen heading={`MAKE YOUR WAY TO THE COMMONS, ${displayName.toUpperCase()}.`} marker="two" image="/assets/map-step-2.png" alt="Map of the exhibition showing the route into Together in the Net" note={['FOLLOW THE CURVE TO THE COMMONS.', 'THIS PART OF THE EXHIBITION IS MADE TO BE SHARED.']} />
           </AppShell>
         )}
 
@@ -520,7 +525,7 @@ export default function App() {
 
         {screen === 'mapThree' && (
           <AppShell tone="green" onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('sectionThreeIntro')} onNext={() => go('asiaMaxxing')}>
-            <MapScreen heading={`FIND YOURSELF HERE, ${displayName.toUpperCase()}.`} marker="three" image="/assets/map-step-3.png" alt="Map of the exhibition showing the route into Here in the Net" note={['FOLLOW THE LIGHT']} />
+            <MapScreen heading={`FIND YOURSELF HERE, ${displayName.toUpperCase()}.`} marker="three" image="/assets/map-step-3.png" alt="Map of the exhibition showing the route into Here in the Net" note={['FOLLOW THE DOTTED PATH.', 'THE FUTURE LOOKS DIFFERENT WHEN IT IS IMAGINED FROM HERE.']} />
           </AppShell>
         )}
 
@@ -550,7 +555,7 @@ export default function App() {
 
         {screen === 'mapFour' && (
           <AppShell tone="yellow" onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('readingRoomCover')} onNext={() => go('readingRoom')}>
-            <MapScreen heading={`WELCOME TO THE READING ROOM, ${displayName.toUpperCase()}.`} marker="four" image="/assets/map-step-4.png" alt="Map of the exhibition showing the route into the Futures Reading Room" note={['FOLLOW THE LIGHT']} />
+            <MapScreen heading={`WELCOME TO THE READING ROOM, ${displayName.toUpperCase()}.`} marker="four" image="/assets/map-step-4.png" alt="Map of the exhibition showing the route into the Futures Reading Room" note={['FOLLOW THE LIGHTS INTO THE ARCHIVE.', 'BEGIN ANYWHERE.']} />
           </AppShell>
         )}
 
@@ -778,8 +783,12 @@ function InfoDialog({ onClose }: { onClose: () => void }) {
         <div><span>HOURS</span><strong>11AM — 7PM</strong></div>
       </div>
       <p className="modal-body-copy">
-        Islands in the Net is part exhibition, part public living room and part programme platform — a meeting place for Southeast Asian futures.
+        Islands in the Net is part exhibition, part public living room and part changing programme. Through artworks, archives, AI systems, performances and public questions, it considers how technology is shaping everyday life in Southeast Asia—and how we might shape it in return.
       </p>
+      <div className="admission-info">
+        <strong>FREE ENTRY</strong>
+        <p>Some programmes are ticketed. No specialist knowledge is required.</p>
+      </div>
     </Modal>
   )
 }

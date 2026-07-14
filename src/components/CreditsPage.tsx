@@ -42,7 +42,7 @@ export default function CreditsPage({ visitorName, onRestart }: Props) {
       if (format === 'pdf') await downloadRewindAsPdf(visitorName, entries)
       else await downloadRewindAsJpg(visitorName, entries)
     } catch (error) {
-      setExportError(error instanceof Error ? error.message : 'The rewind could not be exported on this device.')
+      setExportError(error instanceof Error ? error.message : 'Field Notes could not be exported on this device.')
     } finally {
       setExporting(null)
     }
@@ -54,14 +54,14 @@ export default function CreditsPage({ visitorName, onRestart }: Props) {
         <span /><span /><span /><span /><span />
       </div>
       <div className="credits-message">
-        <p>Thank you for exploring the net with us, {visitorName}.</p>
+        <p>Thank you for spending time in the net, {visitorName}.</p>
       </div>
 
       <section className="rewind-card" aria-labelledby="rewind-card-title">
         <header className="rewind-card-head">
           <div>
             <p>YOUR TRACE THROUGH THE EXHIBITION</p>
-            <h2 id="rewind-card-title">YOUR NET<br />REWIND</h2>
+            <h2 id="rewind-card-title">FIELD NOTES<br />FROM THE NET</h2>
           </div>
           <span>{String(entries.length).padStart(2, '0')}</span>
         </header>
@@ -69,7 +69,7 @@ export default function CreditsPage({ visitorName, onRestart }: Props) {
         {entries.length > 0 ? (
           <>
             <p className="rewind-card-intro">
-              Everything you paused to write, gathered back into one private record.
+              Your responses, gathered into one private record to keep, revisit or discard.
             </p>
             <div className="rewind-card-list">
               {entries.map((entry, index) => {
@@ -94,7 +94,7 @@ export default function CreditsPage({ visitorName, onRestart }: Props) {
               })}
             </div>
 
-            <div className="rewind-downloads" aria-label="Download your rewind">
+            <div className="rewind-downloads" aria-label="Download your Field Notes">
               <button type="button" onClick={() => exportRewind('pdf')} disabled={exporting !== null}>
                 {exporting === 'pdf' ? 'PREPARING PDF…' : 'DOWNLOAD PDF'}
               </button>
@@ -103,12 +103,12 @@ export default function CreditsPage({ visitorName, onRestart }: Props) {
               </button>
             </div>
             {exportError && <p className="rewind-export-error" role="alert">{exportError}</p>}
-            <p className="rewind-privacy">CREATED ON THIS DEVICE · NOTHING IS UPLOADED</p>
+            <p className="rewind-privacy">MADE ON THIS DEVICE · NOT UPLOADED</p>
           </>
         ) : (
           <div className="rewind-empty">
-            <p>Your rewind is still open.</p>
-            <span>Answer any Pause &amp; Reflect prompt and it will appear here.</span>
+            <p>No written trace saved.</p>
+            <span>Looking and thinking were enough.</span>
           </div>
         )}
       </section>

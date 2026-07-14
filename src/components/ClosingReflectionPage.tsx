@@ -64,7 +64,7 @@ export default function ClosingReflectionPage({ visitorName }: Props) {
                 <textarea
                   value={answers[index]}
                   onChange={(event: ChangeEvent<HTMLTextAreaElement>) => updateAnswer(index, event.target.value)}
-                  placeholder="A note to carry with you..."
+                  placeholder="Write a thought, doubt, contradiction or question..."
                   rows={4}
                   maxLength={600}
                   aria-label={question}

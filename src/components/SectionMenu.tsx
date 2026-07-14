@@ -1,7 +1,7 @@
-type SectionDestination = 'cover' | 'section' | 'sectionTwoCover' | 'sectionThreeCover'
+type SectionDestination = 'cover' | 'section' | 'sectionTwoCover' | 'sectionThreeCover' | 'readingRoomCover'
 
 type Props = {
-  currentSection: 'beginning' | 'one' | 'two' | 'three' | 'finale'
+  currentSection: 'beginning' | 'one' | 'two' | 'three' | 'four' | 'finale'
   onSelect: (destination: SectionDestination) => void
   onClose: () => void
 }
@@ -16,6 +16,7 @@ const items: Array<{
   { number: '01', label: 'YOU AND THE NET', destination: 'section', section: 'one' },
   { number: '02', label: 'TOGETHER IN THE NET', destination: 'sectionTwoCover', section: 'two' },
   { number: '03', label: 'HERE IN THE NET', destination: 'sectionThreeCover', section: 'three' },
+  { number: '04', label: 'FUTURES READING ROOM', destination: 'readingRoomCover', section: 'four' },
 ]
 
 export default function SectionMenu({ currentSection, onSelect, onClose }: Props) {
@@ -52,7 +53,7 @@ export default function SectionMenu({ currentSection, onSelect, onClose }: Props
           })}
         </nav>
 
-        <p className="section-menu-note">JUMPING SECTIONS DOES NOT ERASE YOUR PRIVATE NOTES OR NAME.</p>
+        <p className="section-menu-note">MOVE FREELY. YOUR NAME AND PRIVATE NOTES STAY ON THIS DEVICE.</p>
       </aside>
     </div>
   )
