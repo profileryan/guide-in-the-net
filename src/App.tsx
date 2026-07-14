@@ -58,7 +58,7 @@ const introParagraphs = [
   'Technology no longer sits outside everyday life. It recommends what we watch, verifies who we are, speaks in our voices and increasingly helps decide how we work, move and imagine the future.',
   'Most stories about these systems still arrive from technology companies: faster, smarter, frictionless, inevitable. Islands in the Net begins somewhere else.',
   'The exhibition takes its name from Bruce Sterling’s 1988 cyberpunk novel, which imagined Singapore as a node in a new global network of data and influence. Nearly four decades later, we return to that image from Southeast Asia.',
-  'Here, islands are not isolated. They form an archipelago: distinct histories, cultures and ways of knowing, connected by uneven flows of people, capital and information.',
+  'Here, the islands form an archipelago: distinct histories, cultures and ways of knowing, connected by uneven flows of people, capital and information.',
 ]
 
 const guideActions = [
@@ -400,7 +400,7 @@ export default function App() {
                 ))}
               </div>
               <p className="closing-invitation">
-                There is no correct route through this exhibition, and no final answer waiting at the end. Linger, disagree, change your mind and leave something behind.
+                Take any route through the exhibition. Let the questions remain open. Linger, disagree, change your mind and leave something behind.
               </p>
             </article>
           </AppShell>

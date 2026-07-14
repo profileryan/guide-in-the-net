@@ -47,7 +47,7 @@ export const sectionOneIntro: SectionIntroContent = {
   paragraphs: [
     'Technology reaches us at an intimate scale: in the voice that answers, the score that judges, the portrait that predicts and the feed that learns what keeps us looking.',
     'The works in this section examine what happens when systems speak as us, measure us and rehearse who we might become.',
-    'What do they reflect back—and what do they quietly prescribe? Where can they support agency, connection and care, and where do they create dependency?',
+    'What do they reflect back—and which futures do they begin to prescribe? Where can they support agency, connection and care, and where do they create dependency?',
     'The question is not only what these technologies can do. It is what repeated use does to us.',
   ],
 }
@@ -58,7 +58,7 @@ export const sectionTwoIntro: SectionIntroContent = {
   paragraphs: [
     'No relationship with technology remains personal for long. A private choice becomes a data point; a post becomes an archive; a voice can become part of a shared memory.',
     'Across a living altar, an emotional map and the Commons, this section asks you not only to look, but to add, listen, disagree and leave something behind.',
-    'A crowd is not yet a community. Community is made through participation, difference, care and the difficult work of staying in relation.',
+    'A crowd becomes a community through participation, difference, care and the difficult work of staying in relation.',
     'What do we preserve? What do platforms flatten? What can many different lives build together?',
   ],
 }
@@ -66,7 +66,7 @@ export const sectionTwoIntro: SectionIntroContent = {
 export const sectionThreeIntro: SectionIntroContent = {
   number: 'SECTION 3',
   title: 'HERE IN\nTHE NET',
-  lead: 'The stories told about technology are never universal. They emerge from particular places: from their languages, beliefs, histories, infrastructures and relationships to power.',
+  lead: 'Every story about technology begins somewhere: in a language, a belief, a history, an infrastructure and a relationship to power.',
   paragraphs: [
     'Here, code meets divination. AI rehearses Asian identities. Speculative archives refuse familiar divisions between nature and technology, body and data, past and future.',
     'These works show technology being absorbed, translated and reinvented across Southeast Asia. They ask what becomes possible when the future is imagined from here, rather than imported from elsewhere.',
@@ -246,7 +246,7 @@ export const sectionTwoArtworks: Record<Extract<ArtworkId, 'altar' | 'traces'>, 
     total: '02',
     sectionLabel: 'TOGETHER IN THE NET',
     palette: 'cobalt',
-    pullQuote: 'It does not simply document a community. It is one of the places through which that community continues to make itself.',
+    pullQuote: 'The altar is both record and gathering place: a structure through which the community continues to make itself.',
     titleAlign: 'left',
     titleSize: '30px',
     image: {
@@ -256,10 +256,10 @@ export const sectionTwoArtworks: Record<Extract<ArtworkId, 'altar' | 'traces'>, 
       aspect: '3 / 2',
     },
     description: [
-      'BussyTemple is a Southeast Asian rave collective working across electronic music, performance, visual culture and practices of care. Their gatherings approach queer nightlife not simply as entertainment, but as a form of worldbuilding: a space in which bodies, identities and relationships can temporarily be reorganised.',
+      'BussyTemple is a Southeast Asian rave collective working across electronic music, performance, visual culture and practices of care. Their gatherings treat queer nightlife as worldbuilding: a space in which bodies, identities and relationships can temporarily be reorganised.',
       'At the centre of F4NT4SY_H4RD_DR1VE://ALTAR is an open scaffolding structure that functions simultaneously as archive, network and communal altar. Screens hold videos, photographs and contributions gathered across BussyTemple’s history, while physical objects and traces are attached to the structure itself.',
       'Unlike a conventional archive, the altar is deliberately unfinished. Visitors and community members can continue adding to it, allowing its form and meaning to change over the exhibition. During BussyTemple’s September gathering, the bare structure will be further transformed through materials, messages, images and performance.',
-      'It does not simply document a community. It is one of the places through which that community continues to make itself.',
+      'The altar is both record and gathering place: a structure through which the community continues to make itself.',
     ],
     whyNow: [
       'Online platforms promise to preserve everything, yet community histories can remain fragile. Posts disappear, accounts are removed and experiences are flattened into content.',
@@ -290,10 +290,10 @@ export const sectionTwoArtworks: Record<Extract<ArtworkId, 'altar' | 'traces'>, 
     },
     description: [
       'Traces in the Net offers another way of encountering the city: through the thoughts, stories, feelings and sounds left behind by the people within it.',
-      'Visitors can move through a map or an immersive digital space, listening to fragments of emotions, confessions and soundscapes. Each trace is small and partial. Together, they form a changing portrait of the city—not as infrastructure or geography alone, but as an accumulation of interior lives.',
+      'Visitors can move through a map or an immersive digital space, listening to fragments of emotions, confessions and soundscapes. Each trace is small and partial. Together, they form a changing portrait of the city, layering interior lives over its infrastructure and geography.',
       'After listening, you are invited to leave a trace of your own. A private thought becomes part of a shared environment, available to someone you may never meet.',
-      'The project does not attempt to produce a complete or authoritative record. It offers a constellation of voices: intimate, uneven and continually expanding. Some may remain; others may eventually disappear.',
-      'Each contribution also leaves a timestamped record on the blockchain—not the voice itself, but proof that it once existed. Traces holds two kinds of memory in tension: one intimate and erasable; the other durable and abstract.',
+      'Its record is deliberately partial: a constellation of intimate, uneven voices that continues to expand. Some may remain; others may eventually disappear.',
+      'The blockchain stores no voice—only a timestamp proving that the contribution once existed. Two memories remain: the erasable intimacy of the voice and the durable abstraction of its timestamp.',
     ],
     whyNow: [
       'Cities are increasingly made legible through movement, property and consumption data. Traces maps what those systems miss: feeling, confession, atmosphere and interior life.',
@@ -314,7 +314,7 @@ export const sectionThreeArtworks: Record<Extract<ArtworkId, 'asia-maxxing' | 'h
     total: '03',
     sectionLabel: 'HERE IN THE NET',
     palette: 'signal-red',
-    pullQuote: 'The question is not really about who you could have been, but what the fiction reveals about the systems imagining you.',
+    pullQuote: 'Its real subject is the system imagining you: the data, stereotypes and desires used to construct an “Asian life”.',
     titleAlign: 'left',
     titleSize: '44px',
     heroLabel: 'ALTERNATE-LIFE PHOTOBOOTH',
@@ -328,12 +328,12 @@ export const sectionThreeArtworks: Record<Extract<ArtworkId, 'asia-maxxing' | 'h
       'What might your life have looked like if it had unfolded somewhere else in Asia?',
       'Developed from Weiwei Xu’s earlier project Chinamaxxing, this participatory photobooth generates an alternative version of your “Asian life.” Your image becomes the starting point for a speculative biography shaped through computational storytelling, popular imagery and assumptions about identity, place and possibility.',
       'The title borrows the internet suffix “-maxxing” — used online to describe the deliberate optimisation or performance of an identity. It also refers to recent social-media fascination with imagined Asian lifestyles, aesthetics and social values.',
-      'The resulting life is not a prediction, nor an authentic account of any single Asian experience. It is a constructed fiction: part algorithm, part cultural stereotype and part projection by the person standing before it.',
+      'The resulting life is a constructed fiction, assembled from algorithmic patterns, cultural stereotypes and the participant’s own projections.',
     ],
     whyNow: [
       'AI can create convincing stories and identities. Yet these narratives are assembled from patterns in existing data that carry assumptions about race, gender, class, nationality and what an “Asian life” is supposed to look like.',
       'At the same time, “Asia” itself is far from a single, stable identity. It is a vast and contested idea, shaped differently by people living within the region, its diasporas and those viewing it from elsewhere. This work makes this construction visible. Its alternate life may feel exciting, recognisable or absurd.',
-      'The question is not really about who you could have been, but what its fiction reveals about the systems imagining you.',
+      'Its real subject is the system imagining you: the data, stereotypes and desires used to construct an “Asian life”.',
     ],
     reflection: [
       'What assumptions did the experience make about Asia, and about you?',
@@ -361,7 +361,7 @@ export const sectionThreeArtworks: Record<Extract<ArtworkId, 'asia-maxxing' | 'h
     },
     description: [
       'Hexagram Today translates the ancient Chinese divination system of the I Ching, or Book of Changes, into a contemporary digital interface.',
-      'The I Ching is organised around 64 hexagrams: figures composed of broken and unbroken lines whose changing arrangements are interpreted in relation to a question or situation. Rather than offering a single fixed forecast, its texts invite reflection upon change, uncertainty, timing and the relationships between different forces.',
+      'The I Ching is organised around 64 hexagrams: figures composed of broken and unbroken lines whose changing arrangements are interpreted in relation to a question or situation. Its texts offer no fixed forecast. They invite reflection on change, uncertainty, timing and the relationships between different forces.',
       'Weiwei Xu brings this cosmological system into conversation with the computational systems through which people now seek guidance. In place of tossed coins, yarrow stalks or a human interpreter, visitors encounter divination through a screen.',
       'The work places an old predictive technology inside a new one — inviting us to consider what has changed, and what has not, in our desire to make uncertainty legible.',
     ],
@@ -383,7 +383,7 @@ export const sectionThreeArtworks: Record<Extract<ArtworkId, 'asia-maxxing' | 'h
     total: '03',
     sectionLabel: 'HERE IN THE NET',
     palette: 'ochre',
-    pullQuote: 'An archive does not simply preserve a world. It helps decide which worlds are legible.',
+    pullQuote: 'Every archive preserves a world—and decides which other worlds remain legible.',
     titleAlign: 'left',
     titleSize: '38px',
     heroLabel: 'SPECULATIVE ARCHIVE',
@@ -400,7 +400,7 @@ export const sectionThreeArtworks: Record<Extract<ArtworkId, 'asia-maxxing' | 'h
       'Even the central mask refuses a stable identity. It is called the Flaming Knotted Heart, the Apparatus and the Ongoing Processing Intake System. Each name changes what the object can be—and what kind of world the archive allows us to see.',
     ],
     whyNow: [
-      'Most technological futures inherit the same oppositions: nature or machine, body or data, real or virtual, tradition or progress. XO refuses the choice. It asks what might emerge if the categories themselves came from different intellectual and cultural histories.',
+      'Most technological futures inherit the same oppositions: nature or machine, body or data, real or virtual, tradition or progress. XO reorganises these familiar categories through different intellectual and cultural histories. Its future begins from a different set of assumptions.',
       'A database, museum or archive does not only store reality. Through its labels, it helps produce it.',
     ],
     reflection: [
@@ -412,9 +412,9 @@ export const sectionThreeArtworks: Record<Extract<ArtworkId, 'asia-maxxing' | 'h
 
 export const commonsContent = {
   title: 'THE\nCOMMONS',
-  deck: 'This room has no single object at its centre. Its subject is what happens between people.',
+  deck: 'The Commons centres the encounters between people: conversations, disagreements, pauses and contributions.',
   paragraphs: [
-    'The low seats, cushions, tables, questions and voting wall are not arranged around a single artwork. They create the conditions for something less predictable: sitting, reading, talking, listening, disagreeing, reconsidering or simply spending time together.',
+    'The low seats, cushions, tables, questions and voting wall arrange the room for conversation, disagreement, reconsideration and unstructured time.',
     'In a conventional exhibition, visitors are expected to move from one artwork to the next. Here, stopping is also participation. Your attention, conversations and contributions become part of the changing life of the room.',
     'The public poll offers a visible snapshot, not a final answer. Each cluster of stickers records both a collective position and the limits of the question: who participated, who hesitated and what nuance disappeared between the available choices?',
     'A commons does not require consensus. It is something people continually negotiate through difference, responsibility, generosity and care.',
@@ -432,9 +432,9 @@ export const readingRoomContent = {
   deck: 'The archive is unfinished. So is the future.',
   paragraphs: [
     'Most visions of the future arrive already branded. They are produced by technology companies, circulated globally and presented as though everyone is travelling to the same destination.',
-    'This room offers a counter-archive. It gathers Southeast Asian experiments in modernity, ecology, networks and collective life—evidence that the region has long imagined technological change on its own terms.',
+    'The room gathers a counter-archive of Southeast Asian experiments in modernity, ecology, networks and collective life—evidence that the region has long imagined technological change on its own terms.',
     'These histories show that networks existed before the internet, and that questions now associated with AI—about knowledge, power, ecological crisis and collective life—have much deeper roots.',
-    'Recovering them is not nostalgia. It widens the material from which the future can be made.',
+    'Recovering these histories widens the material from which the future can be made.',
   ],
   browsingCues: [
     'Pick up something outside your usual field.',
