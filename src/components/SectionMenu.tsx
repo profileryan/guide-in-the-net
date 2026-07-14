@@ -12,7 +12,7 @@ const items: Array<{
   destination: SectionDestination
   section: Props['currentSection']
 }> = [
-  { number: '00', label: 'BEGINNING / RESTART', destination: 'cover', section: 'beginning' },
+  { number: '00', label: 'BEGINNING', destination: 'cover', section: 'beginning' },
   { number: '01', label: 'YOU AND THE NET', destination: 'section', section: 'one' },
   { number: '02', label: 'TOGETHER IN THE NET', destination: 'sectionTwoCover', section: 'two' },
   { number: '03', label: 'HERE IN THE NET', destination: 'sectionThreeCover', section: 'three' },
