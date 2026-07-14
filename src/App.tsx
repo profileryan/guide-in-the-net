@@ -101,6 +101,42 @@ const guideActions = [
   },
 ]
 
+const guideImageUrls = Array.from(new Set([
+  '/assets/main-splash-logo.png',
+  '/assets/upper-corner-logo-transparent.png',
+  '/assets/info-icon.png',
+  '/assets/settings-icon.png',
+  '/assets/map-step-1.png',
+  '/assets/map-step-2.png',
+  '/assets/map-step-3.png',
+  '/assets/map-step-4.png',
+  ...guideActions.map(({ icon }) => icon),
+  ...Object.values(sectionOneArtworks).flatMap(({ image }) => image ? [image.src] : []),
+  ...Object.values(sectionTwoArtworks).flatMap(({ image }) => image ? [image.src] : []),
+  ...Object.values(sectionThreeArtworks).flatMap(({ image }) => image ? [image.src] : []),
+]))
+
+let guideImagePreload: Promise<void> | undefined
+
+function preloadGuideImages() {
+  if (guideImagePreload) return guideImagePreload
+
+  guideImagePreload = Promise.all(guideImageUrls.map((src) => new Promise<void>((resolve) => {
+    const image = new Image()
+    const timeout = window.setTimeout(resolve, 4000)
+    const finish = () => {
+      window.clearTimeout(timeout)
+      resolve()
+    }
+
+    image.onload = finish
+    image.onerror = finish
+    image.src = src
+  }))).then(() => undefined)
+
+  return guideImagePreload
+}
+
 function readStoredName() {
   try {
     return localStorage.getItem('iitn-guide-name') ?? ''
@@ -221,9 +257,23 @@ export default function App() {
 
   useEffect(() => {
     if (screen !== 'loading') return
-    const delay = reducedMotion ? 700 : 2700
-    const timer = window.setTimeout(() => setScreen('cover'), delay)
-    return () => window.clearTimeout(timer)
+    const minimumDelay = reducedMotion ? 700 : 2700
+    const fallbackDelay = reducedMotion ? 1800 : 5000
+    let cancelled = false
+
+    void Promise.race([
+      Promise.all([
+        preloadGuideImages(),
+        new Promise<void>((resolve) => window.setTimeout(resolve, minimumDelay)),
+      ]),
+      new Promise<void>((resolve) => window.setTimeout(resolve, fallbackDelay)),
+    ]).then(() => {
+      if (!cancelled) setScreen('cover')
+    })
+
+    return () => {
+      cancelled = true
+    }
   }, [screen, reducedMotion])
 
   useEffect(() => {
@@ -329,7 +379,6 @@ export default function App() {
           >
             <article className="how-screen screen-enter">
               <h1>HOW TO USE THIS SPACE</h1>
-              <p className="how-intro">This space is yours to inhabit. We invite you to...</p>
               <div className="action-list">
                 {guideActions.map((action, index) => (
                   <section
@@ -501,7 +550,7 @@ export default function App() {
 
         {screen === 'mapFour' && (
           <AppShell tone="yellow" onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('readingRoomCover')} onNext={() => go('readingRoom')}>
-            <MapScreen heading={`ENTER THE FUTURES READING ROOM, ${displayName.toUpperCase()}.`} marker="four" image="/assets/map-step-4.png" alt="Map of the exhibition showing the route into the Futures Reading Room" note={['FOLLOW THE LIGHT']} />
+            <MapScreen heading={`WELCOME TO THE READING ROOM, ${displayName.toUpperCase()}.`} marker="four" image="/assets/map-step-4.png" alt="Map of the exhibition showing the route into the Futures Reading Room" note={['FOLLOW THE LIGHT']} />
           </AppShell>
         )}
 
@@ -684,10 +733,9 @@ function ReadingRoomArrival({ reducedMotion }: { reducedMotion: boolean }) {
       <IslandBlob className="reading-room-blob reading-room-blob-a" variant={3} />
       <IslandBlob className="reading-room-blob reading-room-blob-b" variant={1} />
       <div className="reading-room-arrival-copy">
-        <p>FINAL SPACE</p>
+        <p className="section-number">SECTION 4</p>
         <h1><span>FUTURES</span><span>READING</span><span>ROOM</span></h1>
-        <div className="reading-room-arrival-rule" aria-hidden="true" />
-        <p className="reading-room-arrival-subtitle">RESEARCH ARCHIVE OF<br />SOUTHEAST ASIAN FUTURES</p>
+        <p className="section-subtitle"><span>RESEARCH ARCHIVE OF</span><span>SOUTHEAST ASIAN FUTURES</span></p>
       </div>
     </section>
   )
@@ -728,7 +776,6 @@ function InfoDialog({ onClose }: { onClose: () => void }) {
         <div><span>WHEN</span><strong>17 JUL — 16 NOV</strong></div>
         <div><span>WHERE</span><strong>PADIMAI ART &amp; TECH STUDIO<br />TANJONG PAGAR DISTRIPARK</strong></div>
         <div><span>HOURS</span><strong>11AM — 7PM</strong></div>
-        <div><span>ADMISSION</span><strong>FREE</strong></div>
       </div>
       <p className="modal-body-copy">
         Islands in the Net is part exhibition, part public living room and part programme platform — a meeting place for Southeast Asian futures.

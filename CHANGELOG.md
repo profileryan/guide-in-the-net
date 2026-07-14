@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.4 - Cover hierarchy and loading polish
+
+- Centred all section-cover content and unified the Futures Reading Room cover
+- Kept long section titles on deliberate lines and moved cover subtitles to a clean sans-serif stack
+- Changed artwork headings to a clean sans-serif stack and reduced the scroll prompt to an animated arrow
+- Simplified the final map, credits message and exhibition-info content
+- Added font and image preloading during the loading screen
+
 ## 0.7.3 - Curator polish and Reading Room wayfinding
 
 - Added a fourth map step before the Futures Reading Room

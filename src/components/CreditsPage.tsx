@@ -10,8 +10,7 @@ export default function CreditsPage({ visitorName, onRestart }: Props) {
         <span /><span /><span /><span /><span />
       </div>
       <div className="credits-message">
-        <p>THANK YOU, {visitorName.toUpperCase()}.</p>
-        <h1>KEEP<br />THE NET<br />OPEN.</h1>
+        <p>Thank you for exploring the net with us, {visitorName}.</p>
       </div>
 
       <div className="credits-copy">

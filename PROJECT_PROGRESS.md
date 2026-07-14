@@ -1,7 +1,7 @@
 # Guide in the Net — Project Progress
 
 _Last updated: 14 July 2026_  
-_Current package: v0.7.3 — curator polish and Reading Room wayfinding_
+_Current package: v0.7.4 — cover hierarchy and loading polish_
 
 ## Current experience
 
@@ -34,6 +34,14 @@ The complete guide journey remains:
 1. ASIAMAXXING
 2. Hexagram Today
 3. XO (2026)
+
+## Changes in v0.7.4
+
+- Centred section-cover content and made the Futures Reading Room cover consistent with the other section covers.
+- Switched artwork titles and section-cover subtitles to a clean sans-serif stack.
+- Replaced the artwork scroll prompt with a centred animated arrow.
+- Updated the final map heading, simplified the final thank-you message and removed the admission row from exhibition information.
+- Added high-priority font and splash-image hints plus guarded image preloading during the loading screen.
 
 ## Changes in v0.7.3
 

@@ -51,7 +51,7 @@ export default function ArtworkPage({ artwork }: Props) {
             <p className="artwork-artist"><MultilineText text={artwork.artist} /></p>
           </header>
           {artwork.image?.note && <p className="artwork-image-note">{artwork.image.note}</p>}
-          <p className="artwork-scroll-cue" aria-hidden="true">SCROLL TO READ <span>↓</span></p>
+          <p className="artwork-scroll-cue" aria-hidden="true"><span>↓</span></p>
         </div>
       </section>
 
