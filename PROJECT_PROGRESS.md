@@ -1,7 +1,7 @@
 # Guide in the Net — Project Progress
 
 _Last updated: 14 July 2026_  
-_Current package: v0.7.4 — cover hierarchy and loading polish_
+_Current package: v0.7.5 — navigation and artwork cue polish_
 
 ## Current experience
 
@@ -14,6 +14,11 @@ The complete guide journey remains:
 5. Futures Reading Room
 6. Closing questions
 7. Credits / restart
+
+## Changes in v0.7.5
+
+- Added a persistent section-menu control beside the bottom back and next buttons.
+- Kept the artwork scroll arrow below the artwork title and artist credit at every viewport size.
 
 ### Section 1 artwork order
 

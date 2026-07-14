@@ -53,6 +53,9 @@ export default function AppShell({
       <main className="shell-content">{children}</main>
       {!hideBottom && (
         <nav className="bottom-nav" aria-label="Guide navigation">
+          <button type="button" className="nav-menu" onClick={onMenu} aria-label="Open section menu">
+            <img src="/assets/list.svg" alt="" />
+          </button>
           <button type="button" className="nav-button nav-back" onClick={onBack} disabled={!onBack}>
             {backLabel}
           </button>

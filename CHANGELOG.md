@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.7.5 - Navigation and artwork cue polish
+
+- Added a persistent list control beside the back and next buttons; it opens the section menu.
+- Kept the artwork scroll arrow in the hero content flow, below each title and artist credit.
+
 ## 0.7.4 - Cover hierarchy and loading polish
 
 - Centred all section-cover content and unified the Futures Reading Room cover
