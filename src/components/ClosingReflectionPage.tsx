@@ -1,22 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type ChangeEvent } from 'react'
 import { closingContent } from '../content/guideContent'
+import {
+  LEGACY_CLOSING_STORAGE_KEY,
+  readLegacyClosingReflections,
+  readReflectionResponse,
+  saveReflectionResponse,
+} from '../utils/reflections'
 
 type Props = {
   visitorName: string
 }
 
-const STORAGE_KEY = 'iitn-guide-closing-reflections'
-
 function readStoredReflections() {
-  try {
-    const value = localStorage.getItem(STORAGE_KEY)
-    if (!value) return ['', '', '']
-    const parsed = JSON.parse(value)
-    if (!Array.isArray(parsed)) return ['', '', '']
-    return closingContent.questions.map((_, index) => typeof parsed[index] === 'string' ? parsed[index] : '')
-  } catch {
-    return ['', '', '']
-  }
+  const shared = closingContent.questions.map((_, index) => readReflectionResponse(`closing:${index}`))
+  const legacy = readLegacyClosingReflections(closingContent.questions.length)
+  return shared.map((answer, index) => answer || legacy[index] || '')
 }
 
 export default function ClosingReflectionPage({ visitorName }: Props) {
@@ -24,10 +22,20 @@ export default function ClosingReflectionPage({ visitorName }: Props) {
 
   useEffect(() => {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(answers))
+      localStorage.setItem(LEGACY_CLOSING_STORAGE_KEY, JSON.stringify(answers))
     } catch {
       // The reflection remains usable when device storage is unavailable.
     }
+
+    answers.forEach((answer, index) => {
+      saveReflectionResponse({
+        id: `closing:${index}`,
+        section: 'CONTINUE?',
+        source: 'FINAL REFLECTION',
+        prompt: closingContent.questions[index],
+        order: 5000 + index,
+      }, answer)
+    })
   }, [answers])
 
   const updateAnswer = (index: number, value: string) => {
@@ -55,9 +63,10 @@ export default function ClosingReflectionPage({ visitorName }: Props) {
                 <span className="closing-question-text">{question}</span>
                 <textarea
                   value={answers[index]}
-                  onChange={(event) => updateAnswer(index, event.target.value)}
+                  onChange={(event: ChangeEvent<HTMLTextAreaElement>) => updateAnswer(index, event.target.value)}
                   placeholder="A note to carry with you..."
                   rows={4}
+                  maxLength={600}
                   aria-label={question}
                 />
               </label>

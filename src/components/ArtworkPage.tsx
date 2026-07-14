@@ -1,5 +1,7 @@
-import type { CSSProperties } from 'react'
+import { useState, type CSSProperties } from 'react'
 import type { ArtworkContent } from '../content/guideContent'
+import ReflectionResponseList, { type ReflectionPromptItem } from './ReflectionResponseList'
+
 
 type Props = {
   artwork: ArtworkContent
@@ -15,7 +17,18 @@ function MultilineText({ text }: { text: string }) {
   )
 }
 
+function reflectionOrder(artwork: ArtworkContent, index: number) {
+  const sectionBase = artwork.sectionLabel === 'YOU AND THE NET'
+    ? 1000
+    : artwork.sectionLabel === 'TOGETHER IN THE NET'
+      ? 2100
+      : 3000
+
+  return sectionBase + Number(artwork.sequence) * 10 + index
+}
+
 export default function ArtworkPage({ artwork }: Props) {
+  const [indexUsed, setIndexUsed] = useState(false)
   const style = {
     '--title-align': artwork.titleAlign ?? 'left',
     '--artwork-title-size': artwork.titleSize ?? '42px',
@@ -24,6 +37,24 @@ export default function ArtworkPage({ artwork }: Props) {
   } as CSSProperties
 
   const [lead, ...body] = artwork.description
+  const sourceTitle = artwork.title.replace(/\n/g, ' ')
+  const reflectionItems: ReflectionPromptItem[] = artwork.reflection.map((prompt, index) => ({
+    id: `artwork:${artwork.id}:${index}`,
+    section: artwork.sectionLabel,
+    source: sourceTitle,
+    prompt,
+    order: reflectionOrder(artwork, index),
+  }))
+
+  const jumpTo = (target: 'about' | 'why-now' | 'reflect') => {
+    const element = document.getElementById(`${artwork.id}-${target}`)
+    if (!element) return
+    setIndexUsed(true)
+    element.scrollIntoView({
+      behavior: document.documentElement.classList.contains('reduced-motion') ? 'auto' : 'smooth',
+      block: 'start',
+    })
+  }
 
   return (
     <article
@@ -55,8 +86,16 @@ export default function ArtworkPage({ artwork }: Props) {
         </div>
       </section>
 
+      <nav className={`artwork-jump-index ${indexUsed ? 'is-used' : ''}`} aria-label={`Jump through ${sourceTitle}`}>
+        <button type="button" onClick={() => jumpTo('about')}>ABOUT</button>
+        <span aria-hidden="true">·</span>
+        <button type="button" onClick={() => jumpTo('why-now')}>WHY NOW?</button>
+        <span aria-hidden="true">·</span>
+        <button type="button" onClick={() => jumpTo('reflect')}>PAUSE &amp; REFLECT</button>
+      </nav>
+
       <div className="artwork-editorial">
-        <section className="artwork-opening">
+        <section className="artwork-opening artwork-scroll-target" id={`${artwork.id}-about`}>
           <p className="artwork-deck">{lead}</p>
           <div className="artwork-body">
             {body.map((paragraph, index) => (
@@ -70,7 +109,7 @@ export default function ArtworkPage({ artwork }: Props) {
           <p>{artwork.pullQuote}</p>
         </blockquote>
 
-        <section className="artwork-context">
+        <section className="artwork-context artwork-scroll-target" id={`${artwork.id}-why-now`}>
           <div className="artwork-context-head">
             <p>WHY NOW?</p>
             <span aria-hidden="true">{artwork.sequence}</span>
@@ -80,13 +119,11 @@ export default function ArtworkPage({ artwork }: Props) {
           </div>
         </section>
 
-        <section className="reflection-block">
+        <section className="reflection-block artwork-scroll-target" id={`${artwork.id}-reflect`}>
           <p className="reflection-kicker">PAUSE &amp; REFLECT</p>
-          <div className="reflection-prompts">
-            {artwork.reflection.map((prompt, index) => (
-              <p key={prompt}><span>{String(index + 1).padStart(2, '0')}</span>{prompt}</p>
-            ))}
-          </div>
+          <p className="reflection-response-invitation">Tap any question to leave a short, private response.</p>
+          <ReflectionResponseList items={reflectionItems} />
+          <p className="reflection-storage-note">OPTIONAL · SAVED ONLY ON THIS DEVICE</p>
         </section>
 
         <footer className="artwork-endmark" aria-hidden="true">

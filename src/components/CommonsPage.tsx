@@ -1,4 +1,5 @@
 import { commonsContent } from '../content/guideContent'
+import ReflectionResponseList, { type ReflectionPromptItem } from './ReflectionResponseList'
 
 function MultilineText({ text }: { text: string }) {
   return (
@@ -11,6 +12,14 @@ function MultilineText({ text }: { text: string }) {
 }
 
 export default function CommonsPage() {
+  const reflectionItems: ReflectionPromptItem[] = commonsContent.reflectionBullets.map((prompt, index) => ({
+    id: `commons:${index}`,
+    section: 'TOGETHER IN THE NET',
+    source: 'THE COMMONS',
+    prompt,
+    order: 2000 + index,
+  }))
+
   return (
     <article className="commons-page screen-enter">
       <header className="commons-hero">
@@ -31,11 +40,9 @@ export default function CommonsPage() {
         <section className="reflection-block reflection-block-commons">
           <p className="reflection-kicker">PAUSE &amp; REFLECT</p>
           <p className="commons-reflection-lead">{commonsContent.reflectionLead}</p>
-          <div className="commons-bullets">
-            {commonsContent.reflectionBullets.map((bullet, index) => (
-              <p key={bullet}><span>{String(index + 1).padStart(2, '0')}</span>{bullet}</p>
-            ))}
-          </div>
+          <p className="reflection-response-invitation">Tap a prompt to record what it makes you notice.</p>
+          <ReflectionResponseList items={reflectionItems} actionLabel="RESPOND" />
+          <p className="reflection-storage-note">OPTIONAL · SAVED ONLY ON THIS DEVICE</p>
         </section>
       </div>
     </article>
