@@ -81,7 +81,7 @@ export default function ArtworkPage({ artwork }: Props) {
         </section>
 
         <section className="reflection-block">
-          <p className="reflection-kicker">PAUSE / REFLECT</p>
+          <p className="reflection-kicker">PAUSE &amp; REFLECT</p>
           <div className="reflection-prompts">
             {artwork.reflection.map((prompt, index) => (
               <p key={prompt}><span>{String(index + 1).padStart(2, '0')}</span>{prompt}</p>
@@ -90,9 +90,7 @@ export default function ArtworkPage({ artwork }: Props) {
         </section>
 
         <footer className="artwork-endmark" aria-hidden="true">
-          <span>{artwork.sequence}</span>
-          <i />
-          <span>{artwork.total}</span>
+          <span>{artwork.sequence}/{artwork.total}</span>
         </footer>
       </div>
     </article>

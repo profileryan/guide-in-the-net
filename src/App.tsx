@@ -42,6 +42,7 @@ type Screen =
   | 'sectionThreeCover'
   | 'sectionThreeIntro'
   | 'mapThree'
+  | 'mapFour'
   | 'asiaMaxxing'
   | 'hexagram'
   | 'xo'
@@ -70,7 +71,7 @@ const guideActions = [
   },
   {
     icon: '/assets/form-thoughts.png',
-    iconHeight: '70px',
+    iconHeight: '60px',
     label: 'Decide',
     text: 'Form your own view about technology, community and the future.',
   },
@@ -157,6 +158,7 @@ const validScreens: Screen[] = [
   'sectionThreeCover',
   'sectionThreeIntro',
   'mapThree',
+  'mapFour',
   'asiaMaxxing',
   'hexagram',
   'xo',
@@ -359,7 +361,7 @@ export default function App() {
             onBack={() => go('how')}
             onNext={() => go('section')}
           >
-            <MapScreen heading={`STEP INTO THE NET, ${displayName.toUpperCase()}.`} marker="one" image="/assets/map-step-1.png" alt="Map of the exhibition showing the route into You and the Net" note={['FOLLOW THE LIGHTS.', 'STAY IN EACH SECTION AS LONG AS YOU WOULD LIKE.']} />
+            <MapScreen heading={`STEP INTO THE NET, ${displayName.toUpperCase()}.`} marker="one" image="/assets/map-step-1.png" alt="Map of the exhibition showing the route into You and the Net" note={['FOLLOW THE LIGHT']} />
           </AppShell>
         )}
 
@@ -433,7 +435,7 @@ export default function App() {
 
         {screen === 'mapTwo' && (
           <AppShell blue onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('sectionTwoIntro')} onNext={() => go('commons')}>
-            <MapScreen heading={`STEP INTO THE COMMON AREA, ${displayName.toUpperCase()}.`} marker="two" image="/assets/map-step-2.png" alt="Map of the exhibition showing the route into Together in the Net" note={['FOLLOW THE LIGHTS INTO THE SPACE.', 'THIS SECTION OF THE EXHIBITION INVITES YOU TO STAY, TOGETHER.']} />
+            <MapScreen heading={`STEP INTO THE COMMON AREA, ${displayName.toUpperCase()}.`} marker="two" image="/assets/map-step-2.png" alt="Map of the exhibition showing the route into Together in the Net" note={['FOLLOW THE LIGHT']} />
           </AppShell>
         )}
 
@@ -469,7 +471,7 @@ export default function App() {
 
         {screen === 'mapThree' && (
           <AppShell tone="green" onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('sectionThreeIntro')} onNext={() => go('asiaMaxxing')}>
-            <MapScreen heading={`FIND YOURSELF HERE, ${displayName.toUpperCase()}.`} marker="three" image="/assets/map-step-3.png" alt="Map of the exhibition showing the route into Here in the Net" note={['FOLLOW THE LIGHTS.', 'THE FUTURE LOOKS DIFFERENT IMAGINED FROM HERE.']} />
+            <MapScreen heading={`FIND YOURSELF HERE, ${displayName.toUpperCase()}.`} marker="three" image="/assets/map-step-3.png" alt="Map of the exhibition showing the route into Here in the Net" note={['FOLLOW THE LIGHT']} />
           </AppShell>
         )}
 
@@ -492,13 +494,19 @@ export default function App() {
         )}
 
         {screen === 'readingRoomCover' && (
-          <AppShell immersive onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('xo')} onNext={() => go('readingRoom')}>
+          <AppShell immersive onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('xo')} onNext={() => go('mapFour')}>
             <ReadingRoomArrival reducedMotion={reducedMotion} />
           </AppShell>
         )}
 
+        {screen === 'mapFour' && (
+          <AppShell tone="yellow" onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('readingRoomCover')} onNext={() => go('readingRoom')}>
+            <MapScreen heading={`ENTER THE FUTURES READING ROOM, ${displayName.toUpperCase()}.`} marker="four" image="/assets/map-step-4.png" alt="Map of the exhibition showing the route into the Futures Reading Room" note={['FOLLOW THE LIGHT']} />
+          </AppShell>
+        )}
+
         {screen === 'readingRoom' && (
-          <AppShell tone="yellow" onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('readingRoomCover')} onNext={() => go('closing')}>
+          <AppShell tone="yellow" onMenu={() => setMenuOpen(true)} onInfo={() => setDialog('info')} onSettings={() => setDialog('settings')} onBack={() => go('mapFour')} onNext={() => go('closing')}>
             <ReadingRoomPage />
           </AppShell>
         )}
@@ -624,7 +632,7 @@ function NameScreen({
   )
 }
 
-function MapScreen({ heading, image, alt, note, marker }: { heading: string; image: string; alt: string; note: string[]; marker: 'one' | 'two' | 'three' }) {
+function MapScreen({ heading, image, alt, note, marker }: { heading: string; image: string; alt: string; note: string[]; marker: 'one' | 'two' | 'three' | 'four' }) {
   return (
     <article className={`map-screen map-step-${marker} screen-enter`}>
       <h1>{heading}</h1>

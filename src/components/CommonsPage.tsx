@@ -29,7 +29,7 @@ export default function CommonsPage() {
         </section>
 
         <section className="reflection-block reflection-block-commons">
-          <p className="reflection-kicker">PAUSE / REFLECT</p>
+          <p className="reflection-kicker">PAUSE &amp; REFLECT</p>
           <p className="commons-reflection-lead">{commonsContent.reflectionLead}</p>
           <div className="commons-bullets">
             {commonsContent.reflectionBullets.map((bullet, index) => (

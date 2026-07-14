@@ -3218,3 +3218,65 @@ h3,
 [role='heading'] {
   font-family: var(--header);
 }
+
+/* ---- v0.7.3: curator polish and Reading Room wayfinding ---- */
+.cover-tagline,
+.welcome-heading,
+.how-screen h1,
+.map-screen h1 {
+  line-height: 1.16;
+}
+
+/* Section-cover display copy stays digital while gaining enough air to read. */
+.section-arrival h1,
+.section-arrival-two h1,
+.section-arrival-three h1,
+.section-subtitle,
+.section-arrival-two .section-subtitle,
+.section-arrival-three .section-subtitle {
+  font-family: var(--header);
+  letter-spacing: .025em;
+}
+
+.section-arrival h1,
+.section-arrival-two h1,
+.section-arrival-three h1 {
+  line-height: 1.04;
+  font-weight: 400;
+}
+
+.section-subtitle,
+.section-arrival-two .section-subtitle,
+.section-arrival-three .section-subtitle {
+  line-height: 1.28;
+}
+
+.reflection-kicker,
+.reading-room-pause-kicker {
+  line-height: 1.08;
+}
+
+.nav-button {
+  font-size: 17px;
+}
+
+.loading-lockup p {
+  font-size: 15px;
+  line-height: 1.2;
+  letter-spacing: .08em;
+}
+
+/* The fourth corrected map leads into the Futures Reading Room. */
+.map-step-four .map-pulse {
+  left: 74.87%;
+  top: 18.99%;
+}
+
+/* A compact fraction reads clearly as artwork progress. */
+.artwork-endmark {
+  display: flex;
+  justify-content: center;
+  margin-top: 45px;
+  font-size: 13px;
+  letter-spacing: .1em;
+}

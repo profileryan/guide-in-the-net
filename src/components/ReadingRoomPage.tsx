@@ -27,7 +27,7 @@ export default function ReadingRoomPage() {
         </section>
 
         <section className="reading-room-pause" aria-labelledby="reading-room-pause-title">
-          <p className="reading-room-pause-kicker" id="reading-room-pause-title">PAUSE / REFLECT</p>
+          <p className="reading-room-pause-kicker" id="reading-room-pause-title">PAUSE &amp; REFLECT</p>
           <p className="reading-room-pause-lead">THE ARCHIVE IS UNFINISHED.<br />SO IS THE FUTURE.</p>
           <div className="reading-room-prompts">
             {readingRoomContent.prompts.map((prompt, index) => (

@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.7.3 - Curator polish and Reading Room wayfinding
+
+- Added a fourth map step before the Futures Reading Room
+- Standardised map directions to “FOLLOW THE LIGHT”
+- Refined cover, loading and navigation typography for clarity
+- Increased the glitch-field refresh rate
+- Updated reflection labels and artwork progress notation
+
+## 0.7.2 - Mobile display typography and cover layout
+
+- Rebalanced large display headings and navigation labels for small screens
+- Ensured section-cover content can expand instead of clipping below the fold
+- Simplified modal and menu close controls to prevent stretched circular buttons
+- Renamed the menu destination from “Beginning / Restart” to “Beginning”
+
 ## 0.7.1 — Accessibility and navigation polish
 
 - Switched display typography to the font’s real family name, PxPlus IBM BIOS

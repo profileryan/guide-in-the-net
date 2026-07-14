@@ -1,7 +1,7 @@
 # Guide in the Net — Project Progress
 
 _Last updated: 14 July 2026_  
-_Current package: v0.7.1 — accessibility and navigation polish_
+_Current package: v0.7.3 — curator polish and Reading Room wayfinding_
 
 ## Current experience
 
@@ -34,6 +34,20 @@ The complete guide journey remains:
 1. ASIAMAXXING
 2. Hexagram Today
 3. XO (2026)
+
+## Changes in v0.7.3
+
+- Added a fourth, yellow-toned map screen between the Reading Room cover and the Futures Reading Room.
+- Added `public/assets/map-step-4.png` and a matching map marker.
+- Simplified every map instruction to **FOLLOW THE LIGHT**.
+- Increased the GlitchCanvas refresh rate and refined display, loading and navigation spacing.
+- Changed reflection labels to **PAUSE & REFLECT** and artwork progress to a compact `01/05` format.
+
+## Changes in v0.7.2
+
+- Rebalanced oversized display typography and navigation labels for mobile screens.
+- Made section-cover content resilient to short viewports.
+- Simplified stretched close controls and renamed the menu destination to **Beginning**.
 
 ## Changes in v0.7.1
 

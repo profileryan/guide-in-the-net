@@ -47,7 +47,7 @@ export default function GlitchCanvas({ reducedMotion, tone = 'green' }: Props) {
       const rect = canvas.getBoundingClientRect()
       const w = rect.width
       const h = rect.height
-      const seed = reducedMotion ? 47 : Math.floor(time / 2300) + 47
+      const seed = reducedMotion ? 47 : Math.floor(time / 850) + 47
       const random = mulberry32(seed)
       const config = toneConfig[tone]
 
@@ -85,7 +85,7 @@ export default function GlitchCanvas({ reducedMotion, tone = 'green' }: Props) {
     }
 
     const loop = (time: number) => {
-      if (time - lastPaint > 240) {
+      if (time - lastPaint > 110) {
         draw(time)
         lastPaint = time
       } else {
