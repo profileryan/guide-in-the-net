@@ -1,5 +1,4 @@
 import { readingRoomContent } from '../content/guideContent'
-import ReflectionResponseList, { type ReflectionPromptItem } from './ReflectionResponseList'
 
 function MultilineTitle({ text }: { text: string }) {
   return (
@@ -12,14 +11,6 @@ function MultilineTitle({ text }: { text: string }) {
 }
 
 export default function ReadingRoomPage() {
-  const reflectionItems: ReflectionPromptItem[] = readingRoomContent.prompts.map((prompt, index) => ({
-    id: `reading-room:${index}`,
-    section: 'FUTURES READING ROOM',
-    source: 'READING ROOM & RESEARCH ARCHIVE',
-    prompt,
-    order: 4000 + index,
-  }))
-
   return (
     <article className="reading-room-page screen-enter">
       <header className="reading-room-header">
@@ -38,9 +29,14 @@ export default function ReadingRoomPage() {
         <section className="reading-room-pause" aria-labelledby="reading-room-pause-title">
           <p className="reading-room-pause-kicker" id="reading-room-pause-title">PAUSE &amp; REFLECT</p>
           <p className="reading-room-pause-lead">THE ARCHIVE IS UNFINISHED.<br />SO IS THE FUTURE.</p>
-          <p className="reflection-response-invitation">Tap a prompt to add a note to your own archive.</p>
-          <ReflectionResponseList items={reflectionItems} actionLabel="RESPOND" />
-          <p className="reflection-storage-note">OPTIONAL · SAVED ONLY ON THIS DEVICE</p>
+          <ol className="reading-room-prompts">
+            {readingRoomContent.prompts.map((tip, index) => (
+              <li key={tip}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <p>{tip}</p>
+              </li>
+            ))}
+          </ol>
         </section>
 
         <footer className="reading-room-endmark" aria-hidden="true">

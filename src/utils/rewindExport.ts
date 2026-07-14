@@ -15,6 +15,7 @@ const PAGE_WIDTH = 1240
 const PAGE_HEIGHT = 1754
 const PAGE_PADDING = 78
 const PAGE_BOTTOM = 92
+const BRAND_LOGO_SRC = '/assets/upper-corner-logo-transparent.png'
 
 function groupEntries(entries: ReflectionEntry[]): RewindGroup[] {
   const groups: RewindGroup[] = []
@@ -116,11 +117,14 @@ function drawHeader(
   visitorName: string,
   responseCount: number,
   fonts: CanvasFonts,
+  brandLogo: HTMLImageElement | null,
   pageIndex: number,
   pageCount?: number,
 ) {
   const left = PAGE_PADDING
   let y = 92
+
+  drawBrandLogo(context, brandLogo)
 
   context.fillStyle = '#a9ff43'
   context.font = `25px ${fonts.display}`
@@ -242,6 +246,23 @@ async function resolveFonts(): Promise<CanvasFonts> {
   }
 }
 
+function loadBrandLogo() {
+  return new Promise<HTMLImageElement | null>((resolve) => {
+    const logo = new Image()
+    logo.onload = () => resolve(logo)
+    logo.onerror = () => resolve(null)
+    logo.src = BRAND_LOGO_SRC
+  })
+}
+
+function drawBrandLogo(context: CanvasRenderingContext2D, logo: HTMLImageElement | null) {
+  if (!logo?.naturalWidth || !logo.naturalHeight) return
+
+  const height = 74
+  const width = Math.min(230, logo.naturalWidth * (height / logo.naturalHeight))
+  context.drawImage(logo, PAGE_WIDTH - PAGE_PADDING - width, 42, width, height)
+}
+
 function calculateContinuousHeight(
   context: CanvasRenderingContext2D,
   groups: RewindGroup[],
@@ -264,10 +285,11 @@ function drawContinuousRewind(
   entries: ReflectionEntry[],
   groups: RewindGroup[],
   fonts: CanvasFonts,
+  brandLogo: HTMLImageElement | null,
   height: number,
 ) {
   drawBackground(context, PAGE_WIDTH, height)
-  let y = drawHeader(context, visitorName, entries.length, fonts, 0)
+  let y = drawHeader(context, visitorName, entries.length, fonts, brandLogo, 0)
   let answerIndex = 0
 
   groups.forEach((group) => {
@@ -426,7 +448,7 @@ function triggerDownload(blob: Blob, filename: string) {
 export async function downloadRewindAsJpg(visitorName: string, entries: ReflectionEntry[]) {
   if (entries.length === 0) throw new Error('There are no responses to export yet.')
 
-  const fonts = await resolveFonts()
+  const [fonts, brandLogo] = await Promise.all([resolveFonts(), loadBrandLogo()])
   const groups = groupEntries(entries)
   const measurement = createCanvas(PAGE_WIDTH, 100)
   const height = calculateContinuousHeight(measurement.context, groups, fonts)
@@ -434,7 +456,7 @@ export async function downloadRewindAsJpg(visitorName: string, entries: Reflecti
   const scale = Math.min(1, Math.sqrt(maxCanvasPixels / (PAGE_WIDTH * height)))
   const { canvas, context } = createCanvas(Math.max(1, Math.floor(PAGE_WIDTH * scale)), Math.max(1, Math.floor(height * scale)))
   context.scale(scale, scale)
-  drawContinuousRewind(context, visitorName, entries, groups, fonts, height)
+  drawContinuousRewind(context, visitorName, entries, groups, fonts, brandLogo, height)
 
   const bytes = await canvasToJpegBytes(canvas, 0.94)
   triggerDownload(new Blob([bytes], { type: 'image/jpeg' }), `islands-in-the-net-rewind-${safeFileName(visitorName)}.jpg`)
@@ -443,7 +465,7 @@ export async function downloadRewindAsJpg(visitorName: string, entries: Reflecti
 export async function downloadRewindAsPdf(visitorName: string, entries: ReflectionEntry[]) {
   if (entries.length === 0) throw new Error('There are no responses to export yet.')
 
-  const fonts = await resolveFonts()
+  const [fonts, brandLogo] = await Promise.all([resolveFonts(), loadBrandLogo()])
   const groups = groupEntries(entries)
   const measurement = createCanvas(PAGE_WIDTH, 100)
   const pages = paginate(measurement.context, groups, fonts)
@@ -452,7 +474,7 @@ export async function downloadRewindAsPdf(visitorName: string, entries: Reflecti
   for (let pageIndex = 0; pageIndex < pages.length; pageIndex += 1) {
     const { canvas, context } = createCanvas(PAGE_WIDTH, PAGE_HEIGHT)
     drawBackground(context, PAGE_WIDTH, PAGE_HEIGHT, pageIndex)
-    let y = drawHeader(context, visitorName, entries.length, fonts, pageIndex, pages.length)
+    let y = drawHeader(context, visitorName, entries.length, fonts, brandLogo, pageIndex, pages.length)
 
     pages[pageIndex].forEach((instruction) => {
       y = drawGroupHeader(context, instruction.group, y, fonts, instruction.continued)

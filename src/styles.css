@@ -1790,10 +1790,13 @@ button {
 }
 
 .commons-bullets {
+  margin: 0;
+  padding: 0;
   border-bottom: 1px solid rgba(0,0,0,.4);
+  list-style: none;
 }
 
-.commons-bullets p {
+.commons-bullets li {
   display: grid;
   grid-template-columns: 32px 1fr;
   gap: 12px;
@@ -1802,6 +1805,11 @@ button {
   border-top: 1px solid rgba(0,0,0,.4);
   font-size: 22px;
   line-height: 1.28;
+}
+
+.commons-bullets p,
+.reading-room-prompts p {
+  margin: 0;
 }
 
 .commons-bullets span {
@@ -2417,10 +2425,13 @@ button {
 }
 
 .reading-room-prompts {
+  margin: 0;
+  padding: 0;
   border-bottom: 1px solid rgba(0,0,0,.35);
+  list-style: none;
 }
 
-.reading-room-prompts p {
+.reading-room-prompts li {
   display: grid;
   grid-template-columns: 32px 1fr;
   gap: 12px;
@@ -3404,7 +3415,7 @@ h3,
 }
 
 .credits-restart {
-  margin-top: 0;
+  margin-top: 36px;
 }
 
 @media (max-height: 760px) {
