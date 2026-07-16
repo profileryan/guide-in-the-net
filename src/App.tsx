@@ -72,31 +72,31 @@ const guideActions = [
     icon: '/assets/form-thoughts.png',
     iconHeight: '60px',
     label: 'TAKE A POSITION',
-    text: 'Form your own view. Change it if the work gives you reason.',
+    text: 'Form a view. Let the work change it.',
   },
   {
     icon: '/assets/converse.png',
     iconHeight: '70px',
     label: 'JOIN IN',
-    text: 'Talk with someone, vote, or leave a thought for whoever comes next.',
+    text: 'Talk, vote or leave a thought for the next visitor.',
   },
   {
     icon: '/assets/reflect.png',
     iconHeight: '95px',
     label: 'PAUSE',
-    text: 'Sit, listen, read, write—or do nothing for a while.',
+    text: 'Sit, listen, read, write—or simply stop.',
   },
   {
     icon: '/assets/return.png',
     iconHeight: '108px',
     label: 'RETURN',
-    text: 'Return after dark for screenings, performances, talks and late-night takeovers.',
+    text: 'Come back after dark for screenings, performances and takeovers.',
   },
   {
     icon: '/assets/share.png',
     iconHeight: '118px',
     label: 'SHARE, OR DON’T',
-    text: 'Photograph and post, remix, or keep the experience offline. Feed the algorithm with #IslandsInTheNetSG',
+    text: 'Post, remix, or keep it offline. Feed the algorithm with #IslandsInTheNetSG.',
   },
 ]
 
@@ -400,7 +400,7 @@ export default function App() {
                 ))}
               </div>
               <p className="closing-invitation">
-                Take any route through the exhibition. Let the questions remain open. Linger, disagree, change your mind and leave something behind.
+                Take any route. Let the questions remain open.
               </p>
             </article>
           </AppShell>

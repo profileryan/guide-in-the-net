@@ -121,9 +121,9 @@ export default function ArtworkPage({ artwork }: Props) {
 
         <section className="reflection-block artwork-scroll-target" id={`${artwork.id}-reflect`}>
           <p className="reflection-kicker">PAUSE &amp; REFLECT</p>
-          <p className="reflection-response-invitation">Tap any question to leave a short, private response.</p>
+          <p className="reflection-response-invitation">Optional: choose one question to answer privately.</p>
           <ReflectionResponseList items={reflectionItems} />
-          <p className="reflection-storage-note">OPTIONAL · SAVED ONLY ON THIS DEVICE</p>
+          <p className="reflection-storage-note">PRIVATE · SAVED ON THIS DEVICE</p>
         </section>
 
         <footer className="artwork-endmark" aria-hidden="true">
