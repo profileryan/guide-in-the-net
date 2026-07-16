@@ -55,10 +55,9 @@ type TextSize = 'small' | 'standard' | 'large'
 type ColourMode = 'standard' | 'red-green-safe' | 'blue-yellow-safe' | 'high-contrast'
 
 const introParagraphs = [
-  'Technology no longer sits outside everyday life. It recommends what we watch, verifies who we are, speaks in our voices and increasingly helps decide how we work, move and imagine the future.',
-  'Most stories about these systems still arrive from technology companies: faster, smarter, frictionless, inevitable. Islands in the Net begins somewhere else.',
-  'The exhibition takes its name from Bruce Sterling’s 1988 cyberpunk novel, which imagined Singapore as a node in a new global network of data and influence. Nearly four decades later, we return to that image from Southeast Asia.',
-  'Here, the islands form an archipelago: distinct histories, cultures and ways of knowing, connected by uneven flows of people, capital and information.',
+  'Technology now shapes what we see, how we work, who we are and how we imagine what comes next. Yet the loudest stories about it still come from commercial platforms, told through promises of frictionless progress and technological inevitability.',
+  'Islands in the Net exists to host a different kind of conversation. Taking its name from Bruce Sterling’s 1988 cyberpunk novel, the exhibition returns to Singapore’s place within a global network from a Southeast Asian perspective: not as an isolated island, but as part of an archipelago of distinct histories, communities and ways of knowing, connected by shifting flows of people, culture, capital and information.',
+  'Many of the works here are data-native. They do not simply depict technology; they use, generate, exchange or resurrect data to reveal overlooked histories and produce possible futures. Together, they ask us to look beyond the future we are being sold—and consider what other futures might be made, by whom, and for whom.',
 ]
 
 const guideActions = [
