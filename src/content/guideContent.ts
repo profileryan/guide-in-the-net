@@ -388,18 +388,20 @@ export const sectionThreeArtworks: Record<Extract<ArtworkId, 'asia-maxxing' | 'h
 
 export const commonsContent = {
   title: 'THE\nCOMMONS',
-  deck: 'The Commons centres the encounters between people: conversations, disagreements, pauses and contributions.',
+  deck: 'The Commons is the shared centre of the exhibition. The space itself is complete, but what it holds will continue to change as people pass through it.',
   paragraphs: [
-    'The low seats, cushions, tables, questions and voting wall arrange the room for conversation, disagreement, reconsideration and unstructured time.',
-    'In a conventional exhibition, visitors are expected to move from one artwork to the next. Here, stopping is also participation. Your attention, conversations and contributions become part of the changing life of the room.',
-    'The public poll offers a visible snapshot, not a final answer. Each cluster of stickers records both a collective position and the limits of the question: who participated, who hesitated and what nuance disappeared between the available choices?',
-    'A commons does not require consensus. It is something people continually negotiate through difference, responsibility, generosity and care.',
+    'Its low seats, cushions, tables and public questions create room for something less predictable than another artwork encounter: sitting, reading, writing, drawing, talking, listening, disagreeing, reconsidering—or simply spending time together.',
+    'In most exhibitions, visitors are expected to move from one work to the next. Here, stopping is also a form of participation. Notes, drawings and reflections accumulate over time. You may encounter something left by a stranger, add a response of your own, or leave behind a question for whoever arrives next.',
+    'The Commons holds questions rather than final answers. What should technology help us know? What should remain private, uncertain or human? What do our data traces reveal—and what can they never capture? What kinds of technological futures should we protect, refuse or imagine differently?',
+    'A commons is not made by everyone reaching agreement. It is continually shaped through difference, curiosity, responsibility and care. In this sense, the room is never quite complete without the people who inhabit it—and is remade by each person who enters.',
   ],
+  reflectionLead: 'A community is more than a group of people sharing the same space. It begins with what they are willing to question, hold and imagine together.',
   tryThis: [
-    'Stay past your first impulse to move on.',
-    'Vote, then return to your answer later.',
-    'Speak with someone who chose differently.',
-    'Leave a thought for the next person.',
+    'Stay for longer than feels necessary.',
+    'Read something left by a stranger.',
+    'Follow a thought that unsettles you.',
+    'Add a response, drawing or question of your own.',
+    'Leave something for whoever arrives next.',
   ],
 }
 
