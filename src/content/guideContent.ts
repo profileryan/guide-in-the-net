@@ -217,9 +217,10 @@ export const sectionOneArtworks: Record<Extract<ArtworkId, 'safe-entry' | 'histo
       aspect: '16 / 9',
     },
     description: [
-      'In 1997, Grace Quek presented a performance lecture through the persona of Dr Eng Olsen, using human cloning to examine reproduction, appropriation and authenticity in art. Almost three decades later, Quek returns to the work in collaboration with DeepSeek, reworking its questions for an age of generative AI.',
-      'Delivered with the authority of an academic lecture, the performance begins with recognisable art-historical debates: Renaissance workshops, disputed attribution, photographic repetition, museum reproductions and Andy Warhol’s use of existing images.',
-      'Gradually, fact gives way to speculative fiction. Museums secretly clone historical artists. Artificial memories are implanted into resurrected sculptors. A teenage clone of He Xiangning refuses to reproduce her paintings and becomes a drum-and-bass musician. A virtual Andy Warhol completes works that the historical artist never made. The boundary between research, performance and fabrication becomes deliberately unstable.',
+      'Art in the Age of Human Cloning (2026) is a performance developed in collaboration with DeepSeek that the artist performed at Padimai Art and Tech Studio on 10 July 2026.',
+      'Revisiting a performance first staged at the University of Southern California in 1988, in which Dr Eng Olsen delivered a lecture on human cloning, the work speculates clones of modern artists as content producers and virtual entities, opening questions around authorship, reproduction, and authenticity in the age of human cloning. A multilayered and nuanced performance, one is never quite sure how much of Dr Eng Olsen’s lecture is factual.',
+      'In collaborating with DeepSeek, Quek took on the persona of someone without much technical knowledge of AI and adhered to several rules. The performance, visuals, and soundtrack were produced through prompting. Second, she accepted defaults whenever possible. Third, she accepted DeepSeek’s recommendations for other models. She found that this led her to more Chinese models. Furthermore, in engaging with these models, all her prompts were produced by DeepSeek. When editing her script, she retained DeepSeek’s preset style, intending to preserve the integrity of the AI’s voice.',
+      'Quek conceived the performance to be documented. The artwork comprises both the performance and its online documentation, staged through this installation with ‘standard’ promotional standees and a QR code that leads to a YouTube video and includes a link to her prompt history with DeepSeek.',
     ],
     whyNow: [
       'AI is often described as a new kind of collaborator — but it is trained on the replication and recombination of existing human work. This lecture asks whether authorship can survive when style, memory and identity can all be simulated.',
@@ -251,10 +252,9 @@ export const sectionTwoArtworks: Record<Extract<ArtworkId, 'altar' | 'traces'>, 
       aspect: '3 / 2',
     },
     description: [
-      'BussyTemple is a Southeast Asian rave collective working across electronic music, performance, visual culture and practices of care. Their gatherings treat queer nightlife as worldbuilding: a space in which bodies, identities and relationships can temporarily be reorganised.',
-      'At the centre of F4NT4SY_H4RD_DR1VE://ALTAR is an open scaffolding structure that functions simultaneously as archive, network and communal altar. Screens hold videos, photographs and contributions gathered across BussyTemple’s history, while physical objects and traces are attached to the structure itself.',
-      'Unlike a conventional archive, the altar is deliberately unfinished. Visitors and community members can continue adding to it, allowing its form and meaning to change over the exhibition. During BussyTemple’s September gathering, the bare structure will be further transformed through materials, messages, images and performance.',
-      'The altar is both record and gathering place: a structure through which the community continues to make itself.',
+      'Established in 2022, Bussy Temple is a Singapore-based queer rave collective that came together in response to a lack of spaces centred on trans, non-binary, and femme people within Singapore’s nightlife. Through their practice, they expand our definition of the rave from "nightlife entertainment" into a social, political, and aesthetic practice of imagining different ways of living together.',
+      'Beginning with informal, invite-only gatherings, their raves have grown into public events and happenings that bring together performance art, community organising, and speculative world-building.',
+      'Manifesting in Islands in the Net as a communal altar to their web archive of events, the installation invites visitors to explore an archive of videos, photographs, and community contributions collected over the years. Imagined as a growing network rather than an accumulation of historical records, visitors are invited to contribute to this living archive in the lead-up to Bussy Temple taking over the exhibition to host a rave on 12 September.',
     ],
     whyNow: [
       'Online platforms promise to preserve everything, yet community histories can remain fragile. Posts disappear, accounts are removed and experiences are flattened into content.',
@@ -389,10 +389,10 @@ export const sectionThreeArtworks: Record<Extract<ArtworkId, 'asia-maxxing' | 'h
       aspect: '16 / 9',
     },
     description: [
-      'XO is an archive from a Southeast Asia that does not exist—but might.',
-      'The work follows a group of “xenographers” from Nusanatra returning from Nooantara, a parallel world where mind and body, land and water, and physical and virtual life are not treated as opposites. Objects, moving images and a monumental mask appear as fragments from this world, catalogued for a collective history.',
-      'Its mythology folds together the noosphere—a realm of shared thought—with Sutan Takdir Alisjahbana’s Bumantara, an idea of Southeast Asia as interconnected “lands between.”',
-      'Even the central mask refuses a stable identity. It is called the Flaming Knotted Heart, the Apparatus and the Ongoing Processing Intake System. Each name changes what the object can be—and what kind of world the archive allows us to see.',
+      'The exhibition culminates in Fyerool Darma’s XO (2026), an extension of his ongoing work kædæluwær§æk§§æk (A Xenographer’s Index) (2026), first presented at the Malay Heritage Centre, Singapore.',
+      'Imagining an expedition into n**antara, a parallel world of the Nusantara, the installation unfolds as a cinematic and virtual double of Padimai’s physical exhibition space. Here, a worker responds to an AI job listing for a "Memory Diver" and enters a process of extraction. Narrated by a butterfly that remains in a room that no longer exists, the work asks what survives a system built to turn everything it encounters into data.',
+      'XO, and the expanded universe of Fyerool’s project, includes a film, artefacts, a historical archive and library that trace the emergence of Southeast Asian Futurism from the 1970s through the work of Sutan Takdir Alisjahbana to contemporary theory by Singapore futurists such as Lee Chor Pharn.',
+      'In marshalling references to older forms of archipelagic connectivity while also invoking the neurological (re)mappings of emergent networked forms of technological and informational interdependence, XO expands the historical idioms of Southeast Asian Futurism to include a critical appraisal of data, heritage, and ontology.',
     ],
     whyNow: [
       'Most technological futures inherit the same oppositions: nature or machine, body or data, real or virtual, tradition or progress. XO reorganises these familiar categories through different intellectual and cultural histories. Its future begins from a different set of assumptions.',
