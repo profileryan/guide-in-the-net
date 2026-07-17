@@ -104,11 +104,6 @@ export default function ArtworkPage({ artwork }: Props) {
           </div>
         </section>
 
-        <blockquote className="artwork-pullquote">
-          <span aria-hidden="true">“</span>
-          <p>{artwork.pullQuote}</p>
-        </blockquote>
-
         <section className="artwork-context artwork-scroll-target" id={`${artwork.id}-why-now`}>
           <div className="artwork-context-head">
             <p>WHY NOW?</p>
@@ -118,6 +113,10 @@ export default function ArtworkPage({ artwork }: Props) {
             {artwork.whyNow.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           </div>
         </section>
+
+        <blockquote className="artwork-pullquote">
+          <p>{artwork.pullQuote}</p>
+        </blockquote>
 
         <section className="reflection-block artwork-scroll-target" id={`${artwork.id}-reflect`}>
           <p className="reflection-kicker">PAUSE &amp; REFLECT</p>
