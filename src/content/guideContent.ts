@@ -307,10 +307,9 @@ export const sectionThreeArtworks: Record<Extract<ArtworkId, 'asia-maxxing' | 'h
       aspect: '16 / 9',
     },
     description: [
-      'What might your life have looked like if it had unfolded somewhere else in Asia?',
-      'Developed from Weiwei Xu’s earlier project Chinamaxxing, this participatory photobooth generates an alternative version of your “Asian life.” Your image becomes the starting point for a speculative biography shaped through computational storytelling, popular imagery and assumptions about identity, place and possibility.',
-      'The title borrows the internet suffix “-maxxing”—used online to describe the deliberate optimisation or performance of an identity. It also refers to recent social-media fascination with imagined Asian lifestyles, aesthetics and social values.',
-      'The resulting life is a constructed fiction: part algorithm, part cultural stereotype and part projection by the person standing before it.',
+      'Coined by evolutionary biologist Richard Dawkins in 1976, the meme describes a unit of cultural transmission: an idea, image, behaviour or fashion that is imitated and transformed as it circulates. Internet memes are its contemporary manifestation, spreading rapidly through digital platforms. Their cultural power lies in their ability to make ideas visible, repeatable and difficult to ignore.',
+      '*ASIA MAXXING* references Chinamaxxing, a viral trend that emerged in 2025 in which non-Chinese people adopted aspects of everyday Chinese life as lifestyle upgrades, wellness practices or critiques of Western society. Presented as a photobooth, the web application imagines a future regional bureaucracy through which users can generate speculative accounts of lives they might have lived in India, Indonesia, China or the Philippines.',
+      'Its narratives rely on the generic language of large language models and on a framework developed by Sprout, Hsu’s start-up, using questions inspired by online personality tests. By exposing these mechanisms, the work invokes the Forer effect: the tendency to perceive vague, general descriptions as uniquely accurate.',
     ],
     whyNow: [
       'AI can produce convincing identities from data that carries assumptions about race, gender, class and nationality. Yet “Asia” is not a single, stable identity, but a contested idea shaped from within the region, its diasporas and elsewhere. The work makes those constructions visible: its real subject is the system imagining you.',
@@ -339,10 +338,8 @@ export const sectionThreeArtworks: Record<Extract<ArtworkId, 'asia-maxxing' | 'h
       aspect: '1 / 1',
     },
     description: [
-      'The work translates the ancient Chinese divination system of the I Ching, or Book of Changes, into a contemporary digital interface.',
-      'The I Ching is organised around 64 hexagrams: figures composed of broken and unbroken lines whose changing arrangements are interpreted in relation to a question or situation. Rather than offering a single fixed forecast, its texts invite reflection on change, uncertainty, timing and the relationships between different forces.',
-      'Weiwei Xu brings this cosmological system into conversation with the computational systems through which people now seek guidance. In place of tossed coins, yarrow stalks or a human interpreter, visitors encounter divination through a screen.',
-      'The work places an old predictive technology inside a new one, inviting us to consider what has changed—and what has not—in our desire to make uncertainty legible.',
+      'After three years of study with an *I Ching* master, Hsu developed *ICHING HEXAGRAM*, a divination app that brings machine learning into conversation with ancient Chinese wisdom. Imagined as an alternative to popular astrology apps such as Co–Star, it seeks to make Eastern philosophies accessible to a wider audience.',
+      'The *I Ching* is an ancient Chinese divination text that has influenced mathematics, cybernetics, information theory and digital computation. It also informed Carl Jung’s concept of synchronicity: events that are meaningfully, rather than causally, connected. *ICHING HEXAGRAM* proposes fate as an interface for managing complexity, situating AI within a longer global history of rule-based knowledge production and meaning-making.',
     ],
     whyNow: [
       'Algorithms already tell us what to watch, where to go and what may happen next, often presenting prediction as objective because it is data-driven. The I Ching offers another relationship to the future: poetic, ambiguous and dependent on interpretation. It asks whether uncertainty is something technology should eliminate—or something we can learn to inhabit.',

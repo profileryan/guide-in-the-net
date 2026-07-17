@@ -17,6 +17,18 @@ function MultilineText({ text }: { text: string }) {
   )
 }
 
+function InlineText({ text }: { text: string }) {
+  return (
+    <>
+      {text.split(/(\*[^*]+\*)/g).map((part, index) => (
+        part.startsWith('*') && part.endsWith('*')
+          ? <em key={`${part}-${index}`}>{part.slice(1, -1)}</em>
+          : part
+      ))}
+    </>
+  )
+}
+
 function reflectionOrder(artwork: ArtworkContent, index: number) {
   const sectionBase = artwork.sectionLabel === 'YOU AND THE NET'
     ? 1000
@@ -96,10 +108,10 @@ export default function ArtworkPage({ artwork }: Props) {
 
       <div className="artwork-editorial">
         <section className="artwork-opening artwork-scroll-target" id={`${artwork.id}-about`}>
-          <p className="artwork-deck">{lead}</p>
+          <p className="artwork-deck"><InlineText text={lead} /></p>
           <div className="artwork-body">
             {body.map((paragraph, index) => (
-              <p key={paragraph} style={{ '--reveal-index': index } as CSSProperties}>{paragraph}</p>
+              <p key={paragraph} style={{ '--reveal-index': index } as CSSProperties}><InlineText text={paragraph} /></p>
             ))}
           </div>
         </section>
